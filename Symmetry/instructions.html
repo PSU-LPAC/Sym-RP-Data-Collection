@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Sample video of a labeling process</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+</head>
+
+<body>
+
+    <body>
+        <div class="container">
+
+            <div class="page-header">
+                <a href="tutorial.html">
+                    <h2 class="text-center"><b>Back to Understanding Symmetry</b></h2>
+                </a>
+                <!-- <h3 class="text-center"><b> The goal of the study is to find out how humans perceive symmetries
+                        in real world scenes.</b>
+                </h3> -->
+            </div>
+
+            <h3 class="text-center"><b>Instructions</b></h3>
+            <div class="thumbnail">
+                <h5>On Each image:</h5>
+                <ol>
+                    <li>
+                        <h5>If you perceive a symmetry:</h5>
+                    </li>
+                    <ul>
+                        <li>
+                            <h5>
+                                First choose symmetry type (<span style="color:red; font-weight:bold">rotation</span> or
+                                <span style="color:green; font-weight:bold">reflection</span>);
+                            </h5>
+                        </li>
+                        <li>
+                            <h5>
+                                If it is a <span style="color:red; font-weight:bold">rotation</span> symmetry, label its
+                                <span style="color:red">rotation center (one click)</span>;
+                            </h5>
+                        </li>
+                        <li>
+                            <h5>
+                                If it is a <span style="color:green; font-weight:bold">reflection</span> symmetry, label
+                                the <span style="color:green">two ends of
+                                    the reflection axis (two clicks)</span>.
+                            </h5>
+                        </li>
+                    </ul>
+
+                    <li> <h5>If you label anything by mistake: <span style="color:orange; font-weight:bold">Clear Last Label</span>.</h5>   </li>
+                    <li> <h5>If you do not perceive any symmetries: <b><span style="color:blue">SKIP</span></b>. </h5></li>
+
+                    <li> <h5>If you finish all symmetry labeling: <span style="color:#55a95a; font-weight:bold">Submit</span>.</h5></li>
+                    
+                </ol>
+                <!-- <ul>
+                    <li>First, choose which type of symmetry to be labeled!</li>
+
+                    <li>On the images:</li>
+                    <ul>
+                        <li> If you see something similar to a rotation symmetry, label its <span style="color:red">rotation center
+                            (one click)</span>.</li>
+                        <li> If you see something similar to a reflection symmetry, label the <span style="color:green">two ends of
+                            the reflection axis (two clicks)</span>.</li>
+                    </ul>
+                </ul> -->
+            </div>
+
+            <div class="thumbnail">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="thumbnail">
+                            <h3 class="text-center"> <b>How to label a <span style="color:red">Rotational Symmetry
+                                        Center</span></b></h3>
+                            <!-- <img src="..\figures\tutorial\rot_demo.mp4"></img> -->
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <video class="embed-responsive-item" src="..\figures\tutorial\rot_demo.mp4" autoplay
+                                       muted loop></video>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-12 ">
+                        <div class="thumbnail">
+                            <h3 class="text-center"> <b>How to label a <span style="color:green">Reflection Symmetry
+                                        Axis</span></b></h3>
+                            <!-- <img src="..\figures\tutorial\Final_Ref.gif"></img> -->
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <video class="embed-responsive-item" src="..\figures\tutorial\ref_demo.mp4" autoplay
+                                       muted loop></video>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="page-header"><a href="train1-1.html">
+                    <h3 class="text-center"><b>A quick training to test your understanding of symmetry on real
+                        images</b></h3>
+                </a></div>
+
+        </div>
+    </body>
+
+    <script src="https://fastly.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script>
+        var real_multi_img_urls = [
+            "room_cat.gif",
+            "thomas.gif",
+            "desk_cat.gif",
+            "toilet.gif"
+        ];
+
+        $(document).ready(function () {
+            // Set Style
+            $("img.example").css({ "width": "400", "height": "400" })
+            $("img.small-example").css({ "width": "200", "height": "200" })
+
+            real_multi_img_urls.forEach((img_url, index) => {
+                $(`div#real-images-multi-users > #col-${index % 2}`).append(
+                    `
+                    <div class="thumbnail">
+                    <img src="../figures/tutorial/${img_url}" class="example" />
+                    </div>
+                    `
+                );
+            });
+
+        }); 
+    </script>
+
+</body>
+
+</html>

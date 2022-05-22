@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Symmetry Labeling Training 2-2</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="label.css">
+</head>
+
+<body>
+
+    <body>
+        <div class="container-fluid">
+
+            <div class="page-header" id="instructions">
+                <h3 class="text-center"><b>Training 2-2: Most people find no prominent symmetries on this image.</b>
+                </h3>
+                <h3 class="text-center"><b>However, if you perceive prominent symmetries, label them;</b></h3>
+                <h3 class="text-center"><b>Else, press "Skip This Image" Button to skip the image.</b></h3>
+                <h5 class="text-center"> Note: Real world symmetries may <strong
+                            style="color: red;font-size: 120%;">NOT</strong> appear
+                    perfectly. </h5>
+                <h5 class="text-center"> Do not use mobile device to view this page. </h5>
+
+            </div>
+
+            <div class="row" id="body-part">
+                <div class="page-header col-md-2" id="actions">
+                    <h4> <b>Actions:</b> </h4>
+                    <ol>
+                        <li>
+                            <div class="thumbnail">
+                                <p><button type="button" class="btn btn-lg dummy-button" disabled>Label
+                                        SYMMETRY</button></p>
+                                <!-- <h3><span class="label label-primary">LABEL SYMMETRY </span> </h3> -->
+                                <!-- <h5>LABEL SYMMETRY </h5> -->
+                                <div class="">
+                                    <ul class="list-group" id="option-left">
+                                        <a class="list-group-item" id="rot">-> Rotation center (one point/click)</a>
+                                        <a class="list-group-item" id="ref">-> Reflection axis (two end
+                                            points/clicks)</a>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <p><button type="button" class="btn btn-lg btn-warning clear" id="left">Clear Last
+                                    Label</button></p>
+                        </li>
+                        <li>
+                            <p><button type="button" class="btn btn-lg btn-primary" id="next">Skip This Image</button>
+                            </p>
+                        </li>
+                        <li>
+                            <p><button type="button" class="btn btn-lg btn-success" id="next">Submit Your SYMMETRY
+                                    Labels</button></p>
+                        </li>
+                    </ol>
+
+                </div>
+                <div class="page-header col-md-10" id="label-part">
+                    <div class="row label-panel">
+
+                        <div id="img-url" style="display: none"> {{ task.input.source-ref | grant_read_access }} </div>
+
+                        <div id="label-canvas">
+                            <img class="bk-image" src=""> </img>
+                            <canvas class="labeling-tool" id="canvas-left">
+                                [Left Image Here]
+                            </canvas>
+                        </div>
+                        <!-- Prevent crowd-form from creating its own button -->
+                        <crowd-button form-action="submit" style="display: none;"></crowd-button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </body>
+
+    <script src="https://fastly.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script>
+        var img_urls = [
+            "../figures/test images/real_no_sym.jpg",
+        ];
+    </script>
+
+    <script src="label.js"></script>
+    <script src="sym_val.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(".btn#next").click(function () {
+                val_success("You have finished all the training!", "congrats.html")
+                // location.href = "congrats.html";
+            });
+        });
+    </script>
+</body>
+
+</html>

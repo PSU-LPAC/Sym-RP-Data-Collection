@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Examples of symmetry on images</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+</head>
+
+<body>
+
+    <body>
+        <div class="container">
+
+            <div class="page-header">
+                <a href="tutorial.html">
+                    <h2 class="text-center"><b>Back to Understanding Symmetry</b></h2>
+                </a>
+                <!-- <h4 class="text-center">  Do not use mobile device to view this page. </h4> -->
+                <!-- <h3 class="text-center"><b> The goal of the study is to find out how humans perceive symmetries
+                        in real world scenes.</b>
+                </h3> -->
+            </div>
+
+            <h3 class="text-center"><b>Toy Examples</b></h3>
+            <div class="row">
+
+                <div class="col-md-6">
+                    <div class="thumbnail">
+                        <h3 class="text-center"><b>Rotational Symmetry</b></h3>
+
+                        <div class="thumbnail">
+                            <a href="http://www.mathsisfun.com/geometry/symmetry-rotational.html" target="_blank">
+                                <img src="..\figures\tutorial\Rot_Sym_Example.png" class="example"></img>
+                            </a>
+
+                            <p class="text-center">Click the image above to learn more</p>
+                            <p class="text-center">(Opens in New Tab)</p>
+                        </div>
+
+                        <div>
+                            <h4 class="text-center"><b>Rotational Symmetry Examples</b></h4>
+                            <div class="text-center">
+                                <img src="..\figures\tutorial\symmetry-shape-r8.gif" class="small-example" />
+
+                                <img src="..\figures\tutorial\rot_pattern.png" class="small-example" />
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="text-center"><b>Example with infinite Rotational Symmetry</b></h4>
+                            <div class="text-center">
+                                <img src="..\figures\tutorial\Circle.gif" class="small-example" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6">
+                    <div class="thumbnail">
+                        <h3 class="text-center"><b>Reflection Symmetry</b></h3>
+
+                        <div class="thumbnail">
+                            <a href="http://www.mathsisfun.com/geometry/symmetry-reflection.html" target="_blank">
+                                <img src="..\figures\tutorial\Ref_Sym_Example.png" class="example"></img>
+                            </a>
+                            <p class="text-center">Click the image above to learn more</p>
+                            <p class="text-center">(Opens in New Tab)</p>
+                        </div>
+
+                        <div>
+                            <h4 class="text-center"><b>Reflection Symmetry Examples</b></h4>
+                            <div class="text-center">
+                                <img src="..\figures\tutorial\symmetry-equilateral-triangle.gif"
+                                     class="small-example" />
+
+                                <img src="..\figures\tutorial\symmetry-isosceles-triangle.gif" class="small-example" />
+                            </div>
+                        </div>
+
+                        <div>
+                            <h4 class="text-center"><b>More Reflection Symmetry Example</b></h4>
+                            <div class="text-center">
+                                <img src="..\figures\tutorial\symmetry-square.gif" class="small-example" />
+
+                                <img src="..\figures\tutorial\symmetry-rectangle.gif" class="small-example" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <h4 class="text-center"> Some images above are borrowed from <a href="http://mathisfun.com"
+                       target="_blank">mathisfun.com</a> </h4>
+            </div>
+
+            <div class="page-header"><a href="example_real.html">
+                    <h3 class="text-center"><b>Examples of symmetry in Real Images</b></h3>
+                </a></div>
+
+        </div>
+    </body>
+
+    <script src="https://fastly.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+            // Set Style
+            $("img.example").css({ "width": "400", "height": "400" })
+            $("img.small-example").css({ "width": "200", "height": "200" })
+
+
+
+            $("button#next").click(function () {
+                location.href = "train1.html";
+            });
+        }); 
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Symmetry Labeling Training 2-1</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="label.css">
+</head>
+
+<body>
+
+    <body>
+        <div class="container-fluid">
+
+            <div class="page-header" id="instructions">
+                <h3 class="text-center"><b> <b>Training 2-1: Find at least one <span style="color:red">Rotation
+                                Symmetry</span> and one <span style="color:green">Reflection Symmetry</span> you
+                            perceive on this image.</b> </b>
+                </h3>
+                <h5 class="text-center"> Note: Real world symmetries may <strong
+                            style="color: red;font-size: 120%;">NOT</strong> appear
+                    perfectly. </h5>
+                <h5 class="text-center"> Do not use mobile device to view this page. </h5>
+
+            </div>
+
+            <div class="row" id="body-part">
+                <div class="page-header col-md-2" id="actions">
+                    <h4> <b>Actions:</b> </h4>
+                    <ol>
+                        <li>
+                            <div class="thumbnail">
+                                <p><button type="button" class="btn btn-lg dummy-button" disabled>Label
+                                        SYMMETRY</button></p>
+                                <!-- <h3><span class="label label-primary">LABEL SYMMETRY </span> </h3> -->
+                                <!-- <h5>LABEL SYMMETRY </h5> -->
+                                <div class="">
+                                    <ul class="list-group" id="option-left">
+                                        <a class="list-group-item" id="rot">-> Rotation center (one point/click)</a>
+                                        <a class="list-group-item" id="ref">-> Reflection axis (two end
+                                            points/clicks)</a>
+                                    </ul>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <p><button type="button" class="btn btn-lg btn-warning clear" id="left">Clear Last
+                                    Label</button></p>
+                        </li>
+                        <!-- <li> <p><button type="button" class="btn btn-lg btn-primary" id="skip">Skip This Image</button></p> </li> -->
+                        <li>
+                            <p><button type="button" class="btn btn-lg btn-success" id="next">Submit Your SYMMETRY
+                                    Labels</button></p>
+                        </li>
+                    </ol>
+
+                </div>
+                <div class="page-header col-md-10" id="label-part">
+                    <div class="row label-panel">
+
+                        <div id="img-url" style="display: none"> {{ task.input.source-ref | grant_read_access }} </div>
+
+                        <div id="label-canvas">
+                            <img class="bk-image" src=""> </img>
+                            <canvas class="labeling-tool" id="canvas-left">
+                                [Left Image Here]
+                            </canvas>
+                        </div>
+                        <!-- Prevent crowd-form from creating its own button -->
+                        <crowd-button form-action="submit" style="display: none;"></crowd-button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </body>
+
+    <script src="https://fastly.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script>
+        var img_urls = [
+            "../figures/test images/real_both.jpg",
+        ];
+    </script>
+
+    <script src="label.js"></script>
+    <script src="sym_val.js"></script>
+
+    <script>
+        var rot_gt = [
+            0.4749568634969325,
+            0.22442963957055215
+        ];
+        var ref_gt = [
+            0.6129936733128835,
+            0.5695216641104295,
+            0.6114599309815951,
+            0.8409940567484663
+        ];
+
+        $(document).ready(function () {
+
+            $(".btn#next").click(function () {
+                console.log(annos);
+                // validation
+                if (annos[0]["Rotation"].length < 1 || annos[0]["Reflection"].length < 1) {
+                    val_failure("You should label at least ONE rotation and ONE reflection symmetry.");
+                    return;
+                }
+
+                var success_rot = false;
+                var success_ref = false;
+                annos[0]["Rotation"].forEach(element => {
+                    if (validate_rot(element, rot_gt)) { success_rot = true; }
+                });
+                annos[0]["Reflection"].forEach(element => {
+                    if (validate_ref(element, ref_gt)) { success_ref = true; }
+                });
+
+                success_rot = true;
+                success_ref = true;
+                if (success_ref && success_rot) {
+                    val_success("After closing this message you will be redirected to the next training page.", "train2-2.html");
+                    return;
+                }
+                else {
+                    if (success_ref) { val_failure("You should label the CENTER of a rotation symmetry."); }
+                    else if (success_rot) { val_failure("You should label the TWO END-POINTS of a reflection symmetry axis "); }
+                    else { val_failure("You should label the CENTER of a rotation symmetry and the TWO END-POINTS of a reflection symmetry axis"); }
+                    return;
+                }
+
+
+            });
+
+        });
+    </script>
+</body>
+
+</html>

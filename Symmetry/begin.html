@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Tutorial</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="label.css">
+</head>
+
+<body>
+
+    <body>
+        <div class="container">
+
+            <div class="page-header">
+                <!-- <h1>Label one symmetry per image.</h1> -->
+                <div class="thumbnail">
+                    <h3 class="text-center"><b>Reflection and Rotation Symmetries</b></h3>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="thumbnail">
+                                <img src="..\figures\tutorial\Rot_Sym_Example.png"></img>
+                            </div>
+
+                        </div>
+                        <div class="col-md-6">
+                            <div class="thumbnail">
+                                <img src="..\figures\tutorial\Ref_Sym_Example.png"></img>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="thumbnail">
+                    <h3 class="text-center"><b>The goal of the study is to find out how humans perceive symmetries in
+                            real
+                            world scenes.</b></h3>
+                    </p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="thumbnail">
+                                <img src="..\figures\tutorial\flower.jpg"></img>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="thumbnail">
+                                <img src="..\figures\tutorial\flower_sym.jpg"></img>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="thumbnail">
+                    <h3 class="text-center"><b>Instructions</b></h3>
+                    <ul>
+                        <li>First, choose which type of symmetry to be labeled!</li>
+
+                        <li>On the photos:</li>
+                        <ul>
+                            <li> If you see something similar to a rotation symmetry, label its rotation center (one
+                                click).</li>
+                            <li> If you see something similar to a reflection symmetry, label the two ends of the
+                                reflection axis (two clicks).</li>
+                        </ul>
+                    </ul>
+                </div>
+
+                <div class="thumbnail">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="thumbnail">
+                                <img src="..\figures\tutorial\Final_Rot.gif"></img>
+
+                                <p class="text-center"> How to label a Rotational Symmetry Center</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 ">
+                            <div class="thumbnail">
+                                <img src="..\figures\tutorial\Final_Ref.gif"></img>
+
+                                <p class="text-center"> How to label a Reflection Symmetry Axis</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- <div class="thumbnail">
+                    <p class="text-center"> For this task, you will need to complete:</p>
+                    <ul>
+                        <li>
+                            A short survey,
+                        </li>
+                        <li>
+                            A short training (label 4 sample images). and
+                        </li>
+                        <li>
+                            Labeling images. You will receive ${PRICE} for each labeled image. You may choose to skip any of the images.
+                        </li>
+                    </ul>
+                </div> -->
+
+                <div class="thumbnail">
+                    <p>
+                        <center>
+                            <button type="button" class="btn btn-lg btn-primary" id="next">Understanding Symmetry</button>
+                        </center>
+                    </p>
+                </div>
+            </div>
+
+
+        </div>
+    </body>
+
+    <script src="https://fastly.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script>
+        $("button#next").click(function () {
+            location.href = "definition.html";
+        });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Examples of symmetry in real images</title>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+</head>
+
+<body>
+
+    <body>
+        <div class="container">
+
+            <div class="page-header">
+                <a href="tutorial.html">
+                    <h2 class="text-center"><b>Back to Understanding Symmetry</b></h2>
+                </a>
+                <!-- <h4 class="text-center">  Do not use mobile device to view this page. </h4> -->
+                <!-- <h3 class="text-center"><b> The goal of the study is to find out how humans perceive symmetries
+                        in real world scenes.</b>
+                </h3> -->
+            </div>
+
+            <h3 class="text-center"><b>Examples of Symmetries in Real Images </b></h3>
+            <h4 class="text-center"> Note: Real world symmetries will <strong
+                        style="color: red;font-size: 120%;">NOT</strong>
+                appear as perfect as those in the toy examples above. </h4>
+
+            <h4 class="text-center"> <text style="color: red"> Red Circle </text> -- Rotation Symmetry
+                Center <br>
+                <text style="color: green"> Green Line </text> -- Reflection Axis
+            </h4>
+
+            <div id="real-images">
+                <div class="col-md-6" id="col-0">
+
+                </div>
+                <div class="col-md-6" id="col-1">
+
+                </div>
+            </div>
+
+            <div class="page-header"><a href="example_results.html">
+                    <h3 class="text-center"><b>Sample results of labeled symmetry</b></h3>
+                </a></div>
+
+        </div>
+    </body>
+
+    <script src="https://fastly.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script>
+        var real_img_urls = [
+            "yanxi_rot.gif",
+            "yanxi_ref.gif",
+            "london-eye.gif",
+            "laying_down.gif",
+            "chickpotpie.gif",
+            "reflection-mountains.gif",
+            "floor_star.gif",
+            "bear.gif",
+            "bike.gif",
+            "dog.gif",
+            "breakfast_food.gif",
+            "fire_hydrant.gif",
+        ];
+
+
+        $(document).ready(function () {
+            // Set Style
+            $("img.example").css({ "width": "400", "height": "400" })
+            $("img.small-example").css({ "width": "200", "height": "200" })
+
+            // Load Real Images
+            real_img_urls.forEach((img_url, index) => {
+                $(`div#real-images > #col-${index % 2}`).append(
+                    `
+                    <div class="thumbnail">
+                    <img src="../figures/tutorial/${img_url}" class="example" />
+                    </div>
+                    `
+                );
+            });
+
+        }); 
+    </script>
+
+</body>
+
+</html>
