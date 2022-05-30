@@ -1,22 +1,3 @@
-/*
-* Scripts for Symmetry Labeling Interface
-*/
-// var img_urls = require("./demo_img_urls.json");
-// var img_urls = [];
-// var img_urls = [
-//     "../figures/demo label images/new_label_000.jpg",
-//     "../figures/demo label images/new_label_001.jpg",
-//     "../figures/demo label images/new_label_002.jpg",
-//     "../figures/demo label images/new_label_003.jpg",
-//     "../figures/demo label images/new_label_004.jpg",
-//     "../figures/demo label images/new_label_005.jpg",
-//     "../figures/demo label images/new_label_006.jpg",
-//     "../figures/demo label images/new_label_007.jpg",
-//     "../figures/demo label images/new_label_008.jpg",
-//     "../figures/demo label images/new_label_009.jpg",
-//     "../figures/demo label images/new_label_010.jpg",
-//     "../figures/demo label images/new_label_011.jpg",
-// ];
 var img_id = 0;
 var img_size = [];
 var annos = [];
@@ -30,33 +11,29 @@ var num_total = 0;
 var active_list_bg_colors = { "rot": "rgba(255, 0, 0, 0.1)", "ref": "rgba(0, 255, 0, 0.1)" };
 
 $(document).ready(function () {
+
+    // * setup the hidden instruction
+    $("#instruction").slideUp(0);
+
+    $("#instruction_button").click(function () {
+        $("#instruction").clearQueue();
+        $("#instruction").slideToggle();
+    });
+    
     // * setup everything to get ready
-    // $.getJSON("./demo_img_urls.json", { get_param: 'value' }, function(data) {
-
-    //     img_urls = data["img_urls"];
-    //     console.log(img_urls);
-    // });
-
-    $("a#rot").text("→ Rotation Symmetry: click one point (rotation center)");
-    $("a#ref").text("→ Reflection Symmetry: click two points (reflection axis)");
     $("a#rot").css({ "background-color": active_list_bg_colors["rot"] });
     $("a#ref").css({ "background-color": active_list_bg_colors["ref"] });
 
     $("button.dummy-button").css({ "color": "white", "background-color": "#666060" });
 
-    num_total = img_urls.length;
 
     // * setup list group active click events
     var options = $(".list-group .list-group-item");
     options.click(function () {
         $(this).addClass("active");
         $(this).css("background-color", "");
+        $(this).siblings().removeClass("active");
 
-        $(this).siblings().each(function(index, element){
-            reset_sym_option(element);
-        });
-        // $(this).siblings().removeClass("active");
-        
 
         var id = -1;
         if ($(this).parent().attr('id') == "option-left")
@@ -65,24 +42,25 @@ $(document).ready(function () {
             id = 1;
 
         if ($(this).attr('id') == "rot") {
-            // $(this).siblings().css({ "background-color": active_list_bg_colors["ref"]});
+            $(this).siblings().css({ "background-color": active_list_bg_colors["ref"] });
             sym_types[id] = "rot";
         }
 
-        else if ($(this).attr('id') == "ref")
-        {
-            // $(this).siblings().css({ "background-color": active_list_bg_colors["rot"]});
+        else if ($(this).attr('id') == "ref") {
+            $(this).siblings().css({ "background-color": active_list_bg_colors["rot"] });
             sym_types[id] = "ref";
         }
-            
+
     });
+
+
 
     // * setup image & canvas
     $(".labeling-tool").each((index, element) => {
-        $(".bk-image")[index].src = img_urls[img_id];
+        // $(".bk-image")[index].src = img_urls[img_id];
 
         img_size[index] = [$(".bk-image")[index].width, $(".bk-image")[index].height];
-        // setupCanvas(element, $(".bk-image")[index]);
+        setupCanvas(element, $(".bk-image")[index]);
         img_id += 1;
         // * init annotation & symmetry types: Rotation and Reflection
         annos.push({ "Rotation": [], "Reflection": [] });
@@ -99,8 +77,6 @@ $(document).ready(function () {
 
     // * setup canvas draw functions
     $(".labeling-tool").mousedown(function (event) {
-        // hide the alert if any
-        $(".alert").alert('close');
         // compute the relative coordinates in range [0,1]
         var relX = event.pageX - $(this).offset().left;
         var relY = event.pageY - $(this).offset().top;
@@ -146,14 +122,53 @@ $(document).ready(function () {
 
     // * setup submit button
     $(".btn#submit").click(function () {
-        submit();
+        $("crowd-form")[0].submit();
+    });
+
+    // * setup skip button
+    $(".btn#skip").click(function () {
+        img_id = initialVars(img_id);
+        $("crowd-form")[0].submit();
     });
 
     // * setup panel div arrangement
     var panel_height = $(".label-panel").height()
     $(".submit-panel").height(panel_height);
     updateInfoBoard($("#info-board"));
+
+    // * setup crowd-form submit 
+    if ($("crowd-form").length > 0) {
+        $("crowd-form")[0].onsubmit = function () {
+            submit();
+        };
+    }
+
+
+
+    // $(label_panel.children(".text-center")[1]).replaceWith(`<button type="button" class="btn btn-lg btn-primary" id="skip">Skip</button>`);
 });
+
+function initialVars(cur_img_id) {
+    // * Initial variables
+    img_size = []
+    annos = []
+    sym_types = []
+    prev_XY = []
+
+    $(".labeling-tool").each((index, element) => {
+        // $(".bk-image")[index].src = img_urls[cur_img_id];
+
+        img_size[index] = [$(".bk-image")[index].width, $(".bk-image")[index].height];
+        setupCanvas(element, $(".bk-image")[index]);
+        cur_img_id += 1;
+        // * init annotation & symmetry types: Rotation and Reflection
+        annos.push({ "Rotation": [], "Reflection": [] });
+        sym_types.push('None');
+        prev_XY.push([-1, -1]);
+    });
+
+    return cur_img_id;
+}
 
 function loadImgURLs(json_url) {
     $.getJSON(json_url, { get_param: 'value' }, function (data) {
@@ -172,13 +187,6 @@ function getCanvasId(canvas) {
     return id;
 }
 
-
-function reset_sym_option(item){
-    // * reset the option click item to inactive status
-    $(item).removeClass("active");
-    $(item).css({ "background-color": active_list_bg_colors[$(item).attr('id')]});
-}
-
 function setupCanvas(canvas, img) {
     // * compute the suitable canvas size
     // get the height of all elements below the canvas
@@ -188,9 +196,10 @@ function setupCanvas(canvas, img) {
         below_height += e.offsetHeight;
     });
     // console.log(below_height);
-    
-    var max_c_height = window.innerHeight - container.getBoundingClientRect().top - 90;
-    var max_c_width = container.getBoundingClientRect().width - 20;
+
+    // var max_c_height = window.innerHeight - container.getBoundingClientRect().top - 30;
+    var max_c_height = window.innerHeight * 3.0 / 4.0;
+    var max_c_width = container.getBoundingClientRect().width;
 
     var w_ratio = max_c_width / img.naturalWidth;
     var h_ratio = max_c_height / img.naturalHeight;
@@ -200,9 +209,9 @@ function setupCanvas(canvas, img) {
     canvas.height = img.naturalHeight * ratio;
     // console.log(canvas.width, canvas.height);
 
-    $(img).css({ 
-        "position": "absolute", 
-        "visibility": "visible", "z-index": -1 ,
+    $(img).css({
+        "position": "absolute",
+        "visibility": "visible", "z-index": -1,
         "left": `50%`,
         "margin-left": `-${canvas.width / 2}px`
     });
@@ -213,18 +222,20 @@ function setupCanvas(canvas, img) {
 }
 
 
-function drawPoint(canvas, x, y, color = 'red', board_color = 'green',  radius = 8, lineWidth = 4, boarder = 1) {
+function drawPoint(canvas, x, y, color = 'red', board_color = '', radius = 8, lineWidth = 4, boarder = 1) {
     // * draw a point on the canvas
     x *= canvas.width;
     y *= canvas.height;
 
     var ctx = canvas.getContext('2d');
 
-    ctx.beginPath();
-    ctx.arc(x, y, radius, 0, 2 * Math.PI);
-    ctx.lineWidth = lineWidth + boarder;
-    ctx.strokeStyle = board_color;
-    ctx.stroke();
+    if (board_color != "") {
+        ctx.beginPath();
+        ctx.arc(x, y, radius, 0, 2 * Math.PI);
+        ctx.lineWidth = lineWidth + boarder;
+        ctx.strokeStyle = board_color;
+        ctx.stroke();
+    }
 
     ctx.beginPath();
     ctx.arc(x, y, radius, 0, 2 * Math.PI);
@@ -233,7 +244,7 @@ function drawPoint(canvas, x, y, color = 'red', board_color = 'green',  radius =
     ctx.stroke();
 }
 
-function drawLine(canvas, x1, y1, x2, y2, color = 'red', board_color = 'green', lineWidth = 4, boarder = 1) {
+function drawLine(canvas, x1, y1, x2, y2, color = 'red', board_color = '', lineWidth = 4, boarder = 1) {
     // * draw a line on the canvas
     x1 *= canvas.width;
     y1 *= canvas.height;
@@ -242,12 +253,15 @@ function drawLine(canvas, x1, y1, x2, y2, color = 'red', board_color = 'green', 
 
     var ctx = canvas.getContext('2d');
 
-    ctx.beginPath();
-    ctx.moveTo(x1, y1);
-    ctx.lineTo(x2, y2);
-    ctx.lineWidth = lineWidth + boarder;
-    ctx.strokeStyle = board_color;
-    ctx.stroke();
+    if (board_color != "") {
+        ctx.beginPath();
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+        ctx.lineWidth = lineWidth + boarder;
+        ctx.strokeStyle = board_color;
+        ctx.stroke();
+
+    }
 
     ctx.beginPath();
     ctx.moveTo(x1, y1);
@@ -316,63 +330,37 @@ function updateInfoBoard(infoboard) {
 }
 
 function submit() {
-    // * submit the annotations, and swap to the next pair of images
+    // * submit the annotations for AWS Crowd
 
-    // TODO: submit the annotation
     console.log("Submit Annotations:");
-    annos.forEach((anno, id) => {
-        console.log("\tImage " + id + " Rotation:");
-        anno["Rotation"].forEach(element => {
-            console.log(element);
-        });
-        console.log("\tImage " + id + " Reflection:");
-        anno["Reflection"].forEach(element => {
-            console.log(element);
-        });
+    // annos.forEach((anno, id) => {
+    //     console.log("\tImage " + id + " Rotation:");
+    //     anno["Rotation"].forEach(element => {
+    //         console.log(element);
+    //     });
+    //     console.log("\tImage " + id + " Reflection:");
+    //     anno["Reflection"].forEach(element => {
+    //         console.log(element);
+    //     });
+    // });
+
+    $("#form").remove("input");
+    var anno = annos[0];
+    anno["Rotation"].forEach((element, idx) => {
+        $("#form").append(`<input name="Rotation ${idx}" id="Rotation" type="hidden">`);
+        $("input#Rotation")[idx].value = element;
+        console.log("\tRot" + idx + ":" + $("input#Rotation")[idx].value);
     });
 
-    
-
-    // var skipFlag = true;
-    annos.forEach((anno) => {
-        if (anno["Rotation"].length != 0 || anno["Reflection"].length != 0) num_labeled += 1;
-        else num_skipped += 1;
-        // if (anno["Rotation"].length != 0 || anno["Reflection"].length != 0) skipFlag = false;
-    });
-    // if (skipFlag)
-    //     num_skipped += 1;
-    // else 
-    //     num_labeled += 1;
-    updateInfoBoard($("#info-board"));
-
-    // reset the panel
-    $(".labeling-tool").each((index, element) => {
-        clearAll(element);
-
-        annos[index] = { "Rotation": [], "Reflection": [] };
-        sym_types[index] = ('None');
-        prev_XY[index] = ([-1, -1]);
+    anno["Reflection"].forEach((element, idx) => {
+        $("#form").append(`<input name="Reflection ${idx}" id="Reflection" type="hidden">`);
+        $("input#Reflection")[idx].value = element;
+        console.log("\tRef: " + idx + ":" + $("input#Reflection")[idx].value);
     });
 
-    var active_options = $(".list-group .list-group-item.active");
-    active_options.each((index, element) => {
-        $(element).removeClass("active");
-    });
-
-    // check if the task is ended (local only ?)
-    if (img_id >= img_urls.length) {
-        console.log("Task is end!");
-        alert("Congrats!");
-        // * Local demo
-        window.location = "end.html?num_labeled=" +num_labeled;
-        // window.location.href = "end.html?num_labeled=" +num_labeled;
-    }
-
-    // swap to the next pair of images
-    $(".labeling-tool").each((index, element) => {
-        $(".bk-image")[index].src = img_urls[img_id];
-        img_id += 1;
-    });
-
-    
+    // $("input#Rotation")[0].value = annos[0]["Rotation"];
+    // $("input#Reflection")[0].value = annos[0]["Reflection"];
+    // // console.log($("#annotations")[0].value);
+    // $("#form").append(`<input name="New" id="New" type="hidden">`);
+    // $("input#New")[0].value = "New";
 }
