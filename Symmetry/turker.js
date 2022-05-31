@@ -24,6 +24,7 @@ let trashcan = new Array();
 let colors = {};
 let timeDownUp = null;
 let rightClick = false;
+let instShowFlag = false;
 
 
 let labelNum = {};     // number of labeling for each type of symmetry
@@ -50,6 +51,9 @@ $(document).ready(function () {
     $("#instruction").slideUp(0);
 
     $("#instruction_button").click(function () {
+        instShowFlag = !instShowFlag;
+        if (instShowFlag == true) { $("#instruction_button").text(`Click here to Hide`); }
+        else { $("#instruction_button").text(`Click here for Instructions`); }
         $("#instruction").clearQueue();
         $("#instruction").slideToggle();
     });
@@ -112,6 +116,8 @@ $(document).ready(function () {
     });
 
     canvas.addEventListener("pointerdown", function (evt) {
+        
+
         rightClick = evt == 3;
         getCorrectCoords(evt);
         timeDownUp = new Date().getTime();
@@ -127,6 +133,9 @@ $(document).ready(function () {
     });
 
     canvas.addEventListener("pointerup", function (evt) {
+        dismissAlerts();        // dismiss alerts if any
+        if (mode=="") {symTypeAlert();}
+
         timeDownUp = new Date().getTime();
         getCorrectCoords(evt);
         if (dragged) {
@@ -191,8 +200,23 @@ $(document).ready(function () {
         }
     });
 });
-
 // end of ready function
+
+function dismissAlerts() {
+    // * dismiss all alerts
+    $('crowd-alert').slideUp();
+}
+
+function symTypeAlert() {
+    // * show a sym type alert
+    $('#alert-box').append(`
+    <crowd-alert type="error" id="sym-type-alert" dismissible>
+        Please choose which type of symmetry (Hot key: <b>R</b>) to be labeled first!
+    </crowd-alert>
+    `);
+}
+
+
 function updateSymInfo() {
     // * update the number of labeled rotation & symmetry
     let rot_num = 0;
@@ -201,13 +225,16 @@ function updateSymInfo() {
     if ("Reflection" in labelNum) { ref_num = labelNum['Reflection']; }
 
     $("#sym-info").html(`
-    <p class="fs-5 text-center">
-        Rotation Symmetry: ${rot_num}
-    </p>
 
-    <p class="fs-5 text-center">
+    <p class="fs-6">
+        Labeled Symmetries so far:
+    </p>
+    <p class="fs-6 text-center">
+        Rotation Symmetry: ${rot_num}
+        <br>
         Reflection Symmetry: ${ref_num}
     </p>
+
     `);
 }
 
@@ -327,7 +354,7 @@ function reset() {
     classes = [];
     classNum = 0;
     selectedRPIndex = 0;
-    
+
     updateGraphics();
 }
 
@@ -559,9 +586,15 @@ function undo() {
 window.addEventListener(
     "keydown",
     function (evt) {
-        // Press E for "Mode toggle"
-        if (evt.key == "e") {
-            toggleMode();
+        // Press R for Flipping Rot/Ref
+        if (evt.key == "r") {
+            if (mode == 'dot') { toggleMode('link'); }
+            else { toggleMode('dot'); }
+        }
+
+        // Press D for Flipping Label/Delete
+        if (evt.key == "d") {
+            toggleDelete();
         }
 
         // Press ctrl + Z for "Undo"
@@ -569,9 +602,9 @@ window.addEventListener(
             undo();
         }
 
-        // Press D for "Delete"
-        if (evt.key == "d") {
-            toggleDelete();
+        // Press ctrl + x for reset zoom view
+        if (evt.key == "x" && evt.ctrlKey) {
+            reposition();
         }
 
         // Press C for "Close Polygon"
