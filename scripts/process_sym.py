@@ -3,6 +3,7 @@
 import pandas as pd
 import json
 import os
+import ast
 ###
 from urllib.request import urlopen
 import matplotlib.pyplot as plt
@@ -33,6 +34,34 @@ def convertResult_Iter1(img, anno_str):
 
     
     
+    return anno
+
+def convertResult(img, anno_str):
+    ''' Convert a labeling result string into an annotation dictionary '''
+    raw_anno = json.loads(anno_str)
+
+    # res = ast.literal_eval(anno_str)
+    # raw_anno = json.dumps(anno_str, separators=(',', ':'))
+    raw_anno = raw_anno[0]
+    raw_anno['coordinates'] = json.loads(raw_anno['coordinates'])
+    anno = {}
+    rot_idx, ref_idx = 0, 0
+
+    label_img_w, label_img_h = json.loads(raw_anno['imageSize'])
+    for label in raw_anno['coordinates']:
+        if label['class'] == 'Rotation': 
+            # * 'Rotation ID': (x, y)
+         
+            rot_center = [int(label['data'][0]/label_img_w*img.shape[1]), int(label['data'][1]/label_img_h*img.shape[0])]
+            anno[f'Rotation {rot_idx}'] = rot_center
+            rot_idx += 1
+
+        elif label['class'] == 'Reflection': 
+            # * 'Reflection ID': (x1, y1, x2, y2)
+            ref_ends = [int(label['data'][0]/label_img_w*img.shape[1]), int(label['data'][1]/label_img_h*img.shape[0]), int(label['data'][2]/label_img_w*img.shape[1]), int(label['data'][3]/label_img_h*img.shape[0])]
+            anno[f'Reflection {rot_idx}'] = ref_ends
+            ref_idx += 1
+
     return anno
 
 def urlToLocalPath(img_dir, img_url):
@@ -81,19 +110,8 @@ def visuSym(img, anno):
 
     return result
 
-
-
-if __name__ == "__main__":
-
-    # * Process the batch result .csv file, and save the visualization figures of each individual labeling
-
-    image_local_dir = 'E:/Lab Work/Human Research/Dataset Collection/Iter-1'
-
-    anno_save_dir = 'E:/Lab Work/Human Research/Dataset Collection/Results/Iter-1/anno'
-    visu_save_dir = 'E:/Lab Work/Human Research/Dataset Collection/Results/Iter-1/visu'
-
-    batch_file_path = 'D:/Downloads/Batch_4743917_batch_results (2).csv'
-    
+def ProcessIter1(image_local_dir, anno_save_dir, visu_save_dir, batch_file_path):
+    ''' Process the batch result .csv file, and save the visualization figures of each individual labeling '''
 
     os.makedirs(anno_save_dir, exist_ok=True)
     os.makedirs(visu_save_dir, exist_ok=True)
@@ -144,3 +162,35 @@ if __name__ == "__main__":
         cv2.imwrite(os.path.join(visu_save_dir ,f'{img_name_noext}_{worker_id}_{idx}.jpg') ,visu)
 
     print (num_nolabel)
+
+
+#  def ProcessIter2():
+
+def Test():
+    img = cv2.imread('E:/Lab Work/Human Research/Dataset Collection/Iter-1/000-201.jpg')
+    data = pd.read_csv('D:/Downloads/testResult.csv')
+    # convertResult(img, anno_str= '[{"coordinates": "[{\"class\":\"Rotation\",\"mode\":\"dot\",\"data\":[477,272]},{\"class\":\"Rotation\",\"mode\":\"dot\",\"data\":[515,279]}]", "imageSize": "[731, 485]"}]')
+
+    for idx, row in data.iterrows():
+
+        anno = convertResult(img, anno_str= row['Answer.taskAnswers'])
+
+        visu = visuSym(img, anno)
+        cv2.imwrite('test.jpg', visu)
+
+if __name__ == "__main__":
+
+    Test()
+
+    # ProcessIter1(
+    #     image_local_dir = 'E:/Lab Work/Human Research/Dataset Collection/Iter-1', 
+    #     anno_save_dir = 'E:/Lab Work/Human Research/Dataset Collection/Results/Iter-1/anno', 
+    #     visu_save_dir = 'E:/Lab Work/Human Research/Dataset Collection/Results/Iter-1/visu', 
+    #     batch_file_path = 'D:/Downloads/Batch_4743917_batch_results (2).csv'
+    # )
+
+    
+
+
+
+    
