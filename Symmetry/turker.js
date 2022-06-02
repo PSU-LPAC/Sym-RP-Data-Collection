@@ -116,7 +116,7 @@ $(document).ready(function () {
     });
 
     canvas.addEventListener("pointerdown", function (evt) {
-        
+
 
         rightClick = evt == 3;
         getCorrectCoords(evt);
@@ -134,7 +134,7 @@ $(document).ready(function () {
 
     canvas.addEventListener("pointerup", function (evt) {
         dismissAlerts();        // dismiss alerts if any
-        if (mode=="") {symTypeAlert();}
+        if (mode == "") { symTypeAlert(); }
 
         timeDownUp = new Date().getTime();
         getCorrectCoords(evt);
@@ -205,6 +205,8 @@ $(document).ready(function () {
 function dismissAlerts() {
     // * dismiss all alerts
     $('crowd-alert').slideUp();
+    $('crowd-alert').alert('close');
+    $('.alert').alert('close');
 }
 
 function symTypeAlert() {
@@ -213,6 +215,15 @@ function symTypeAlert() {
     <crowd-alert type="error" id="sym-type-alert" dismissible>
         Please choose which type of symmetry (Hot key: <b>R</b>) to be labeled first!
     </crowd-alert>
+    `);
+
+    // * show the alert in a test environment
+    $('#test-alert-box').append(`
+
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+    Please choose which type of symmetry (Hot key: <b>R</b>) to be labeled first!
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
     `);
 }
 
@@ -225,15 +236,11 @@ function updateSymInfo() {
     if ("Reflection" in labelNum) { ref_num = labelNum['Reflection']; }
 
     $("#sym-info").html(`
-
-    <p class="fs-6">
-        Labeled Symmetries so far:
-    </p>
     <p class="fs-6 text-center">
-        Rotation Symmetry: ${rot_num}
-        <br>
-        Reflection Symmetry: ${ref_num}
-    </p>
+                                Labeled Rotation Symmetries: ${rot_num}
+                                <br>
+                                Labeled Reflection Symmetries: ${ref_num}
+                            </p>
 
     `);
 }
@@ -451,7 +458,7 @@ function drawDot(annotation, options) {
     // console.log(mode);
     const corners = annotation.data;
 
-    if (mode == 'dot') {
+    if (mode == 'dot' || getDeleteMode() === true) {
         // * set highlight border
         ctx.fillStyle = "rgba(1, 1, 1, 0)";
         ctx.strokeStyle = `rgba(255, 255, 255, 1.0)`;
@@ -473,7 +480,7 @@ function drawDot(annotation, options) {
 function drawLink(annotation, options) {
     const corners = annotation.data;
 
-    if (mode == 'link') {
+    if (mode == 'link' || getDeleteMode() === true) {
         // * set highlight border
         ctx.fillStyle = "rgba(1, 1, 1, 0)";
         ctx.strokeStyle = `rgba(255, 255, 255, 1.0)`;
@@ -605,6 +612,10 @@ window.addEventListener(
         // Press ctrl + x for reset zoom view
         if (evt.key == "x" && evt.ctrlKey) {
             reposition();
+        }
+
+        if (evt.key == "Enter" ) {
+            $("crowd-form")[0].submit();
         }
 
         // Press C for "Close Polygon"

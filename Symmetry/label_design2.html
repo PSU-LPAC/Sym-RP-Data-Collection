@@ -62,7 +62,7 @@
 
         .tooltip-text {
             visibility: hidden;
-            /* width: 160px; */
+            width: 160px;
             background-color: black;
             color: #fff;
             text-align: center;
@@ -75,14 +75,15 @@
 
         .tooltip-text-2 {
             visibility: hidden;
-            /* width: 160px; */
+            width: 160px;
             background-color: black;
             color: #fff;
             text-align: center;
             position: absolute;
+            width: 120px;
             bottom: 100%;
             left: 50%;
-            margin-left: -50%;
+            margin-left: -60px;
         }
 
         .fixed_width {
@@ -174,6 +175,22 @@
                             Understanding Symmetry</a> and submit your <strong>WorkerID</strong> through the background
                         survey.
                     </crowd-alert>
+
+                    <!-- <crowd-alert type="error" id="sym-type-alert" dismissible>
+                        Please choose which type of symmetry to be labeled first!
+                    </crowd-alert> -->
+
+                    <!-- <crowd-alert type="info" dismissible>
+                        During preview, if no perceived symmetries are found, kindly
+                        <strong>SKIP</strong> this image.
+                    </crowd-alert>
+
+                    <crowd-alert type="info" dismissible>
+                        To get HIT approved properly, make sure you've read this
+                        tutorial <a href="https://alexis97.github.io/RP-Interface/pages/tutorial.html" target="_blank">
+                            Understanding Symmetry</a> and submit your <strong>WorkerID</strong> through the background
+                        survey.
+                    </crowd-alert> -->
                 </div>
 
                 <div id="response">
@@ -182,7 +199,7 @@
                     <input id="imageSize" name="imageSize" type="hidden" />
                 </div>
 
-                <div class="col-4 border gap-3" id="left-panel">
+                <div class="col-4 border  d-grid gap-3" id="left-panel">
                     <div class="row border">
                         <!-- *[Instruction] -->
                         <button type="button" class="btn" name="instruction_button" id="instruction_button"> Click
@@ -199,9 +216,9 @@
                                     Use mouse scroll to zoom in/out the image for more precise labeling.
                                 </li>
 
-                                <li>Click the <strong>Submit</strong> button or press <strong>ENTER</strong> to finish current task.</li>
+                                <li>Click the <strong>Submit</strong> button to finish current task.</li>
 
-                                <li> Buttons & Hotkeys:
+                                <li> Buttons & Hot keys:
                                     <ol>
                                         <li>
                                             Click <strong>Rotation/Reflection</strong> flip switch or press
@@ -247,111 +264,103 @@
                         </div>
                     </div>
 
-                    <div class="row border" id="label-panel">
+                    <div class="row border d-grid gap-0" id="label-panel">
                         <!-- *[Label Panel] -->
 
-                        <div class="row">
-                            <div class="col-6">
-                                CHOOSE A SYMMETRY TYPE:
+                        <div class="row" id="control-sym-type">
+                            <div class="col-3">
+                                <p class="fs-6 text-center">
+                                    CHOOSE SYMMETRY TYPE
+                                    <br>
+                                    (Hot key: <strong>R</strong>)
+                                </p>
                             </div>
-                            <div class="col-6">
+
+                            <div class="col-3  d-grid">
                                 <div class="btn-group" role="group">
                                     <label class="btn btn-outline-secondary" type="radio" name="sym_options"
                                            id="rot_button" autocomplete="off" checked>
                                         Rotation Symmetry
-                                        <span class="tooltip-text-2">
-                                            Click one point as the rotation center
-                                            <br>
-                                            (Hotkey: <strong>R</strong>)
-                                        </span>
+                                        <span class="tooltip-text-2">click one point (rotation center)</span>
                                     </label>
                                     <label class="btn btn-outline-secondary" type="radio" name="sym_options"
                                            id="ref_button" autocomplete="off">
                                         Reflection Symmetry
-                                        <span class="tooltip-text-2">
-                                            Click two points as the reflection axis
-                                            <br>
-                                            (Hotkey: <strong>R</strong>)
-                                        </span>
+                                        <span class="tooltip-text-2">click two points (reflection axis)</span>
                                     </label>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="row">
-                            <p>
-                                CHOOSE AN ACTION
-                            </p>
-                        </div>
+                        <hr>
 
-                        <div class="row">
-                            <div class="col-3">
+                        <div class="row" id="control-label-type">
+                            <div class="col-6">
+                                <p class="fs-6 text-center">
+                                    CHOOSE ACTION
+                                    <br>
+                                    (Hot key: <strong>D</strong>)
+                                </p>
+                            </div>
+
+                            <div class="col-6  d-grid">
                                 <span id="delete_flip" class="btn-group btn-group-toggle" data-toggle="buttons">
                                     <label class="btn btn-primary" type="radio" name="options" id="annotate_button"
                                            autocomplete="off">
                                         Label
-                                        <span class="tooltip-text-2">
-                                            Label a New Symmetry
-                                            <br>
-                                            (Hotkey: <strong>D</strong>)
-                                        </span>
+                                        <span class="tooltip-text-2">Label a New Symmetry</span>
                                     </label>
                                     <label class="btn btn-outline-secondary" type="radio" name="options"
                                            id="delete_button" autocomplete="off" checked>
                                         Delete
-                                        <span class="tooltip-text-2">
-                                            Delete an Existing Symmetry
-                                            <br>
-                                            (Hotkey: <strong>D</strong>)
-                                        </span>
+                                        <span class="tooltip-text-2">Delete an Existing Symmetry</span>
                                     </label>
                                 </span>
                             </div>
+                        </div>
+                        <hr>
+                        <div class="row" id="other-label-funcs">
 
-                            <div class="col-2 d-grid">
-                                <button type="button" class="btn btn-secondary btn-sm" name="undo_button" id="undo_button">
-                                    Undo Last
-                                    <span class="tooltip-text">
-                                        Undo last Annotation/Deletion
-                                        <br>
-                                        (Hotkey: <strong>CTRL+Z</strong>)</span>
+                            <div class="col">
+                                <button type="button" class="btn btn-secondary" name="undo_button" id="undo_button">
+                                    Undo Last (<strong>CTRL+Z</strong>)
+                                    <span class="tooltip-text">Undo last Annotation/Deletion</span>
                                 </button>
                             </div>
 
-                            <div class="col-2 d-grid">
-                                <button type="button" class="btn btn-warning btn-sm" name="reposition_button"
+                            <div class="col">
+                                <button type="button" class="btn btn-warning" name="reposition_button"
                                         id="reposition_button">
-                                    Reset View
-                                    <span class="tooltip-text">
-                                        Reset View Scale After Zooming-In
-                                        <br>
-                                        (Hotkey: <strong>CTRL+X</strong>)</span>
+                                    Reset View (<strong>CTRL+X</strong>)
+                                    <span class="tooltip-text">Reset View Scale After Zooming-In</span>
                                 </button>
                             </div>
 
-                            <div class="col-2 d-grid">
-                                <button type="button" class="btn btn-danger btn-sm" name="reset_button" id="reset_button">
+                            <div class="col d-grid">
+                                <button type="button" class="btn btn-danger" name="reset_button" id="reset_button">
                                     Clear All
-                                    <span class="tooltip-text">
-                                        Clear All Annotations
-                                        <!-- <br>
-                                <span style="color: red;">Symmetry Labels disappeared cannot be
-                                    recovered!</span> -->
+                                    <span class="tooltip-text">Clear All Annotations
+                                    <br>
+                                    <span style="color: red;">Symmetry Labels disappeared cannot be recovered!</span>
                                     </span>
                                 </button>
                             </div>
 
-                            <div class="col-3 d-grid">
-                                <button type="button" class="btn btn-success" name="submit" id="submit"> Submit
-                                    <span class="tooltip-text">
-                                        Click here to submit your labeling
-                                        <br>
-                                        (Hotkey:<strong>ENTER</strong>)
-                                    </span>
-                                </button>
-                            </div>
+
                         </div>
 
+                        <div class="row border d-flex  justify-content-center">
+                            <p class="fs-6 text-center">
+                                <strong>Click here to submit your labeling </strong>
+                            </p>
+                            <div class="col-6 d-grid">
+                                <button type="button" class="btn btn-success" name="submit" id="submit"> Submit
+
+                                    <span class="tooltip-text">Click here to submit your labeling</span>
+                                </button>
+                            </div>
+
+                        </div>
                     </div>
 
 
@@ -376,14 +385,7 @@
 
 
             <div class="row border">
-                <!-- * [IRB Study Information Here] -->
-                <p class="fs-6 font-monospace">
-                    This study is carried under The Pennsylvania State University (PSU) IRB STUDY00008698, and funded by National Science Foundation (NSF) grant 1909315.
-
-                </p>
-                <p class="fs-6 font-monospace">
-                    By completing this HIT, you understand that you are agreeing to participate in an experiment designed by researchers at The Pennsylvania State University and that you will remain anonymous. Your participation is voluntary and you may stop the experiment at any time or choose to not answer any specific question. If you have any questions, concerns, or problems regarding the research, please contact Shimian Zhang at <a href="mailto:svz5303@psu.edu" target="_blank" >svz5303@psu.edu</a> or Dr. Yanxi Liu at <a href="mailto:yul11@psu.edu" target="_blank" >yul11@psu.edu</a>. If you have any other questions, concerns, or problems specifically regarding your rights as a research participant, please contact The Pennsylvania State University's Office for Research Protections (ORP) at (814) 865-1775. 
-                </p>
+                [IRB Study Information Here]
             </div>
 
 

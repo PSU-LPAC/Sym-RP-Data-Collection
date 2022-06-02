@@ -109,64 +109,29 @@ function validate_ref(user_label, gt, th_dist = 0.05) {
 }
 
 function val_success(message, redirect_url) {
-    $("div#body-part").prepend(`
-            <div class="alert alert-success fade in alert-dismissible" id="correct">
+    $("#test-alert-box").append(`
+            <div class="alert alert-success alert-dismissible fade show" role="alert" id="correct">
             <strong>Correct!</strong> ${message}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             `);
-    $('div#correct').on('closed.bs.alert', function () {
-        // console.log("Click close!");
-        clearAll($(".labeling-tool")[0]);
-        annos[0] = { "Rotation": [], "Reflection": [] };
-        sym_types[0] = ('None');
-        prev_XY[0] = ([-1, -1]);
-
+    $('.alert#correct').on('closed.bs.alert', function () {
         location.href = redirect_url;
     })
 
-    $("div#correct").fadeTo(5000, 1.0).slideUp("fast", function(){
-        // $("div#incorrect").slideUp(500);
-        clearAll($(".labeling-tool")[0]);
-        annos[0] = { "Rotation": [], "Reflection": [] };
-        sym_types[0] = ('None');
-        prev_XY[0] = ([-1, -1]);
-
-        location.href = redirect_url;
-    });
 }
 
 function val_failure(message) {
-    $("div#body-part").prepend(`
-            <div class="alert alert-danger alert-dismissible" id="incorrect">
+    $("#test-alert-box").append(`
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" id="incorrect">
             <strong>Incorrect!</strong> ${message}
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             `);
-    $('div#incorrect').on('closed.bs.alert', function () {
-        // console.log("Click close!");
-        clearAll($(".labeling-tool")[0]);
-        annos[0] = { "Rotation": [], "Reflection": [] };
-        sym_types[0] = ('None');
-        prev_XY[0] = ([-1, -1]);
-
-        $(".list-group > .list-group-item").each(function(index, element){
-            reset_sym_option(element);
-        });
+    $('.alert#incorrect').on('closed.bs.alert', function () {
+        reset();
     })
-    $("div#incorrect").fadeTo(5000, 1.0).slideUp("fast", function(){
-        // $("div#incorrect").slideUp(500);
-        clearAll($(".labeling-tool")[0]);
-        annos[0] = { "Rotation": [], "Reflection": [] };
-        sym_types[0] = ('None');
-        prev_XY[0] = ([-1, -1]);
-
-        $(".list-group > .list-group-item").each(function(index, element){
-            reset_sym_option(element);
-        });
-    });
+    // $(".alert#incorrect").fadeTo(5000, 1.0).slideUp("fast", function(){
+    //     reset();
+    // });
 }
