@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Symmetry Labeling Test-3</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <style>
+        body {
+            overflow: hidden;
+        }
+
+        #left-panel {
+            overflow: auto;
+        }
+
+        #parent {
+            /* width: 1000px; */
+            width: auto;
+            height: auto;
+            overflow: hidden;
+            position: relative;
+            /* background: #f5f5f5; */
+        }
+
+        #child {
+            margin: auto;
+        }
+
+        #myCanvas {
+            position: absolute;
+        }
+
+        #pic {
+            width: 100%;
+            /* height: 50vh; */
+        }
+
+
+
+        #text {
+            width: 1000px;
+        }
+
+        .btn:hover {
+            text-shadow: 0px 0px 1px black;
+        }
+
+        .btn:hover .tooltip-text {
+            visibility: visible;
+        }
+
+        .btn:hover .tooltip-text-2 {
+            visibility: visible;
+        }
+
+        .tooltip-text {
+            visibility: hidden;
+            /* width: 160px; */
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            position: absolute;
+            /* width: 120px;
+            bottom: 100%;
+            left: 50%;
+            margin-left: -60px; */
+        }
+
+        .tooltip-text-2 {
+            visibility: hidden;
+            /* width: 160px; */
+            background-color: black;
+            color: #fff;
+            text-align: center;
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            margin-left: -50%;
+        }
+
+        .fixed_width {
+            width: 130px !important;
+        }
+
+        .fixed_height {
+            height: 50vh;
+        }
+
+        #label_class {
+            width: 200px;
+            float: right;
+        }
+
+        #text {
+            margin-bottom: 20px;
+        }
+
+        #buttons {
+            margin-top: 20px;
+        }
+
+        .panel {
+            margin-top: 20px;
+        }
+
+        #rot_button.btn-outline-secondary {
+            color: red;
+        }
+
+        #rot_button.btn-primary {
+            background-color: #ac2925;
+            color: white;
+        }
+
+        #ref_button.btn-outline-secondary {
+            color: green;
+        }
+
+        #ref_button.btn-primary {
+            background-color: #398439;
+            color: white;
+        }
+
+        #instruction_button {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <crowd-form id="form"> 
+        <crowd-button form-action="submit" style="display: none;"></crowd-button>
+    </crowd-form> -->
+    <div class="container-fluid">
+        <div class="page-header justify-content-between" id="header">
+            <!-- [Header] -->
+
+            <h4 class="text-center"><b>Test-3: Find at least one <span style="color:red">Rotation
+                        Symmetry</span> and one <span style="color:green">Reflection Symmetry</span> you
+                    perceive on this image.</b>
+            </h4>
+
+            <p class="fs-6 font-monospace text-center"> Note: Real world symmetries may <strong
+                        style="color: red;font-size: 120%;">NOT</strong> appear perfectly. </p>
+        </div>
+
+        <div class="row">
+            <p class="fs-6 font-monospace text-center">
+                Need a refresher on "<b>Symmetry</b>"?
+                Click here:
+                <a href="https://psu-lpac.github.io/Sym-RP-Data-Collection/Symmetry/Tutorial/tutorial.html"
+                   target="_blank">
+                    Understanding Symmetry</a>
+            </p>
+        </div>
+
+
+        <div class="row border " id="body-part">
+            <div id="test-alert-box">
+
+            </div>
+
+            <div id="response">
+                <!-- *Response -->
+                <input id="coordinates" name="coordinates" type="hidden" />
+                <input id="imageSize" name="imageSize" type="hidden" />
+            </div>
+
+            <div class="col-4 border" id="left-panel">
+                <div class="row">
+                    <!-- *[Instruction] -->
+                    <button type="button" class="btn" name="instruction_button" id="instruction_button"> Click
+                        Here for Instructions
+                    </button>
+                    <div id="instruction">
+
+                        <ol>
+                            <li> <b>Label every symmetry</b> you <b>perceive</b> on each image.</li>
+
+                            <li> Choose which type of symmetry to be labeled first. </li>
+
+                            <li>
+                                Use mouse scroll to zoom in/out the image for more precise labeling.
+                            </li>
+
+                            <li>Click the <strong>Submit</strong> button or press <strong>ENTER</strong> to finish
+                                current task.</li>
+
+                            <li> Buttons & Hotkeys:
+                                <ol>
+                                    <li>
+                                        Click <strong>Rotation/Reflection</strong> flip switch or press
+                                        <strong>R</strong> to toggle between label rotation and reflection.
+                                    </li>
+                                    <li>
+                                        Click <strong>Label/Deletion</strong> flip switch or press
+                                        <strong>D</strong> to toggle between labeling and deleting.
+                                    </li>
+                                    <li>
+                                        Click the <strong>Undo Last</strong> button or press <strong>CTRL+Z</strong>
+                                        to
+                                        undo last Annotation/Deletion.
+                                    </li>
+
+                                    <li>
+                                        Click the <strong>Reset View</strong> button or press
+                                        <strong>CTRL+X</strong> center the image and reset
+                                        zoom.
+                                    </li>
+
+                                    <li>
+                                        Click the <strong>Clear All</strong> button to clear all annotations.
+                                        <span style="color: red;"><strong>Warning:</strong> this action cannot be
+                                            recovered!</span>
+                                    </li>
+
+                                </ol>
+                            </li>
+                        </ol>
+
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="row">
+                    <!-- *[Information] -->
+                    <div id="sym-info">
+                        <p class="fs-6 text-center">
+                            Labeled Rotation Symmetries: 0
+                            <br>
+                            Labeled Reflection Symmetries: 0
+                        </p>
+                    </div>
+                </div>
+
+                <hr>
+
+                <div class="row mt-2" id="label-panel">
+                    <!-- *[Label Panel] -->
+
+                    <div class="row mb-2">
+                        <div class="col-6">
+                            CHOOSE A SYMMETRY TYPE:
+                        </div>
+                        <div class="col-6">
+                            <div class="btn-group" role="group">
+                                <label class="btn btn-outline-secondary" type="radio" name="sym_options" id="rot_button"
+                                       autocomplete="off" checked>
+                                    Rotation Symmetry
+                                    <span class="tooltip-text-2">
+                                        Click one point as the rotation center
+                                        <br>
+                                        (Hotkey: <strong>R</strong>)
+                                    </span>
+                                </label>
+                                <label class="btn btn-outline-secondary" type="radio" name="sym_options" id="ref_button"
+                                       autocomplete="off">
+                                    Reflection Symmetry
+                                    <span class="tooltip-text-2">
+                                        Click two points as the reflection axis
+                                        <br>
+                                        (Hotkey: <strong>R</strong>)
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <p>
+                            CHOOSE AN ACTION:
+                        </p>
+                    </div>
+
+                    <div class="row justify-content-center">
+                        <div class="row mb-2">
+                            <span id="delete_flip" class="btn-group btn-group-toggle" data-toggle="buttons">
+                                <label class="btn btn-primary" type="radio" name="options" id="annotate_button"
+                                       autocomplete="off">
+                                    Label
+                                    <span class="tooltip-text-2">
+                                        Label a New Symmetry
+                                        <br>
+                                        (Hotkey: <strong>D</strong>)
+                                    </span>
+                                </label>
+                                <label class="btn btn-outline-secondary" type="radio" name="options" id="delete_button"
+                                       autocomplete="off" checked>
+                                    Delete
+                                    <span class="tooltip-text-2">
+                                        Delete an Existing Symmetry
+                                        <br>
+                                        (Hotkey: <strong>D</strong>)
+                                    </span>
+                                </label>
+                            </span>
+                        </div>
+
+
+                        <div class="row mb-2">
+                            <div class="col-4 d-grid">
+                                <button type="button" class="btn btn-secondary btn-sm" name="undo_button"
+                                        id="undo_button">
+                                    Undo Last
+                                    <span class="tooltip-text">
+                                        Undo last Annotation/Deletion
+                                        <br>
+                                        (Hotkey: <strong>CTRL+Z</strong>)</span>
+                                </button>
+                            </div>
+                            <div class="col-4 d-grid">
+                                <button type="button" class="btn btn-warning btn-sm" name="reposition_button"
+                                        id="reposition_button">
+                                    Reset View
+                                    <span class="tooltip-text">
+                                        Reset View Scale After Zooming-In
+                                        <br>
+                                        (Hotkey: <strong>CTRL+X</strong>)</span>
+                                </button>
+                            </div>
+                            <div class="col-4 d-grid">
+                                <button type="button" class="btn btn-danger btn-sm" name="reset_button"
+                                        id="reset_button">
+                                    Clear All
+                                    <span class="tooltip-text">
+                                        Clear All Annotations
+                                        <!-- <br>
+                                <span style="color: red;">Symmetry Labels disappeared cannot be
+                                    recovered!</span> -->
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="row mt-3">
+                            <div class="col-12 d-grid">
+                                <button type="button" class="btn btn-success" name="test-submit" id="test-submit">
+                                    Submit
+                                    <span class="tooltip-text">
+                                        Click here to submit your labeling
+                                        <br>
+                                        (Hotkey:<strong>ENTER</strong>)
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <div class="col">
+                <!-- *[Canvas Part] -->
+
+                <div class="fixed_height border col  d-flex justify-content-center">
+                    <div id="parent">
+                        <div id="child">
+                            <canvas id="myCanvas"></canvas>
+                            <!-- <img class="fixed_height" id="pic" src="${img_url}" /> -->
+                            <img class="fixed_height" id="pic" src="../figures/test images/real_both.jpg" />
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row border">
+            <!-- * [IRB Study Information Here] -->
+            <p class="fs-6 font-monospace">
+                This study is carried under The Pennsylvania State University (PSU) IRB STUDY00008698, and funded by
+                National Science Foundation (NSF) grant 1909315.
+
+            </p>
+            <!-- <p class="fs-6 font-monospace">
+                By completing this HIT, you understand that you are agreeing to participate in an experiment designed by
+                researchers at The Pennsylvania State University and that you will remain anonymous. Your participation
+                is voluntary and you may stop the experiment at any time or choose to not answer any specific question.
+                If you have any questions, concerns, or problems regarding the research, please contact Shimian Zhang at
+                <a href="mailto:svz5303@psu.edu" target="_blank">svz5303@psu.edu</a> or Dr. Yanxi Liu at <a
+                   href="mailto:yul11@psu.edu" target="_blank">yul11@psu.edu</a>. If you have any other questions,
+                concerns, or problems specifically regarding your rights as a research participant, please contact The
+                Pennsylvania State University's Office for Research Protections (ORP) at (814) 865-1775.
+            </p> -->
+        </div>
+
+
+    </div>
+
+
+
+
+    <script src="https://fastly.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+    <!-- <script src="https://assets.crowd.aws/crowd-html-elements.js"></script> -->
+
+    <!-- <script src="https://sym-rp-data-collection.s3.amazonaws.com/Sym-Interface/label.js"></script> -->
+    <script src="../turker.js"></script>
+
+    <!-- * Validate the Test  -->
+    <script src="sym_val.js"></script>
+
+
+    <script>
+
+        $(document).ready(function () {
+            $("#test-submit").click(function () {
+                // validation
+                var rot_flag = false;
+                var ref_flag = false;
+
+                annotations.forEach(element => {
+                    if (element["class"] == "Rotation") { rot_flag = true; }
+                    else if (element["class"] == "Reflection") { ref_flag = true; }
+                });
+
+
+                if (rot_flag && rot_flag) {
+                    val_success("After closing this message you will be redirected to the next training page.", "test-4.html");
+
+                    return;
+                }
+                else {
+                    val_failure("You should label at least ONE rotation and ONE reflection symmetry.");
+                    return;
+                }
+
+
+            });
+        });
+    </script>
+</body>
+
+</html>

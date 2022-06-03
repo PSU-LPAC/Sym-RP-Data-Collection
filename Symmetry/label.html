@@ -144,35 +144,30 @@
                         world scenes </b>
                 </h4>
 
-
-
-                <h5 class="text-center"> Note: Real world symmetries may <strong
-                            style="color: red;font-size: 120%;">NOT</strong> appear perfectly. </h5>
+                <p class="fs-6 font-monospace text-center"> Note: Real world symmetries may <strong
+                            style="color: red;font-size: 120%;">NOT</strong> appear perfectly. </p>
             </div>
 
             <div class="row">
-                <h5 class="text-center">
+                <p class="fs-6 font-monospace text-center">
                     Need a refresher on "<b>Symmetry</b>"?
                     Click here:
-                    <a href="https://alexis97.github.io/RP-Interface/pages/tutorial.html" target="_blank">
+                    <a href="https://psu-lpac.github.io/Sym-RP-Data-Collection/Symmetry/Tutorial/tutorial.html"
+                       target="_blank">
                         Understanding Symmetry</a>
-
-                    <!-- Copy and open this link: <a
-                       href="https://alexis97.github.io/RP-Interface/pages/tutorial.html" target="_blank">
-                        https://alexis97.github.io/RP-Interface/pages/tutorial.html</a> -->
-                </h5>
+                </p>
             </div>
 
 
             <div class="row border " id="body-part">
                 <div id="alert-box">
                     <crowd-alert type="info" dismissible>
-                        During <strong>Preview</strong>, if no perceived symmetries are found, kindly
+                        During <strong>Preview</strong>, if no perceived symmetries are found, you can
                         <strong>SKIP</strong> this image.
                         <br>
-                        To get <strong>HIT approved</strong> properly, make sure you've read this
+                        To get <strong>HIT approved</strong> properly, make sure you have seen this
                         tutorial <a href="https://alexis97.github.io/RP-Interface/pages/tutorial.html" target="_blank">
-                            Understanding Symmetry</a> and submit your <strong>WorkerID</strong> through the background
+                            Understanding Symmetry</a> AND submit your <strong>WorkerID</strong> through the background
                         survey.
                     </crowd-alert>
                 </div>
@@ -200,7 +195,8 @@
                                     Use mouse scroll to zoom in/out the image for more precise labeling.
                                 </li>
 
-                                <li>Click the <strong>Submit</strong> button or press <strong>ENTER</strong> to finish current task.</li>
+                                <li>Click the <strong>Submit</strong> button or press <strong>ENTER</strong> to finish
+                                    current task.</li>
 
                                 <li> Buttons & Hotkeys:
                                     <ol>
@@ -282,7 +278,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="row">
                             <p>
                                 CHOOSE AN ACTION:
@@ -291,32 +287,33 @@
 
                         <div class="row justify-content-center">
                             <div class="row mb-2">
-                                    <span id="delete_flip" class="btn-group btn-group-toggle" data-toggle="buttons">
-                                        <label class="btn btn-primary" type="radio" name="options" id="annotate_button"
-                                               autocomplete="off">
-                                            Label
-                                            <span class="tooltip-text-2">
-                                                Label a New Symmetry
-                                                <br>
-                                                (Hotkey: <strong>D</strong>)
-                                            </span>
-                                        </label>
-                                        <label class="btn btn-outline-secondary" type="radio" name="options"
-                                               id="delete_button" autocomplete="off" checked>
-                                            Delete
-                                            <span class="tooltip-text-2">
-                                                Delete an Existing Symmetry
-                                                <br>
-                                                (Hotkey: <strong>D</strong>)
-                                            </span>
-                                        </label>
-                                    </span>
+                                <span id="delete_flip" class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-primary" type="radio" name="options" id="annotate_button"
+                                           autocomplete="off">
+                                        Label
+                                        <span class="tooltip-text-2">
+                                            Label a New Symmetry
+                                            <br>
+                                            (Hotkey: <strong>D</strong>)
+                                        </span>
+                                    </label>
+                                    <label class="btn btn-outline-secondary" type="radio" name="options"
+                                           id="delete_button" autocomplete="off" checked>
+                                        Delete
+                                        <span class="tooltip-text-2">
+                                            Delete an Existing Symmetry
+                                            <br>
+                                            (Hotkey: <strong>D</strong>)
+                                        </span>
+                                    </label>
+                                </span>
                             </div>
 
 
                             <div class="row mb-2">
                                 <div class="col-4 d-grid">
-                                    <button type="button" class="btn btn-secondary btn-sm" name="undo_button" id="undo_button">
+                                    <button type="button" class="btn btn-secondary btn-sm" name="undo_button"
+                                            id="undo_button">
                                         Undo Last
                                         <span class="tooltip-text">
                                             Undo last Annotation/Deletion
@@ -335,7 +332,8 @@
                                     </button>
                                 </div>
                                 <div class="col-4 d-grid">
-                                    <button type="button" class="btn btn-danger btn-sm" name="reset_button" id="reset_button">
+                                    <button type="button" class="btn btn-danger btn-sm" name="reset_button"
+                                            id="reset_button">
                                         Clear All
                                         <span class="tooltip-text">
                                             Clear All Annotations
@@ -373,8 +371,12 @@
                             <div id="child">
                                 <canvas id="myCanvas"></canvas>
                                 <!-- <img class="fixed_height" id="pic" src="${img_url}" /> -->
-                                <img class="fixed_height" id="pic"
-                                     src="https://sym-rp-data-collection.s3.amazonaws.com/Dataset/Iter-1/000-201.jpg" />
+                                <!-- <img class="fixed_height" id="pic"
+                                     src="https://sym-rp-data-collection.s3.amazonaws.com/Dataset/Iter-1/000-201.jpg" /> -->
+
+                                <img class="fixed_height" id="pic" src=".\figures\test images\Butterfly.jpg" />
+<!-- 
+                                <img class="fixed_height" id="pic" src=".\figures\test images\flower.jpg" /> -->
 
                             </div>
                         </div>
@@ -385,13 +387,12 @@
 
             <div class="row border">
                 <!-- * [IRB Study Information Here] -->
-                <p class="fs-6 font-monospace">
-                    This study is carried under The Pennsylvania State University (PSU) IRB STUDY00008698, and funded by National Science Foundation (NSF) grant 1909315.
+                <div id="sym-irb-info">
 
-                </p>
-                <p class="fs-6 font-monospace">
-                    By completing this HIT, you understand that you are agreeing to participate in an experiment designed by researchers at The Pennsylvania State University and that you will remain anonymous. Your participation is voluntary and you may stop the experiment at any time or choose to not answer any specific question. If you have any questions, concerns, or problems regarding the research, please contact Shimian Zhang at <a href="mailto:svz5303@psu.edu" target="_blank" >svz5303@psu.edu</a> or Dr. Yanxi Liu at <a href="mailto:yul11@psu.edu" target="_blank" >yul11@psu.edu</a>. If you have any other questions, concerns, or problems specifically regarding your rights as a research participant, please contact The Pennsylvania State University's Office for Research Protections (ORP) at (814) 865-1775. 
-                </p>
+                </div>
+                <div id="irb-info">
+
+                </div>
             </div>
 
 

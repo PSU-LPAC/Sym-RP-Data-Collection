@@ -199,20 +199,29 @@ $(document).ready(function () {
             updateGraphics();
         }
     });
+
+    // * add irb related information
+    irb_info();
+    sym_irb_info();
 });
 // end of ready function
 
 function dismissAlerts() {
     // * dismiss all alerts
-    $('crowd-alert').slideUp();
-    $('crowd-alert').alert('close');
-    $('.alert').alert('close');
+    if ($('crowd-alert.sym-alert').length > 0) {
+        $('crowd-alert.sym-alert').slideUp();
+        $('crowd-alert.sym-alert').alert('close');
+    }
+    if ($('.alert').length > 0) {
+        $('.alert').alert('close');
+    }
+
 }
 
 function symTypeAlert() {
     // * show a sym type alert
     $('#alert-box').append(`
-    <crowd-alert type="error" id="sym-type-alert" dismissible>
+    <crowd-alert type="error" class="sym-alert" id="sym-type-alert" dismissible>
         Please choose which type of symmetry (Hot key: <b>R</b>) to be labeled first!
     </crowd-alert>
     `);
@@ -614,8 +623,10 @@ window.addEventListener(
             reposition();
         }
 
-        if (evt.key == "Enter" ) {
-            $("crowd-form")[0].submit();
+        if (evt.key == "Enter") {
+            $("#test-submit").click();
+            $("#submit").click();
+            // $("crowd-form")[0].submit();
         }
 
         // Press C for "Close Polygon"
@@ -760,4 +771,37 @@ function get_avg_dist(corners) {
         avg_dist_array.push(getDist([correctX, correctY], corners[j]));
     }
     return mean(avg_dist_array);
+}
+
+
+function sym_irb_info() {
+    // * add the symmetry IRB information & NSF grant
+    $("div#sym-irb-info").html(
+        `
+        <p class="fs-6 font-monospace">
+            This study is carried under The Pennsylvania State University (PSU) IRB STUDY00008698, and funded by
+            National Science Foundation (NSF) grant 1909315.
+
+        </p>
+        `
+    )
+}
+
+function irb_info() {
+    // * add the IRB information
+    $("div#irb-info").html(
+        `
+        <p class="fs-6 font-monospace">
+            By completing this HIT, you understand that you are agreeing to participate in an experiment
+            designed by researchers at The Pennsylvania State University and that you will remain anonymous.
+            Your participation is voluntary and you may stop the experiment at any time or choose to not answer
+            any specific question. If you have any questions, concerns, or problems regarding the research,
+            please contact Shimian Zhang at <a href="mailto:svz5303@psu.edu" target="_blank">svz5303@psu.edu</a>
+            or Dr. Yanxi Liu at <a href="mailto:yul11@psu.edu" target="_blank">yul11@psu.edu</a>. If you have
+            any other questions, concerns, or problems specifically regarding your rights as a research
+            participant, please contact The Pennsylvania State University's Office for Research Protections
+            (ORP) at (814) 865-1775.
+        </p>
+        `
+    )
 }

@@ -109,6 +109,8 @@ function validate_ref(user_label, gt, th_dist = 0.05) {
 }
 
 function val_success(message, redirect_url) {
+    dismissAlerts();
+
     $("#test-alert-box").append(`
             <div class="alert alert-success alert-dismissible fade show" role="alert" id="correct">
             <strong>Correct!</strong> ${message}
@@ -118,10 +120,14 @@ function val_success(message, redirect_url) {
     $('.alert#correct').on('closed.bs.alert', function () {
         location.href = redirect_url;
     })
-
+    $(".alert#correct").slideUp(3000, function(){
+        $(this).alert('close');
+    });
 }
 
 function val_failure(message) {
+    dismissAlerts();
+
     $("#test-alert-box").append(`
             <div class="alert alert-danger alert-dismissible fade show" role="alert" id="incorrect">
             <strong>Incorrect!</strong> ${message}
