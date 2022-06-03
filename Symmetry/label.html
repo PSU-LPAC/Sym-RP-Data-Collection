@@ -182,8 +182,8 @@
                     <input id="imageSize" name="imageSize" type="hidden" />
                 </div>
 
-                <div class="col-4 border gap-3" id="left-panel">
-                    <div class="row border">
+                <div class="col-4 border" id="left-panel">
+                    <div class="row">
                         <!-- *[Instruction] -->
                         <button type="button" class="btn" name="instruction_button" id="instruction_button"> Click
                             Here for Instructions
@@ -236,7 +236,9 @@
                         </div>
                     </div>
 
-                    <div class="row border">
+                    <hr>
+
+                    <div class="row">
                         <!-- *[Information] -->
                         <div id="sym-info">
                             <p class="fs-6 text-center">
@@ -247,10 +249,12 @@
                         </div>
                     </div>
 
-                    <div class="row border" id="label-panel">
+                    <hr>
+
+                    <div class="row mt-2" id="label-panel">
                         <!-- *[Label Panel] -->
 
-                        <div class="row">
+                        <div class="row mb-2">
                             <div class="col-6">
                                 CHOOSE A SYMMETRY TYPE:
                             </div>
@@ -277,78 +281,81 @@
                                 </div>
                             </div>
                         </div>
-
+                        
                         <div class="row">
                             <p>
-                                CHOOSE AN ACTION
+                                CHOOSE AN ACTION:
                             </p>
                         </div>
 
-                        <div class="row">
-                            <div class="col-3">
-                                <span id="delete_flip" class="btn-group btn-group-toggle" data-toggle="buttons">
-                                    <label class="btn btn-primary" type="radio" name="options" id="annotate_button"
-                                           autocomplete="off">
-                                        Label
-                                        <span class="tooltip-text-2">
-                                            Label a New Symmetry
-                                            <br>
-                                            (Hotkey: <strong>D</strong>)
-                                        </span>
-                                    </label>
-                                    <label class="btn btn-outline-secondary" type="radio" name="options"
-                                           id="delete_button" autocomplete="off" checked>
-                                        Delete
-                                        <span class="tooltip-text-2">
-                                            Delete an Existing Symmetry
-                                            <br>
-                                            (Hotkey: <strong>D</strong>)
-                                        </span>
-                                    </label>
-                                </span>
-                            </div>
-
-                            <div class="col-2 d-grid">
-                                <button type="button" class="btn btn-secondary btn-sm" name="undo_button" id="undo_button">
-                                    Undo Last
-                                    <span class="tooltip-text">
-                                        Undo last Annotation/Deletion
-                                        <br>
-                                        (Hotkey: <strong>CTRL+Z</strong>)</span>
-                                </button>
-                            </div>
-
-                            <div class="col-2 d-grid">
-                                <button type="button" class="btn btn-warning btn-sm" name="reposition_button"
-                                        id="reposition_button">
-                                    Reset View
-                                    <span class="tooltip-text">
-                                        Reset View Scale After Zooming-In
-                                        <br>
-                                        (Hotkey: <strong>CTRL+X</strong>)</span>
-                                </button>
-                            </div>
-
-                            <div class="col-2 d-grid">
-                                <button type="button" class="btn btn-danger btn-sm" name="reset_button" id="reset_button">
-                                    Clear All
-                                    <span class="tooltip-text">
-                                        Clear All Annotations
-                                        <!-- <br>
-                                <span style="color: red;">Symmetry Labels disappeared cannot be
-                                    recovered!</span> -->
+                        <div class="row justify-content-center">
+                            <div class="row mb-2">
+                                    <span id="delete_flip" class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <label class="btn btn-primary" type="radio" name="options" id="annotate_button"
+                                               autocomplete="off">
+                                            Label
+                                            <span class="tooltip-text-2">
+                                                Label a New Symmetry
+                                                <br>
+                                                (Hotkey: <strong>D</strong>)
+                                            </span>
+                                        </label>
+                                        <label class="btn btn-outline-secondary" type="radio" name="options"
+                                               id="delete_button" autocomplete="off" checked>
+                                            Delete
+                                            <span class="tooltip-text-2">
+                                                Delete an Existing Symmetry
+                                                <br>
+                                                (Hotkey: <strong>D</strong>)
+                                            </span>
+                                        </label>
                                     </span>
-                                </button>
                             </div>
 
-                            <div class="col-3 d-grid">
-                                <button type="button" class="btn btn-success" name="submit" id="submit"> Submit
-                                    <span class="tooltip-text">
-                                        Click here to submit your labeling
-                                        <br>
-                                        (Hotkey:<strong>ENTER</strong>)
-                                    </span>
-                                </button>
+
+                            <div class="row mb-2">
+                                <div class="col-4 d-grid">
+                                    <button type="button" class="btn btn-secondary btn-sm" name="undo_button" id="undo_button">
+                                        Undo Last
+                                        <span class="tooltip-text">
+                                            Undo last Annotation/Deletion
+                                            <br>
+                                            (Hotkey: <strong>CTRL+Z</strong>)</span>
+                                    </button>
+                                </div>
+                                <div class="col-4 d-grid">
+                                    <button type="button" class="btn btn-warning btn-sm" name="reposition_button"
+                                            id="reposition_button">
+                                        Reset View
+                                        <span class="tooltip-text">
+                                            Reset View Scale After Zooming-In
+                                            <br>
+                                            (Hotkey: <strong>CTRL+X</strong>)</span>
+                                    </button>
+                                </div>
+                                <div class="col-4 d-grid">
+                                    <button type="button" class="btn btn-danger btn-sm" name="reset_button" id="reset_button">
+                                        Clear All
+                                        <span class="tooltip-text">
+                                            Clear All Annotations
+                                            <!-- <br>
+                                    <span style="color: red;">Symmetry Labels disappeared cannot be
+                                        recovered!</span> -->
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="col-12 d-grid">
+                                    <button type="button" class="btn btn-success" name="submit" id="submit"> Submit
+                                        <span class="tooltip-text">
+                                            Click here to submit your labeling
+                                            <br>
+                                            (Hotkey:<strong>ENTER</strong>)
+                                        </span>
+                                    </button>
+                                </div>
                             </div>
                         </div>
 
