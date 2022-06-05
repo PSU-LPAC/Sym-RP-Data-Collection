@@ -39,12 +39,16 @@ def convertResult_Iter1(img, anno_str):
 def convertResult(img, anno_str):
     ''' Convert a labeling result string into an annotation dictionary '''
     raw_anno = json.loads(anno_str)
-
+    anno = {}
     # res = ast.literal_eval(anno_str)
     # raw_anno = json.dumps(anno_str, separators=(',', ':'))
+    if len(raw_anno) == 0:
+        return anno
     raw_anno = raw_anno[0]
+    if 'coordinates' not in raw_anno:
+        return anno
     raw_anno['coordinates'] = json.loads(raw_anno['coordinates'])
-    anno = {}
+    
     rot_idx, ref_idx = 0, 0
 
     label_img_w, label_img_h = json.loads(raw_anno['imageSize'])
@@ -58,7 +62,7 @@ def convertResult(img, anno_str):
 
         elif label['class'] == 'Reflection': 
             # * 'Reflection ID': (x1, y1, x2, y2)
-            ref_ends = [int(label['data'][0]/label_img_w*img.shape[1]), int(label['data'][1]/label_img_h*img.shape[0]), int(label['data'][2]/label_img_w*img.shape[1]), int(label['data'][3]/label_img_h*img.shape[0])]
+            ref_ends = [int(label['data'][0][0]/label_img_w*img.shape[1]), int(label['data'][0][1]/label_img_h*img.shape[0]), int(label['data'][1][0]/label_img_w*img.shape[1]), int(label['data'][1][1]/label_img_h*img.shape[0])]
             anno[f'Reflection {rot_idx}'] = ref_ends
             ref_idx += 1
 
@@ -110,18 +114,23 @@ def visuSym(img, anno):
 
     return result
 
-def ProcessIter1(image_local_dir, anno_save_dir, visu_save_dir, batch_file_path):
+def ProcessOld(image_local_dir, save_dir, batch_file_path, batch_name = 'Iter-1', anno_dict = {}):
     ''' Process the batch result .csv file, and save the visualization figures of each individual labeling '''
 
+    anno_save_dir = os.path.join(save_dir, batch_name, 'anno')
+    visu_save_dir = os.path.join(save_dir, batch_name, 'visu')
     os.makedirs(anno_save_dir, exist_ok=True)
     os.makedirs(visu_save_dir, exist_ok=True)
 
-    batch_results = readBatchResults(batch_file_path)
+    data = pd.read_csv(batch_file_path)
 
-    anno_dict = {}      # anno_dict stores the annotation based on ImageUrl (as keys)
     num_nolabel = 0
-    for idx, row in batch_results.iterrows():
+    for idx, row in data.iterrows():
         # [worker, image_url, anno_string]
+        # * skip the Rejected results
+        if row['AssignmentStatus'] == 'Rejected':
+            continue
+
         worker_id = row['WorkerId']
         image_url = row['Input.image_url']
         img_name = os.path.split(image_url)[-1]
@@ -132,8 +141,8 @@ def ProcessIter1(image_local_dir, anno_save_dir, visu_save_dir, batch_file_path)
         if len(worker_label) == 0:
             num_nolabel += 1
 
-        # full annotation: {'WorkerId','ImageUrl', 'WorkerLabel', 'ImageSize':[w,h]}
         anno = {'WorkerId':worker_id, 'ImageUrl': image_url, 'WorkerLabel':worker_label, 'ImageSize':[img.shape[1], img.shape[0]]}
+
         idx = 0
         if image_url not in anno_dict:
             anno_dict[image_url] = {}
@@ -157,14 +166,100 @@ def ProcessIter1(image_local_dir, anno_save_dir, visu_save_dir, batch_file_path)
         
         visu = visuSym(img, worker_label)
 
-        # save the visualization results
+        # save the visualization results (together)
         
         cv2.imwrite(os.path.join(visu_save_dir ,f'{img_name_noext}_{worker_id}_{idx}.jpg') ,visu)
 
+        # save the visualization results (by worker)
+        save_path = os.path.join(save_dir, 'worker', worker_id, f'{img_name_noext}_{worker_id}_{idx}.jpg')
+
+        os.makedirs(os.path.dirname(save_path), exist_ok=True)
+        cv2.imwrite(save_path ,visu)
+
+        # save the visualization results (by image)
+        save_path = os.path.join(save_dir, 'image', img_name_noext, f'{img_name_noext}_{worker_id}_{idx}.jpg')
+
+        os.makedirs(os.path.dirname(save_path), exist_ok=True)
+        cv2.imwrite(save_path ,visu)
+
     print (num_nolabel)
 
+    # save the whole anno_dict for further usage
+    with open(os.path.join(save_dir, batch_name, 'all_anno_dict.json'), 'w') as f:
+        json.dump(anno_dict, f, indent=4)
 
-#  def ProcessIter2():
+    return anno_dict
+
+
+def ProcessNew(image_local_dir, save_dir, batch_file_path, batch_name = 'Iter-2', anno_dict = {}):
+    ''' Process the batch result .csv file, and save the visualization figures of each individual labeling '''
+
+    anno_save_dir = os.path.join(save_dir, batch_name, 'anno')
+    visu_save_dir = os.path.join(save_dir, batch_name, 'visu')
+    os.makedirs(anno_save_dir, exist_ok=True)
+    os.makedirs(visu_save_dir, exist_ok=True)
+
+    data = pd.read_csv(batch_file_path)
+
+    num_nolabel = 0
+
+    for idx, row in data.iterrows():
+        # * skip the Rejected results
+        if row['AssignmentStatus'] == 'Rejected':
+            continue
+
+        worker_id = row['WorkerId']
+        image_url = row['Input.img_url']
+        img_name = os.path.split(image_url)[-1]
+        img = cv2.imread(os.path.join(image_local_dir, img_name))
+        worker_label = convertResult(img, anno_str= row['Answer.taskAnswers'])
+
+        anno = {'WorkerId':worker_id, 'ImageUrl': image_url, 'WorkerLabel':worker_label, 'ImageSize':[img.shape[1], img.shape[0]]}
+
+        idx = 0
+        if image_url not in anno_dict:
+            anno_dict[image_url] = {}
+            anno_dict[image_url][worker_id] = {0:worker_label}
+        else:
+            if worker_id not in anno_dict[image_url]:
+                anno_dict[image_url][worker_id] = {0:worker_label}
+            else:
+                idx = len(anno_dict[image_url][worker_id])
+                anno_dict[image_url][worker_id] = {idx:worker_label}
+
+        print (worker_id)
+        print (image_url)
+        img_name_noext = os.path.splitext(img_name)[0]
+
+        # save the individual labeling as a json file
+        with open(os.path.join(anno_save_dir ,f'{img_name_noext}_{worker_id}_{idx}.json'), 'w') as f:
+            json.dump(anno, f, indent=4)
+
+        visu = visuSym(img, worker_label)
+
+        # save the visualization results (together)
+        cv2.imwrite(os.path.join(visu_save_dir ,f'{img_name_noext}_{worker_id}_{idx}.jpg') ,visu)
+
+        # save the visualization results (by worker)
+        save_path = os.path.join(save_dir, 'worker', worker_id, f'{img_name_noext}_{worker_id}_{idx}.jpg')
+
+        os.makedirs(os.path.dirname(save_path), exist_ok=True)
+        cv2.imwrite(save_path ,visu)
+
+        # save the visualization results (by image)
+        save_path = os.path.join(save_dir, 'image', img_name_noext, f'{img_name_noext}_{worker_id}_{idx}.jpg')
+
+        os.makedirs(os.path.dirname(save_path), exist_ok=True)
+        cv2.imwrite(save_path ,visu)
+
+   
+    print (num_nolabel)
+
+    # save the whole anno_dict for further usage
+    with open(os.path.join(save_dir, batch_name, 'all_anno_dict.json'), 'w') as f:
+        json.dump(anno_dict, f, indent=4)
+
+    return anno_dict
 
 def Test():
     img = cv2.imread('E:/Lab Work/Human Research/Dataset Collection/Iter-1/000-201.jpg')
@@ -180,14 +275,23 @@ def Test():
 
 if __name__ == "__main__":
 
-    Test()
+    # Test()
 
-    # ProcessIter1(
-    #     image_local_dir = 'E:/Lab Work/Human Research/Dataset Collection/Iter-1', 
-    #     anno_save_dir = 'E:/Lab Work/Human Research/Dataset Collection/Results/Iter-1/anno', 
-    #     visu_save_dir = 'E:/Lab Work/Human Research/Dataset Collection/Results/Iter-1/visu', 
-    #     batch_file_path = 'D:/Downloads/Batch_4743917_batch_results (2).csv'
-    # )
+    anno_dict = ProcessOld(
+        image_local_dir = 'E:/Lab Work/Datasets/Sym-RP-Collection/Images', 
+        save_dir = 'E:/Lab Work/Datasets/Sym-RP-Collection/Results', 
+        batch_file_path = 'D:/Downloads/Batch_4743917_batch_results (2).csv',
+        batch_name = 'Iter-1',
+        anno_dict = {}
+    )
+
+    anno_dict = ProcessNew(
+        image_local_dir = 'E:/Lab Work/Datasets/Sym-RP-Collection/Images', 
+        save_dir = 'E:/Lab Work/Datasets/Sym-RP-Collection/Results', 
+        batch_file_path = 'D:/Downloads/Batch_4754060_batch_results.csv',
+        batch_name = 'Iter-2',
+        anno_dict = anno_dict
+    )
 
     
 

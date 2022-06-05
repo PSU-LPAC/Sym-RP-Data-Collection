@@ -9,7 +9,7 @@ def get_csv_list(img_dir, csv_path, url_root_dir = ''):
         # creating a csv writer object 
         writer = csv.writer(f) 
         # writer.writerow(['image_url', 'index'])
-        writer.writerow(['image_url', 'index'])    
+        writer.writerow(['img_url'])    
         # writing the data rows 
         # rows = [[root_dir + img_name, idx] for idx, img_name in enumerate(os.listdir(img_dir)) ]
 
@@ -22,22 +22,30 @@ def add_index(img_dir, new_img_dir, start_index = 0):
     ''' rename the images with index'''
     os.makedirs(new_img_dir, exist_ok=True)
     for i, img_name in enumerate(os.listdir(img_dir)):
-        new_name = f'{start_index+i:03d}-{img_name}'
+        new_name = f'{start_index+i:04d}-{img_name}'
         shutil.copy(os.path.join(img_dir, img_name), os.path.join(new_img_dir, new_name))
 
-
+def update_index(img_dir, new_img_dir):
+    ''' rename the image with updated index (from 000 to 0000) '''
+    os.makedirs(new_img_dir, exist_ok=True)
+    for i, img_name in enumerate(os.listdir(img_dir)):
+        new_name = f'0{img_name}'
+        shutil.copy(os.path.join(img_dir, img_name), os.path.join(new_img_dir, new_name))
 
 if __name__ == "__main__":
     # add_index(
-    #     img_dir = 'E:\Lab Work\Human Research\Dataset Collection\Iter-2', 
-    #     new_img_dir = 'E:\Lab Work\Human Research\Dataset Collection\Iter-2-rename', 
-    #     start_index= 100)
+    #     img_dir = 'E:/Lab Work/Datasets/Sym-RP-Collection/NRT Images/symmetry', 
+    #     new_img_dir = 'E:/Lab Work/Datasets/Sym-RP-Collection/Rename-new', 
+    #     start_index= 625
+    #     )
+
+
+    
 
     get_csv_list(
-        img_dir = 'E:\Lab Work\Human Research\Dataset Collection\Iter-2', 
-        csv_path = "E:\Lab Work\Human Research\Dataset Collection\Iter-2.csv",
-        # root_dir='s3://sym-rp-data-collection/Dataset/Iter-1/'
-        # url_root_dir='https://s3.amazonaws.com/sym-rp-data-collection/Dataset/Iter-2/'
+        img_dir = 'E:/Lab Work/Datasets/Sym-RP-Collection/Rename', 
+        csv_path = "E:/Lab Work/Datasets/Sym-RP-Collection/Iter-2.csv",
+        url_root_dir='https://s3.amazonaws.com/sym-rp-data-collection/Dataset/Iter-2/'
         )
         
     
