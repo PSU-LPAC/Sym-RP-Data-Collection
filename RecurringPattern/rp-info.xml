@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<info>
+    <title>
+        Goal of the study: to find out how humans perceive Recurring Pattern (RP) in real world scenes
+    </title>
+
+    <rp-tutorial>
+        <![CDATA[ 
+        Need a refresher on "<b>Recurring Pattern</b>"?
+        Click here:
+        <a href="https://psu-lpac.github.io/Sym-RP-Data-Collection/RecurringPattern/Tutorial/definition.html" target="_blank">
+            Understanding Recurring Pattern
+        </a>
+        ]]>
+    </rp-tutorial>
+
+    <warning-msg>
+        <![CDATA[ 
+        During <strong>Preview</strong>, if no perceived Recurring Patterns are found, you can
+        <strong>SKIP</strong> this image.
+        <br>
+        To get <strong>HIT approved</strong> properly, make sure you have seen this
+        tutorial <a href="https://psu-lpac.github.io/Sym-RP-Data-Collection/RecurringPattern/Tutorial/definition.html" target="_blank">
+            Understanding Recurring Pattern</a> AND submit your <strong>WorkerID</strong> through the background
+        survey.
+        ]]>
+    </warning-msg>
+
+    <warning-no-rp>
+        <![CDATA[ 
+        No <b>RP</b> selected. Please click the <b>Add</b> button first!
+        ]]>
+    </warning-no-rp>
+
+    <rp-instruction>
+        <![CDATA[ 
+        <ol>
+            <li> Label every <b>Recurring Pattern (RP)</b> you <b>perceive</b> on each image.</li>
+
+            <li>
+                For each <b>RP</b> you perceived:
+                <ul>
+                    <li>
+                        First click the <b>Add</b> button. A new <b>RP</b> button will be appeared and auto selected.
+                    </li>
+                    <li>
+                        Then you can start labeling the perceived <b>RP
+                            Instances</b> by either <b>Bounding Box</b> or
+                            <b>Polygon</b> contour.
+                    </li>
+                </ul>
+
+            </li>
+
+            <li>
+                Use mouse scroll to zoom in/out the image for more precise labeling.
+            </li>
+
+            <li>Click the <strong>Submit</strong> button or press <strong>ENTER</strong> to finish
+                current task.</li>
+
+            <li> Buttons & Hotkeys:
+                <ol>
+                    <li>
+                        Click <strong>Add</strong> button or press 
+                        <strong>A</strong> to add a new <b>RP</b>.
+                    </li>
+                    <li>
+                        Click <strong>Remove</strong> button or press 
+                        <strong>R</strong> to remove the selected <b>RP</b>.
+                    </li>
+                    <li>
+                        Click <strong>Bbox/Polygon</strong> button or press
+                        <strong>E</strong> to toggle between two labeling modes.
+                        <ul>
+                            <li>
+                                In <strong>Bbox</strong> mode, draw the bounding box of the <strong>RP instance</strong> by <b>holding down</b> left click.
+                            </li>
+                            <li>
+                                In <strong>Polygon</strong> mode, draw the contour of the <strong>RP instance</strong> by left clicks.
+                                Press <strong>C</strong> to close the polygon.
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        Click <strong>Label/Deletion</strong> flip switch or press
+                        <strong>D</strong> to toggle between labeling and deleting.
+                    </li>
+                    <li>
+                        Click the <strong>Undo Last</strong> button or press <strong>CTRL+Z</strong>
+                        to
+                        undo last Annotation/Deletion.
+                    </li>
+
+                    <li>
+                        Click the <strong>Reset View</strong> button or press
+                        <strong>CTRL+X</strong> center the image and reset
+                        zoom.
+                    </li>
+
+                    <li>
+                        Click the <strong>Clear All</strong> button to clear all annotations.
+                        <span style="color: red;"><strong>Warning:</strong> this action cannot be
+                            recovered!</span>
+                    </li>
+
+                </ol>
+            </li>
+        </ol>
+        ]]>
+    </rp-instruction>
+
+    <rp-irb>
+        This study is carried under The Pennsylvania State University (PSU) IRB STUDY00008698, and funded by National Science Foundation (NSF) grant 1909315.
+    </rp-irb>
+
+    <worker-info>
+        <![CDATA[ 
+        By completing this HIT, you understand that you are agreeing to participate in an experiment designed by researchers at The Pennsylvania State University and that you will remain anonymous. 
+        Your participation is voluntary and you may stop the experiment at any time or choose to not answer any specific question. If you have any questions, concerns, or problems regarding the research, please contact Shimian Zhang at
+        <a href="mailto:svz5303@psu.edu" target="_blank">svz5303@psu.edu</a>
+        or Dr. Yanxi Liu at
+        <a href="mailto:yul11@psu.edu" target="_blank">yul11@psu.edu</a>
+        . 
+        If you have any other questions, concerns, or problems specifically regarding your rights as a research participant, please contact The Pennsylvania State University's Office for Research Protections
+        (ORP) at (814) 865-1775.
+        ]]>
+    </worker-info>
+
+    <bbox-tip>
+        <![CDATA[ 
+        <strong>Bbox</strong> mode draws the bounding box of the <strong>RP instance</strong> by <b>holding down</b> left click.
+        <br>
+        (Toggle Hotkey: <strong>E</strong>)
+        ]]>
+    </bbox-tip>
+
+    <polygon-tip>
+        <![CDATA[ 
+        <strong>Polygon</strong> mode draws the contour of the <strong>RP instance</strong> by left clicks.
+        <br>
+        Press <strong>C</strong> to close polygon in polygon mode.
+        <br>
+        (Toggle Hotkey: <strong>E</strong>)
+        ]]>
+
+    </polygon-tip>
+</info>

@@ -134,6 +134,8 @@ def ProcessOld(image_local_dir, save_dir, batch_file_path, batch_name = 'Iter-1'
         worker_id = row['WorkerId']
         image_url = row['Input.image_url']
         img_name = os.path.split(image_url)[-1]
+        img_name = f'0{img_name}'
+        
         img = cv2.imread(os.path.join(image_local_dir, img_name))
 
         worker_label = convertResult_Iter1(img, row['Answer.taskAnswers'])
@@ -289,7 +291,15 @@ if __name__ == "__main__":
         image_local_dir = 'E:/Lab Work/Datasets/Sym-RP-Collection/Images', 
         save_dir = 'E:/Lab Work/Datasets/Sym-RP-Collection/Results', 
         batch_file_path = 'D:/Downloads/Batch_4754060_batch_results.csv',
-        batch_name = 'Iter-2',
+        batch_name = 'Iter-2-1',
+        anno_dict = anno_dict
+    )
+
+    anno_dict = ProcessNew(
+        image_local_dir = 'E:/Lab Work/Datasets/Sym-RP-Collection/Images', 
+        save_dir = 'E:/Lab Work/Datasets/Sym-RP-Collection/Results', 
+        batch_file_path = 'D:/Downloads/Batch_4754201_batch_results.csv',
+        batch_name = 'Iter-2-2-half',
         anno_dict = anno_dict
     )
 
