@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Recurring Pattern Labeling Tutorial</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <style>
+        .figure-img {
+            height: 300px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <body>
+        <div class="container">
+            <div class="page-header">
+                <a href="tutorial.html">
+                    <p class="fs-4 text-center"><b>Back to Understanding Recurring Pattern</b></p>
+                </a>
+
+                <hr>
+
+                <p class="fs-4 text-center" id="title">
+
+                </p>
+            </div>
+
+
+
+            <div class="row d-grid gap-3">
+
+                <div>
+                    <h2>What is Recurring Pattern?</h2>
+                    <p>
+                        A <b>Recurring Pattern (RP)</b> is an ensemble of similar yet not necessarily identical
+                        "instances"
+                        in an image.
+                    </p>
+
+                    <p>
+                        The term of "<b>instances</b>" refers to a visual area which distinctive features that could be
+                        undoubtedly grouped or segmented together. Each <b>RP</b> consists of two or more similar
+                        instances.
+                    </p>
+                </div>
+
+                <!-- <h2>An illustration image about Recurring Pattern</h2> -->
+
+                <div class="row border">
+                    <div class="col-6 d-flex justify-content-center">
+                        <figure class="figure">
+                            <img src="../figures/toy_example_labeled.png" class="figure-img img-fluid rounded">
+                            <figcaption class="figure-caption text-center">An illustration image about <b>Recurring Pattern</b>
+                            </figcaption>
+                        </figure>
+                    </div>
+                    <div class="col">
+                        <ul>
+                            <li>
+                                <p>
+                                    The four similar <span style="color: red;"><b>sun-shape instances</b></span> could
+                                    be
+                                    grouped as a <span style="color: red;"><b>Recurring Pattern</b></span>, even with
+                                    scaling, rotation, shearing and color variations.
+                                </p>
+                            </li>
+                            <li>
+                                <p>
+                                    Correspondingly, the two similar <span style="color: green;"><b>thunder-shape
+                                            instances</b></span> could be grouped as another <span
+                                          style="color: green;"><b>Recurring Pattern</b></span>.
+                                </p>
+                            </li>
+                            <li>
+                                Finally, the ONE <span style="color: orange;"><b>moon-shape instances</b></span> CANNOT be grouped as a <b>Recurring
+                                    Pattern</b>, because each <b>RP</b> shall consist of two or more similar instances.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div>
+                    <h2> Examples of RPs in Real Images </h2>
+
+                    <div class="row">
+                        <div class="col-6 d-flex justify-content-center">
+                            <figure class="figure">
+                                <img src="../figures/examples/new027.jpg" class="figure-img img-fluid rounded">
+                                <figcaption class="figure-caption text-center">An RP consist of 4 eagle instances.
+                                </figcaption>
+                            </figure>
+                        </div>
+
+                        <div class="col-6 d-flex justify-content-center">
+                            <figure class="figure">
+                                <img src="../figures/examples/new705.jpg" class="figure-img img-fluid rounded">
+                                <figcaption class="figure-caption text-center">An RP consist of 9 Pipa (a musical
+                                    instrument) instances.
+                                </figcaption>
+                            </figure>
+                        </div>
+
+                        <div class="col-6 d-flex justify-content-center">
+                            <figure class="figure">
+                                <img src="../figures/examples/new653.jpg" class="figure-img img-fluid rounded">
+                                <figcaption class="figure-caption text-center">An RP consist of multiple parachute
+                                    instances.
+                                </figcaption>
+                            </figure>
+                        </div>
+
+                        <div class="col-6 d-flex justify-content-center">
+                            <figure class="figure">
+                                <img src="../figures/examples/new632.jpg" class="figure-img img-fluid rounded">
+                                <figcaption class="figure-caption text-center">An RP consist of multiple Micky
+                                    instances.
+                                </figcaption>
+                            </figure>
+                        </div>
+
+                        
+
+                        <div class="col-6 d-flex justify-content-center">
+                            <figure class="figure">
+                                <img src="../figures/examples/new789.jpg" class="figure-img img-fluid rounded">
+                                <figcaption class="figure-caption text-center">An RP consist of 6 painting instances
+                                    <b>from a projective view</b>.
+                                </figcaption>
+                            </figure>
+                        </div>
+
+                        <div class="col-6 d-flex justify-content-center">
+                            <figure class="figure">
+                                <img src="../figures/examples/new036.jpg" class="figure-img img-fluid rounded">
+                                <figcaption class="figure-caption text-center"><b>Two</b> RPs consist of two different
+                                    types of products.
+                                </figcaption>
+                            </figure>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- <p>
+                    Here is an example image which contains one <span style="color: red;">Recurring Pattern</span> with four <span style="color: blue;">instances</span> (each labeled in blue ployline).
+                </p> -->
+
+
+            </div>
+
+
+
+        </div>
+    </body>
+
+    <script src="https://fastly.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+    <script>
+        var rp_examples = [
+            'new027.jpg',
+            'new632.jpg',
+            'new653.jpg',
+            'new705.jpg',
+            'new789.jpg',
+            'new036.jpg',
+        ]
+    </script>
+
+</body>
+
+</html>

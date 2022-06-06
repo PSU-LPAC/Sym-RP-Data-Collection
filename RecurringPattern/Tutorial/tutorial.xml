@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<tutorial>
+    <title>
+        Recurring Pattern Labeling Tutorial
+    </title>
+
+    <tutorial-link>
+        <![CDATA[
+        <a href="tutorial.html">
+            Back to Understanding Recurring Pattern
+        </a> 
+        ]]>
+    </tutorial-link>
+</tutorial>
