@@ -298,7 +298,7 @@ if __name__ == "__main__":
     anno_dict = ProcessNew(
         image_local_dir = 'E:/Lab Work/Datasets/Sym-RP-Collection/Images', 
         save_dir = 'E:/Lab Work/Datasets/Sym-RP-Collection/Results', 
-        batch_file_path = 'D:/Downloads/Batch_4754201_batch_results.csv',
+        batch_file_path = 'D:/Downloads/Batch_4754201_batch_results (1).csv',
         batch_name = 'Iter-2-2-half',
         anno_dict = anno_dict
     )

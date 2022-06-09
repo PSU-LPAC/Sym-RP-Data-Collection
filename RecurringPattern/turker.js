@@ -256,7 +256,7 @@ function modeButtonCaption() {
         console.log(rp_info_url);
         modeButton.html(
             `
-            Bbox
+            <i class="bi bi-square"></i> Box
             <span class="tooltip-text-2">
             ${bbox_tip}
             </span>
@@ -267,7 +267,7 @@ function modeButtonCaption() {
         console.log(rp_info_url);
         modeButton.html(
             `
-            Polygon
+            <i class="bi bi-heptagon"></i> Polygon
             <span class="tooltip-text-2">
             ${polygon_tip}
             </span>

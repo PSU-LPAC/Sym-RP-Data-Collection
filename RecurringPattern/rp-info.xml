@@ -111,7 +111,7 @@
     </rp-instruction>
 
     <rp-irb>
-        This study is carried under The Pennsylvania State University (PSU) IRB STUDY00008698, and funded by National Science Foundation (NSF) grant 1909315.
+        This study is carried under The Pennsylvania State University (PSU) IRB STUDY00016169, and funded by National Science Foundation (NSF) grant 1909315.
     </rp-irb>
 
     <worker-info>
@@ -129,7 +129,7 @@
 
     <bbox-tip>
         <![CDATA[ 
-        <strong>Bbox</strong> mode draws the bounding box of the <strong>RP instance</strong> by <b>holding down</b> left click.
+        <strong>Box</strong> mode draws the bounding box of the <strong>RP instance</strong> by <b>holding down</b> left click.
         <br>
         (Toggle Hotkey: <strong>E</strong>)
         ]]>
