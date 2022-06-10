@@ -93,17 +93,6 @@
             float: right;
         }
 
-        #text {
-            margin-bottom: 20px;
-        }
-
-        #buttons {
-            margin-top: 20px;
-        }
-
-        .panel {
-            margin-top: 20px;
-        }
 
         #rot_button.btn-outline-secondary {
             color: red;
@@ -135,35 +124,21 @@
             <div class="page-header justify-content-between" id="header">
                 <!-- [Header] -->
 
-                <h4 class="text-center"><b> Goal of the study: to find out how humans perceive symmetries in real
-                        world scenes </b>
-                </h4>
+                <p class="fs-4 text-center fw-bold" id="title">[Title]</p>
 
                 <p class="fs-6 font-monospace text-center"> Note: Real world symmetries may <strong
                             style="color: red;font-size: 120%;">NOT</strong> appear perfectly. </p>
             </div>
 
             <div class="row">
-                <p class="fs-6 font-monospace text-center">
-                    Need a refresher on "<b>Symmetry</b>"?
-                    Click here:
-                    <a href="https://psu-lpac.github.io/Sym-RP-Data-Collection/Symmetry/Tutorial/tutorial.html"
-                       target="_blank">
-                        Understanding Symmetry</a>
-                </p>
+                <p class="fs-6 font-monospace text-center" id="tutorial-display"> [Totorial] </p>
             </div>
 
 
             <div class="row border " id="body-part">
                 <div id="alert-box">
-                    <crowd-alert type="info" dismissible>
-                        During <strong>Preview</strong>, if no perceived symmetries are found, you can
-                        <strong>SKIP</strong> this image.
-                        <br>
-                        To get <strong>HIT approved</strong> properly, make sure you have seen this
-                        tutorial <a href="https://alexis97.github.io/RP-Interface/pages/tutorial.html" target="_blank">
-                            Understanding Symmetry</a> AND submit your <strong>WorkerID</strong> through the background
-                        survey.
+                    <crowd-alert type="info" id="warning-msg" dismissible>
+                        [Warning Msg]
                     </crowd-alert>
                 </div>
 
@@ -181,49 +156,9 @@
                         </button>
                         <div id="instruction">
 
-                            <ol>
-                                <li> <b>Label every symmetry</b> you <b>perceive</b> on each image.</li>
-
-                                <li> Choose which type of symmetry to be labeled first. </li>
-
-                                <li>
-                                    Use mouse scroll to zoom in/out the image for more precise labeling.
-                                </li>
-
-                                <li>Click the <strong>Submit</strong> button or press <strong>ENTER</strong> to finish
-                                    current task.</li>
-
-                                <li> Buttons & Hotkeys:
-                                    <ol>
-                                        <li>
-                                            Click <strong>Rotation/Reflection</strong> flip switch or press
-                                            <strong>R</strong> to toggle between label rotation and reflection.
-                                        </li>
-                                        <li>
-                                            Click <strong>Label/Deletion</strong> flip switch or press
-                                            <strong>D</strong> to toggle between labeling and deleting.
-                                        </li>
-                                        <li>
-                                            Click the <strong>Undo Last</strong> button or press <strong>CTRL+Z</strong>
-                                            to
-                                            undo last Annotation/Deletion.
-                                        </li>
-
-                                        <li>
-                                            Click the <strong>Reset View</strong> button or press
-                                            <strong>CTRL+X</strong> center the image and reset
-                                            zoom.
-                                        </li>
-
-                                        <li>
-                                            Click the <strong>Clear All</strong> button to clear all annotations.
-                                            <span style="color: red;"><strong>Warning:</strong> this action cannot be
-                                                recovered!</span>
-                                        </li>
-
-                                    </ol>
-                                </li>
-                            </ol>
+                            <p class="fs-6" id="instruction-content">
+                            
+                            </p>
 
                         </div>
                     </div>
@@ -254,7 +189,7 @@
                                 <div class="btn-group" role="group">
                                     <label class="btn btn-outline-secondary" type="radio" name="sym_options"
                                            id="rot_button" autocomplete="off" checked>
-                                        Rotation Symmetry
+                                           <i class="bi bi-dot"></i> Rotation Symmetry
                                         <span class="tooltip-text-2">
                                             Click one point as the rotation center
                                             <br>
@@ -263,6 +198,7 @@
                                     </label>
                                     <label class="btn btn-outline-secondary" type="radio" name="sym_options"
                                            id="ref_button" autocomplete="off">
+                                           <i class="bi bi-dash-lg"></i>
                                         Reflection Symmetry
                                         <span class="tooltip-text-2">
                                             Click two points as the reflection axis
@@ -382,11 +318,15 @@
 
             <div class="row border">
                 <!-- * [IRB Study Information Here] -->
-                <div id="sym-irb-info">
+                <div>
+                    <p class="fs-6 font-monospace" id="sym-irb">
 
+                    </p>
                 </div>
-                <div id="irb-info">
+                <div>
+                    <p class="fs-6 font-monospace" id="worker-info">
 
+                    </p>
                 </div>
             </div>
 
@@ -407,6 +347,33 @@
             crossorigin="anonymous"></script>
 
     <script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
+
+    <script>
+        // Load XML
+        let sym_info_url = "sym-info.xml";
+
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET",
+                url: sym_info_url,
+                dataType: "xml",
+                success: function (xml) {
+                    // Text
+                    $("p#title").html($(xml).find('title').text());
+                    $("p#tutorial-display").html($(xml).find('sym-tutorial').text());
+                    $("p#instruction-content").html($(xml).find('sym-instruction').text());
+                    $("p#sym-irb").html($(xml).find('sym-irb').text());
+                    $("p#worker-info").html($(xml).find('worker-info').text());
+
+                    // Warning Message
+                    $("#warning-msg").html($(xml).find('warning-msg').text());
+                }
+            });
+
+        });
+
+
+    </script>
 
     <!-- <script src="https://sym-rp-data-collection.s3.amazonaws.com/Sym-Interface/turker.js"></script> -->
     <script src="turker.js"></script>

@@ -263,6 +263,7 @@ def ProcessNew(image_local_dir, save_dir, batch_file_path, batch_name = 'Iter-2'
 
     return anno_dict
 
+
 def Test():
     img = cv2.imread('E:/Lab Work/Human Research/Dataset Collection/Iter-1/000-201.jpg')
     data = pd.read_csv('D:/Downloads/testResult.csv')
@@ -279,26 +280,29 @@ if __name__ == "__main__":
 
     # Test()
 
-    anno_dict = ProcessOld(
-        image_local_dir = 'E:/Lab Work/Datasets/Sym-RP-Collection/Images', 
-        save_dir = 'E:/Lab Work/Datasets/Sym-RP-Collection/Results', 
-        batch_file_path = 'D:/Downloads/Batch_4743917_batch_results (2).csv',
-        batch_name = 'Iter-1',
-        anno_dict = {}
-    )
+    # anno_dict = ProcessOld(
+    #     image_local_dir = 'E:/Lab Work/Datasets/Sym-RP-Collection/Images', 
+    #     save_dir = 'E:/Lab Work/Datasets/Sym-RP-Collection/Results', 
+    #     batch_file_path = 'D:/Downloads/Batch_4743917_batch_results (2).csv',
+    #     batch_name = 'Iter-1',
+    #     anno_dict = {}
+    # )
+
+    # anno_dict = ProcessNew(
+    #     image_local_dir = 'E:/Lab Work/Datasets/Sym-RP-Collection/Images', 
+    #     save_dir = 'E:/Lab Work/Datasets/Sym-RP-Collection/Results', 
+    #     batch_file_path = 'D:/Downloads/Batch_4754060_batch_results.csv',
+    #     batch_name = 'Iter-2-1',
+    #     anno_dict = anno_dict
+    # )
+
+    with open('E:/Lab Work/Datasets/Sym-RP-Collection/Results/Iter-2-1/all_anno_dict.json', 'r') as f:
+        anno_dict = json.load(f)
 
     anno_dict = ProcessNew(
         image_local_dir = 'E:/Lab Work/Datasets/Sym-RP-Collection/Images', 
         save_dir = 'E:/Lab Work/Datasets/Sym-RP-Collection/Results', 
-        batch_file_path = 'D:/Downloads/Batch_4754060_batch_results.csv',
-        batch_name = 'Iter-2-1',
-        anno_dict = anno_dict
-    )
-
-    anno_dict = ProcessNew(
-        image_local_dir = 'E:/Lab Work/Datasets/Sym-RP-Collection/Images', 
-        save_dir = 'E:/Lab Work/Datasets/Sym-RP-Collection/Results', 
-        batch_file_path = 'D:/Downloads/Batch_4754201_batch_results (1).csv',
+        batch_file_path = 'D:/Downloads/Batch_4754201_batch_results (2).csv',
         batch_name = 'Iter-2-2-half',
         anno_dict = anno_dict
     )

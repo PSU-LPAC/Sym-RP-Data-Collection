@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<info>
+
+    <title>
+        Goal of the study: to find out how humans perceive Rsymmetries in real world scenes
+    </title>
+    <url>
+        <sym-root-url>https://psu-lpac.github.io/Sym-RP-Data-Collection/Symmetry</sym-root-url>
+
+        <real-img-urls>
+            <item>yanxi_rot.gif</item>
+            <item>yanxi_ref.gif</item>
+            <item>london-eye.gif</item>
+            <item>laying_down.gif</item>
+            <item>chickpotpie.gif</item>
+            <item>reflection-mountains.gif</item>
+            <item>floor_star.gif</item>
+            <item>bear.gif</item>
+            <item>bike.gif</item>
+            <item>dog.gif</item>
+            <item>breakfast_food.gif</item>
+            <item>fire_hydrant.gif</item>
+        </real-img-urls>
+
+        <sample-results-urls>
+            <item>room_cat.gif"</item>
+            <item>thomas.gif"</item>
+            <item>desk_cat.gif"</item>
+            <item>toilet.gif"</item>
+            <item>dog_laptop.gif"</item>
+            <item>bike2.gif"</item>
+            <item>cat.gif"</item>
+            <item>pizza.gif"</item>
+            <item>surf_board.gif"</item>
+            <item>dog_under_bed.gif"</item>
+        </sample-results-urls>
+    </url>
+
+
+    <sym-tutorial>
+        <![CDATA[ 
+        Need a refresher on "<b>Symmetry</b>"?
+        Click here:
+        <a href="https://psu-lpac.github.io/Sym-RP-Data-Collection/Symmetry/Tutorial/tutorial.html" target="_blank">
+            Understanding Symmetry
+        </a>
+        ]]>
+    </sym-tutorial>
+
+    <warning-msg>
+        <![CDATA[ 
+        During <strong>Preview</strong>, if no perceived symmetries are found, you can
+        <strong>SKIP</strong> this image.
+        <br>
+        To get <strong>HIT approved</strong> properly, make sure you have seen this
+        tutorial <a href="https://psu-lpac.github.io/Sym-RP-Data-Collection/Symmetry/Tutorial/tutorial.html" target="_blank">Understanding Symmetry</a> AND submit your <strong>WorkerID</strong> through the background survey.
+        ]]>
+    </warning-msg>
+
+    <warning-no-sym>
+        <![CDATA[ 
+        Please choose which type of symmetry (Hot key: <b>R</b>) to be labeled first!
+        ]]>
+    </warning-no-sym>
+
+    <notify-real-sym>
+        <![CDATA[ 
+        Note: Real world symmetries will <strong style="color: red;">NOT</strong> appear as perfect as those in the toy examples above.
+        ]]>
+    </notify-real-sym>
+
+    <sym-legend>
+        <![CDATA[ 
+        <text style="color: red"> Red Circle </text> -- Rotation Symmetry Center 
+        <br>
+        <text style="color: green"> Green Line </text> -- Reflection Axis
+        ]]>
+    </sym-legend>
+
+
+    <sym-instruction>
+        <![CDATA[ 
+        <ol>
+            <li> <b>Label every symmetry</b> you <b>perceive</b> on each image.</li>
+
+            <li> Choose which type of symmetry to be labeled first. </li>
+
+            <li>
+                Use mouse scroll to zoom in/out the image for more precise labeling.
+            </li>
+
+            <li>Click the <strong>Submit</strong> button or press <strong>ENTER</strong> to finish
+                current task.</li>
+
+            <li> Buttons & Hotkeys:
+                <ol>
+                    <li>
+                        Click <strong>Rotation/Reflection</strong> flip switch or press
+                        <strong>R</strong> to toggle between label rotation and reflection.
+                    </li>
+                    <li>
+                        Click <strong>Label/Deletion</strong> flip switch or press
+                        <strong>D</strong> to toggle between labeling and deleting.
+                    </li>
+                    <li>
+                        Click the <strong>Undo Last</strong> button or press <strong>CTRL+Z</strong>
+                        to
+                        undo last Annotation/Deletion.
+                    </li>
+
+                    <li>
+                        Click the <strong>Reset View</strong> button or press
+                        <strong>CTRL+X</strong> center the image and reset
+                        zoom.
+                    </li>
+
+                    <li>
+                        Click the <strong>Clear All</strong> button to clear all annotations.
+                        <span style="color: red;"><strong>Warning:</strong> this action cannot be
+                            recovered!</span>
+                    </li>
+
+                </ol>
+            </li>
+        </ol>
+        ]]>
+    </sym-instruction>
+
+    <sym-irb>
+        This study is carried under The Pennsylvania State University (PSU) IRB STUDY00008698, and funded by National Science Foundation (NSF) grant 1909315.
+    </sym-irb>
+
+    <worker-info>
+        <![CDATA[ 
+        By completing this HIT, you understand that you are agreeing to participate in an experiment designed by researchers at The Pennsylvania State University and that you will remain anonymous. 
+        Your participation is voluntary and you may stop the experiment at any time or choose to not answer any specific question. If you have any questions, concerns, or problems regarding the research, please contact Shimian Zhang at
+        <a href="mailto:svz5303@psu.edu" target="_blank">svz5303@psu.edu</a>
+        or Dr. Yanxi Liu at
+        <a href="mailto:yul11@psu.edu" target="_blank">yul11@psu.edu</a>
+        . 
+        If you have any other questions, concerns, or problems specifically regarding your rights as a research participant, please contact The Pennsylvania State University's Office for Research Protections
+        (ORP) at (814) 865-1775.
+        ]]>
+    </worker-info>
+
+</info>
