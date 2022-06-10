@@ -9,8 +9,8 @@
     <title>Congrats!</title>
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <!-- <link rel="stylesheet" href="label.css"> -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
 
 <body>
@@ -18,59 +18,64 @@
     <body>
         <div class="container">
 
-            <div class="page-header">
+            <div class="row my-3">
                 <!-- <h1>Label one symmetry per image.</h1> -->
-                <h1 class="text-center">
-                    CONGRATULATIONS!
-                </h1>
-                <!-- <h3 class="text-center">
-                    You can start the symmetry labeling task now
-                </h3> -->
+                <p class="fs-3 text-center fw-bold">CONGRATULATIONS!</p>
 
-                <h3 class="text-center">
+                <p class="fs-4 text-center fw-bold">
                     You are qualified to start the symmetry labeling task now
-                </h3>
-
-                <p class="lead"></p>
+                </p>
 
             </div>
 
-            <div class="page-header">
-                <h3 class="text-center" style="color: red;"> Remember: Real word Symmetries are often Imperfect </h3>
+            <hr>
+
+            <div class="row my-3">
+                <p class="fs-4 text-center fw-bold" style="color: red;">
+                    Remember: Real word Symmetries are often Imperfect
+                </p>
+
             </div>
 
-            <div class="page-header">
-                <!-- <a href="https://lgb749q8pu.labeling.us-east-1.sagemaker.aws/#/">
-                    <h3 class="text-center">Click here to direct back to the symmetry labeling task.</h3>
-                </a> -->
+            <hr>
 
-                <a href="https://forms.gle/uL8ja6vYFLoavHZE7">
-                    <h3 class="text-center">Click here to do the quick background survey and enter your work ID for us to give you the qualification.</h3>
-                </a>
-                <!-- <p class="text-center">
-                    <button type="button" class="btn btn-lg btn-primary" id="next">Back to Labeling Task
-                    </button>
-                </p> -->
+            <div class="row my-3">
+                <button type="button" class="btn btn-lg btn-outline-primary navigation" id="survey-button">
+                    Click here to do the quick background survey and enter your work ID for us to give you the
+                    qualification.
+                </button>
 
-                
             </div>
-            <p class="fs-6 text-center">
-                This study is carried under The Pennsylvania State University (PSU) IRB STUDY00008698, and funded by
-                National Science Foundation (NSF) grant 1909315.
 
-            </p>
+            <hr>
+            <div class="row my-3">
+                <p class="fs-6 font-monospace sym-irb">
+                </p>
+            </div>
         </div>
     </body>
 
     <script src="https://fastly.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
 
 
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+    <script src="../reload.js"></script>
 
     <script>
         $(document).ready(function () {
-            $(".btn#next").click(function () {
-                location.href = "train2.html";
+            // Load XML
+            let xml_url = "../sym.xml";
+            $.get(xml_url, function (xml) {
+                console.log("Load XML was performed.");
+
+                reloadMain(xml);
+                let survey_url = $(xml).find(`survey-url`).text();
+                $(".btn#survey-button").click(function () {
+                    window.open(survey_url);
+                });
             });
         });
     </script>

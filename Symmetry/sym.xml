@@ -7,6 +7,10 @@
     <url>
         <sym-root-url>https://psu-lpac.github.io/Sym-RP-Data-Collection/Symmetry</sym-root-url>
 
+        <survey-url>https://forms.gle/uL8ja6vYFLoavHZE7</survey-url>
+
+        <!-- <sym-root-url>http://127.0.0.1:5501/Symmetry/</sym-root-url> -->
+
         <real-img-urls>
             <item>yanxi_rot.gif</item>
             <item>yanxi_ref.gif</item>
@@ -47,6 +51,7 @@
         ]]>
     </sym-tutorial>
 
+
     <warning-msg>
         <![CDATA[ 
         During <strong>Preview</strong>, if no perceived symmetries are found, you can
@@ -65,7 +70,7 @@
 
     <notify-real-sym>
         <![CDATA[ 
-        Note: Real world symmetries will <strong style="color: red;">NOT</strong> appear as perfect as those in the toy examples above.
+        Note: Real world symmetries may <strong style="color: red;">NOT</strong> appear perfectly.
         ]]>
     </notify-real-sym>
 
@@ -125,6 +130,97 @@
         </ol>
         ]]>
     </sym-instruction>
+
+    <buttons>
+        <rot_button>
+            <![CDATA[ 
+            <i class="bi bi-dot"></i> Rotation Symmetry
+            <span class="tooltip-text-2">
+                Click one point as the rotation center
+                <br>
+                (Hotkey: <strong>R</strong>)
+            </span>
+            ]]>
+        </rot_button>
+
+        <ref_button>
+            <![CDATA[ 
+            <i class="bi bi-dash-lg"></i>
+            Reflection Symmetry
+            <span class="tooltip-text-2">
+                Click two points as the reflection axis
+                <br>
+                (Hotkey: <strong>R</strong>)
+            </span>
+            ]]>
+        </ref_button>
+
+        <annotate_button>
+            <![CDATA[ 
+            Label
+            <span class="tooltip-text-2">
+                Label a New Symmetry
+                <br>
+                (Hotkey: <strong>D</strong>)
+            </span>
+            ]]>
+        </annotate_button>
+
+        <delete_button>
+            <![CDATA[ 
+            Delete
+            <span class="tooltip-text-2">
+                Delete an Existing Symmetry
+                <br>
+                (Hotkey: <strong>D</strong>)
+            </span>
+            ]]>
+        </delete_button>
+
+        <undo_button>
+            <![CDATA[ 
+            Undo Last
+            <span class="tooltip-text">
+                Undo last Annotation/Deletion
+                <br>
+                (Hotkey: <strong>CTRL+Z</strong>)
+            </span>
+            ]]>
+        </undo_button>
+
+        <reposition_button>
+            <![CDATA[ 
+            Reset View
+            <span class="tooltip-text">
+                Reset View Scale After Zooming-In
+                <br>
+                (Hotkey: <strong>CTRL+X</strong>)
+            </span>
+            ]]>
+        </reposition_button>
+
+        <reset_button>
+            <![CDATA[ 
+            Clear All
+            <span class="tooltip-text">
+                Clear All Annotations
+            </span>
+            ]]>
+        </reset_button>
+
+        <submit>
+            <![CDATA[ 
+            Submit
+            <span class="tooltip-text">
+                Click here to submit your labeling
+                <br>
+                (Hotkey:<strong>ENTER</strong>)
+            </span>
+            ]]>
+        </submit>
+
+
+    </buttons>
 
     <sym-irb>
         This study is carried under The Pennsylvania State University (PSU) IRB STUDY00008698, and funded by National Science Foundation (NSF) grant 1909315.

@@ -6,12 +6,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Tutorial</title>
+    <title>Batch Symmetry Tutorial Page</title>
 
     <!-- Bootstrap -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="label.css">
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="../sym.css">
 </head>
 
 <body>
@@ -20,47 +22,143 @@
         <div class="container" id="container">
 
             <div class="page-header">
-                <h2 class="text-center"><b>Understanding Symmetry</b></h2>
-                <h3 class="text-center"><b> The goal of the study is to find out how humans perceive symmetries
-                        in real world scenes.</b>
-                </h3>
-            </div>
+                <p class="fs-3 text-center fw-bold">
+                    Understanding Symmetry
+                </p>
 
-            <div>
-                <h4 class="text-center" >After you finish all sections of this tutorial, you will be redirected to the quick background survey. 
-                
-                </h4>
-                <h4  class="text-center" >Once you finish the survey, you will be qualified to start the symmetry labeling HITs with rewards.</h4>
-                
+                <p class="fs-4 text-center fw-bold">
+                    The goal of the study is to find out how humans perceive symmetries in real world scenes.
+                </p>
+
+                <p class="fs-6 font-monospace text-center">
+                    After you finish all sections of this tutorial, you will be redirected to a quick background survey.
+                    <br>
+                    Once you finish the survey, you will be qualified to start the symmetry labeling HIT with rewards.
+                </p>
+
             </div>
 
             <hr>
 
-            <div class="page-header"><a href="example_toy.html">
-                    <h3 class="text-center"><b>1. Examples of symmetry on images</b></h3>
-                </a></div>
-            <div class="page-header"><a href="example_real.html">
-                    <h3 class="text-center"><b>2. Examples of symmetry on real images</b></h3>
-                </a></div>
 
-            <div class="page-header"><a href="example_results.html">
-                    <h3 class="text-center"><b>3. Sample results of labeled symmetry</b></h3>
-                </a></div>
+            <div class="row border">
+                <div class="row border">
+                    <div class="row mb-3">
+                        <!-- <button type="button" class="btn btn-lg expandable hidden"> Click Here for Examples of Symmetry
+                            on Images
+                        </button> -->
 
-            <div class="page-header"><a href="instructions.html">
-                    <h3 class="text-center"><b>4. Sample video of a labeling process</b></h3>
-                </a></div>
+                        <div id="sym-definition">
 
-            <div class="page-header"><a href="test-1.html">
-                    <h3 class="text-center"><b>5. Pass four labeling tasks to test your understanding of symmetry on real
-                            images</b></h3>
-                </a></div>
+                        </div>
+                    </div>
 
-                <p class="fs-6 text-center">
-                    This study is carried under The Pennsylvania State University (PSU) IRB STUDY00008698, and funded by
-                    National Science Foundation (NSF) grant 1909315.
-    
-                </p>
+                    <hr class="border-3 border border-primary">
+
+                    <div class="row mb-3">
+                        <button type="button" class="btn btn-lg expandable hidden"> Click Here for Examples of Symmetry
+                            on Real Images
+                        </button>
+
+                        <div class="expandable-content">
+                            <div class="row">
+                                <p class="fs-5 text-center fw-bold notify-real-sym">
+                                </p>
+
+                                <p class="fs-5 font-monospace text-center sym-legend">
+                                </p>
+                            </div>
+
+                            <div class="row">
+                                <div class="row gap-3 justify-content-center" id="real-images">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="border-3 border border-primary">
+
+                    <div class="row mb-3">
+                        <button type="button" class="btn btn-lg expandable hidden"> Click Here for Sample Results of
+                            Labeled Symmetry
+                        </button>
+
+                        <div class="expandable-content">
+                            <div class="row">
+                                <p class="fs-5 text-center fw-bold notify-real-sym">
+                                </p>
+
+                                <p class="fs-5 font-monospace text-center sym-legend">
+                                </p>
+                            </div>
+
+                            <div class="row">
+                                <div class="row gap-3 justify-content-center" id="sample-results">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="border-3 border border-primary">
+
+                    <div class="row mb-3">
+                        <button type="button" class="btn btn-lg expandable hidden"> Click Here for Labeling Instructions
+                        </button>
+
+                        <div class="expandable-content">
+                            <div class="row">
+                                <div class="row">
+                                    <p class="fs-6 sym-instruction">
+
+                                    </p>
+                                </div>
+
+                                <div class="row">
+                                    <p class="fs-5 text-center fw-bold">How to label <span style="color:red">Rotational
+                                            Symmetry Center(s)</span></p>
+
+                                    <div class="ratio ratio-16x9">
+                                        <video src="..\figures\tutorial\rot_demo.mp4" autoplay muted loop></video>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <p class="fs-5 text-center fw-bold">How to label a <span
+                                              style="color:green">Reflection Symmetry Axis</span></p>
+
+                                    <div class="ratio ratio-16x9">
+                                        <video src="..\figures\tutorial\ref_demo.mp4" autoplay muted loop></video>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="border-3 border border-primary">
+
+                    <div class="row mb-3">
+                        <button type="button" class="btn btn-lg btn-outline-primary navigation"> Start a Quick Test on
+                            Symmetry Labeling
+                        </button>
+                    </div>
+                </div>
+
+
+
+                <div class="row border">
+                    <p class="fs-6 font-monospace sym-irb">
+                    </p>
+
+                    <p class="fs-6 font-monospace worker-info">
+                    </p>
+                </div>
+            </div>
+
+
+
 
         </div>
     </body>
@@ -68,13 +166,36 @@
     <script src="https://fastly.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
 
 
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
 
+    <script src="../reload.js"></script>
     <script>
-        $("button#next").click(function () {
-            location.href = "definition.html";
-        });
+        $(document).ready(function () {
+            // Load XML
+            let xml_url = "../sym.xml";
+            $.get(xml_url, function (xml) {
+                console.log("Load XML was performed.");
+
+                reloadMain(xml);
+
+                setExpand();
+            });
+        })
+
+        function setExpand() {
+            $("div.expandable-content").slideUp(0);
+
+            $("button.expandable").click(function () {
+                let content = $(this).siblings(".expandable-content");
+                content.clearQueue();
+                content.slideToggle();
+            });
+        }
     </script>
+
+
 
 </body>
 

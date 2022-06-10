@@ -218,7 +218,7 @@ function dismissAlerts() {
 function symTypeAlert() {
     // * show a sym type alert
     $('#alert-box').append(`
-    <crowd-alert type="error" class="sym-alert" id="sym-type-alert" dismissible>
+    <crowd-alert type="error" class="sym-alert" dismissible>
         Please choose which type of symmetry (Hot key: <b>R</b>) to be labeled first!
     </crowd-alert>
     `);
