@@ -22,6 +22,11 @@ function reloadSymDef(xml) {
     // * reload sym-definition
     let sym_root_url = $(xml).find('sym-root-url').text();
     let sym_def_url = `${sym_root_url}/Tutorial/definition.html`;
+
+    $.get(`${sym_def_url} div#sym-definition`, function( data ) {
+        console.log(data)
+        console.log( "Reload Symmetry Definition was performed." );
+      });
 }
 
 function reloadFigs(xml) {
