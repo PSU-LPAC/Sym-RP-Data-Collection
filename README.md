@@ -7,6 +7,8 @@ https://psu-lpac.github.io/Sym-RP-Data-Collection/Symmetry/Tutorial/tutorial.htm
 ### Interface Demo
 https://psu-lpac.github.io/Sym-RP-Data-Collection/Symmetry/label.html
 
+## Batch Interface Demo
+https://psu-lpac.github.io/Sym-RP-Data-Collection/Symmetry/batch_hits/index.html
 ## Recurring Pattern 
 
 ### Tutorial
