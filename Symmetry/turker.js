@@ -32,7 +32,57 @@ let currentLink = { class: [], mode: "link", data: [] };
 let currentPolygon = { class: [], mode: "polygon", data: [] };
 let currentBbox = { class: [], mode: "bbox", data: [] };
 
-$(document).ready(function () {
+let handleScroll = function (evt) {
+
+
+    getCorrectCoords(evt);
+    delta = evt.wheelDelta ? evt.wheelDelta / 40 : evt.detail ? -evt.detail : 0;
+
+    newScale += delta / 10;
+    newScale = Math.max(newScale, 1.0);
+    newScale = Math.min(newScale, 5.0);
+    scaleRatio = newScale / oldScale;
+    scaleDiff = newScale - oldScale;
+    oldScale = scaleTransform = newScale;
+
+    scalingOffsetX = ((newScale - 1) * parent.offsetWidth) / 2;
+    scalingOffsetY = ((newScale - 1) * parent.offsetHeight) / 2;
+
+    translateTransform_raw[0] -=
+        (correctX - parent.offsetWidth / 2) * scaleDiff;
+    translateTransform_raw[1] -=
+        (correctY - parent.offsetHeight / 2) * scaleDiff;
+
+    translateTransform[0] = translateTransform_raw[0] / newScale;
+    translateTransform[1] = translateTransform_raw[1] / newScale;
+    updateTransform();
+
+    // * disable page scroll
+    TopScroll = window.pageYOffset || document.documentElement.scrollTop;
+    LeftScroll = window.pageXOffset || document.documentElement.scrollLeft;
+    window.onscroll = function () {
+        window.scrollTo(LeftScroll, TopScroll);
+    };
+};
+
+
+// $(document).ready(function () {
+//     setupAll();
+// });
+
+function resizeCanvas() {
+    canvas = document.getElementById("myCanvas");
+    ctx = canvas.getContext("2d");
+    img = document.getElementById("pic");
+
+    canvas.width = img.width;
+    canvas.height = img.height;
+    ctx.canvas.width = img.width;
+    ctx.canvas.height = img.height;
+    canvas.style.cursor = "crosshair";
+}
+
+function setupAll() {
     parent = document.getElementById("parent");
     child = document.getElementById("child");
     canvas = document.getElementById("myCanvas");
@@ -40,10 +90,10 @@ $(document).ready(function () {
     img = document.getElementById("pic");
 
     // modeButton = $("#mode_button")
-
-    canvas.width = img.width;
-    canvas.height = img.height;
-    canvas.style.cursor = "crosshair";
+    resizeCanvas();
+    // canvas.width = img.width;
+    // canvas.height = img.height;
+    // canvas.style.cursor = "crosshair";
 
     classSelection = $("select#label_class")[0];
 
@@ -75,15 +125,10 @@ $(document).ready(function () {
         Array.prototype.splice.call(annotations, idx, numElements);
     };
 
-    // mode = modes[0];
-
-    // modeButton.text("Mode: " + capitalize(mode));
-
-    // * generate RP list options
-    // addRPClass(0);
+    updateSymInfo();
 
     // * initialize buttons
-    $("#reset_button").click(reset);
+    $("#reset_button").click(() => reset(true));
     $("#reposition_button").click(reposition);
     $("#undo_button").click(undo);
     $("#mode_button").click(toggleMode);
@@ -92,6 +137,9 @@ $(document).ready(function () {
 
     $("#rot_button").click(() => toggleMode('dot'));
     $("#ref_button").click(() => toggleMode('link'));
+
+
+
 
     $("#submit").click(function () {
         $("crowd-form")[0].submit();
@@ -199,9 +247,18 @@ $(document).ready(function () {
             updateGraphics();
         }
     });
+    $(document).bind("keydown", keyboardListener);
+    // window.addEventListener("keydown", keyboardListener, true);
+}
 
-});
-// end of ready function
+function getAnno() {
+    let single_anno = {};
+    single_anno['coordinates'] = annotations;
+    single_anno['imageSize'] = [$(img).width(), $(img).height()];
+
+    return single_anno;
+}
+
 
 function dismissAlerts() {
     // * dismiss all alerts
@@ -243,12 +300,22 @@ function updateSymInfo() {
 
     $("#sym-info").html(`
     <p class="fs-6 text-center">
-                                Labeled Rotation Symmetries: ${rot_num}
-                                <br>
-                                Labeled Reflection Symmetries: ${ref_num}
-                            </p>
-
+        Labeled Rotation Symmetries: ${rot_num}
+        <br>
+        Labeled Reflection Symmetries: ${ref_num}
+    </p>
     `);
+
+    // batch info
+    if ($(".batch-sym-info").length > 0) {
+        $(".img-info").html(`Image ${img_idx + 1}/${num_imgs}, Skipped: ${skip_num}`);
+        $(".sym-info").html(`
+            Labeled Rotation Symmetries: ${rot_num}
+            <br>
+            Labeled Reflection Symmetries: ${ref_num}
+        `)
+    }
+
 }
 
 
@@ -356,7 +423,9 @@ function setDeleteMode(deleteMode) {
     }
 }
 
-function reset() {
+function reset(confirm_flag = false) {
+    if (confirm_flag && !confirm("Clear all annotations (this action cannot be recovered)?")) return;
+
     clearAnnotations();
     reposition();
     firstPoint = true;
@@ -596,88 +665,105 @@ function undo() {
     updateGraphics();
 }
 
-window.addEventListener(
-    "keydown",
-    function (evt) {
-        // Press R for Flipping Rot/Ref
-        if (evt.key == "r") {
-            if (mode == 'dot') { toggleMode('link'); }
-            else { toggleMode('dot'); }
+// window.addEventListener(
+//     "keydown",
+//     function (evt) {
+//         // Press R for Flipping Rot/Ref
+//         if (evt.key == "r") {
+//             if (mode == 'dot') { toggleMode('link'); }
+//             else { toggleMode('dot'); }
+//         }
+
+//         // Press D for Flipping Label/Delete
+//         if (evt.key == "d") {
+//             toggleDelete();
+//         }
+
+//         // Press ctrl + Z for "Undo"
+//         if (evt.key == "z" && evt.ctrlKey) {
+//             undo();
+//         }
+
+//         // Press ctrl + x for reset zoom view
+//         if (evt.key == "x" && evt.ctrlKey) {
+//             reposition();
+//         }
+
+//         if (evt.key == "Enter") {
+//             $("#test-submit").click();
+//             $("#submit").click();
+//             $("#next").click();
+//             // $("crowd-form")[0].submit();
+//         }
+
+//         // Press C for "Close Polygon"
+//         if (evt.key == "c") {
+//             if (currentPolygon.data.length > 2) {
+//                 currentPolygon.class = getClass();
+//                 annotations.push(Object.assign({}, currentPolygon));
+//                 currentPolygon.data = new Array();
+//             }
+//             // Update coordinates
+//             if (annotations.length == 0) {
+//                 document.getElementById("coordinates").value = "";
+//             } else {
+//                 document.getElementById("coordinates").value =
+//                     JSON.stringify(annotations);
+//             }
+//         }
+//         updateGraphics();
+//     },
+//     true
+// );
+
+
+function keyboardListener(evt) {
+    // Press R for Flipping Rot/Ref
+    if (evt.key == "r") {
+        if (mode == 'dot') { toggleMode('link'); }
+        else { toggleMode('dot'); }
+    }
+
+    // Press D for Flipping Label/Delete
+    if (evt.key == "d") {
+        toggleDelete();
+    }
+
+    // Press ctrl + Z for "Undo"
+    if (evt.key == "z" && evt.ctrlKey) {
+        undo();
+    }
+
+    // Press ctrl + x for reset zoom view
+    if (evt.key == "x" && evt.ctrlKey) {
+        reposition();
+    }
+
+    if (evt.key == "Enter") {
+        $("#test-submit").click();
+        $("#submit").click();
+        $("#next").click();
+        // $("crowd-form")[0].submit();
+    }
+
+    // Press C for "Close Polygon"
+    if (evt.key == "c") {
+        if (currentPolygon.data.length > 2) {
+            currentPolygon.class = getClass();
+            annotations.push(Object.assign({}, currentPolygon));
+            currentPolygon.data = new Array();
         }
-
-        // Press D for Flipping Label/Delete
-        if (evt.key == "d") {
-            toggleDelete();
+        // Update coordinates
+        if (annotations.length == 0) {
+            document.getElementById("coordinates").value = "";
+        } else {
+            document.getElementById("coordinates").value =
+                JSON.stringify(annotations);
         }
+    }
+    updateGraphics();
+}
 
-        // Press ctrl + Z for "Undo"
-        if (evt.key == "z" && evt.ctrlKey) {
-            undo();
-        }
-
-        // Press ctrl + x for reset zoom view
-        if (evt.key == "x" && evt.ctrlKey) {
-            reposition();
-        }
-
-        if (evt.key == "Enter") {
-            $("#test-submit").click();
-            $("#submit").click();
-            // $("crowd-form")[0].submit();
-        }
-
-        // Press C for "Close Polygon"
-        if (evt.key == "c") {
-            if (currentPolygon.data.length > 2) {
-                currentPolygon.class = getClass();
-                annotations.push(Object.assign({}, currentPolygon));
-                currentPolygon.data = new Array();
-            }
-            // Update coordinates
-            if (annotations.length == 0) {
-                document.getElementById("coordinates").value = "";
-            } else {
-                document.getElementById("coordinates").value =
-                    JSON.stringify(annotations);
-            }
-        }
-        updateGraphics();
-    },
-    true
-);
-
-let handleScroll = function (evt) {
-
-
-    getCorrectCoords(evt);
-    delta = evt.wheelDelta ? evt.wheelDelta / 40 : evt.detail ? -evt.detail : 0;
-
-    newScale += delta / 10;
-    newScale = Math.max(newScale, 1.0);
-    newScale = Math.min(newScale, 5.0);
-    scaleRatio = newScale / oldScale;
-    scaleDiff = newScale - oldScale;
-    oldScale = scaleTransform = newScale;
-
-    scalingOffsetX = ((newScale - 1) * parent.offsetWidth) / 2;
-    scalingOffsetY = ((newScale - 1) * parent.offsetHeight) / 2;
-
-    translateTransform_raw[0] -=
-        (correctX - parent.offsetWidth / 2) * scaleDiff;
-    translateTransform_raw[1] -=
-        (correctY - parent.offsetHeight / 2) * scaleDiff;
-
-    translateTransform[0] = translateTransform_raw[0] / newScale;
-    translateTransform[1] = translateTransform_raw[1] / newScale;
-    updateTransform();
-
-    // * disable page scroll
-    TopScroll = window.pageYOffset || document.documentElement.scrollTop;
-    LeftScroll = window.pageXOffset || document.documentElement.scrollLeft;
-    window.onscroll = function () {
-        window.scrollTo(LeftScroll, TopScroll);
-    };
-};
 
 function updateTransform() {
     child.style.transform = "";

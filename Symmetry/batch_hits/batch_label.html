@@ -1,257 +1,241 @@
-<div class="page-header justify-content-between" id="header">
-    <!-- [Header] -->
+<!doctype html>
+<html lang="zh-CN">
 
-    <h4 class="text-center"><b> Goal of the study: to find out how humans perceive symmetries in real
-            world scenes </b>
-    </h4>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <p class="fs-6 font-monospace text-center"> Note: Real world symmetries may <strong
-                style="color: red;font-size: 120%;">NOT</strong> appear perfectly. </p>
-</div>
+    <title>Symmetry Labeling</title>
 
-<div class="row">
-    <p class="fs-6 font-monospace text-center">
-        Need a refresher on "<b>Symmetry</b>"?
-        Click here:
-        <a href="https://psu-lpac.github.io/Sym-RP-Data-Collection/Symmetry/Tutorial/tutorial.html" target="_blank">
-            Understanding Symmetry</a>
-    </p>
-</div>
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="../sym.css">
 
-<div class="row border " id="body-part">
-    <div id="alert-box">
-        <crowd-alert type="info" dismissible>
-            During <strong>Preview</strong>, if no perceived symmetries are found, you can
-            <strong>SKIP</strong> this image.
-            <br>
-            To get <strong>HIT approved</strong> properly, make sure you have seen this
-            tutorial <a href="https://alexis97.github.io/RP-Interface/pages/tutorial.html" target="_blank">
-                Understanding Symmetry</a> AND submit your <strong>WorkerID</strong> through the background
-            survey.
-        </crowd-alert>
-    </div>
+    <style>
+        body {
+            overflow: hidden;
+        }
+    </style>
+</head>
 
-    <div id="response">
-        <!-- *Response -->
-        <input id="coordinates" name="coordinates" type="hidden" />
-        <input id="imageSize" name="imageSize" type="hidden" />
-    </div>
+<body>
+    <crowd-form id="form">
+        <div class="container-fluid" id="container">
+            <div class="page-header justify-content-between" id="header">
+                <!-- [Header] -->
 
-    <div class="col-4 border" id="left-panel">
-        <div class="row">
-            <!-- *[Instruction] -->
-            <button type="button" class="btn" name="instruction_button" id="instruction_button"> Click
-                Here for Instructions
-            </button>
-            <div id="instruction">
+                <p class="fs-4 text-center fw-bold title">[Title]</p>
 
-                <ol>
-                    <li> <b>Label every symmetry</b> you <b>perceive</b> on each image.</li>
-
-                    <li> Choose which type of symmetry to be labeled first. </li>
-
-                    <li>
-                        Use mouse scroll to zoom in/out the image for more precise labeling.
-                    </li>
-
-                    <li>Click the <strong>Submit</strong> button or press <strong>ENTER</strong> to finish
-                        current task.</li>
-
-                    <li> Buttons & Hotkeys:
-                        <ol>
-                            <li>
-                                Click <strong>Rotation/Reflection</strong> flip switch or press
-                                <strong>R</strong> to toggle between label rotation and reflection.
-                            </li>
-                            <li>
-                                Click <strong>Label/Deletion</strong> flip switch or press
-                                <strong>D</strong> to toggle between labeling and deleting.
-                            </li>
-                            <li>
-                                Click the <strong>Undo Last</strong> button or press <strong>CTRL+Z</strong>
-                                to
-                                undo last Annotation/Deletion.
-                            </li>
-
-                            <li>
-                                Click the <strong>Reset View</strong> button or press
-                                <strong>CTRL+X</strong> center the image and reset
-                                zoom.
-                            </li>
-
-                            <li>
-                                Click the <strong>Clear All</strong> button to clear all annotations.
-                                <span style="color: red;"><strong>Warning:</strong> this action cannot be
-                                    recovered!</span>
-                            </li>
-
-                        </ol>
-                    </li>
-                </ol>
-
-            </div>
-        </div>
-
-        <hr>
-
-        <div class="row">
-            <!-- *[Information] -->
-            <div id="sym-info">
-                <p class="fs-6 text-center">
-                    Labeled Rotation Symmetries: 0
-                    <br>
-                    Labeled Reflection Symmetries: 0
+                <p class="fs-5 text-center fw-bold notify-real-sym">
                 </p>
-            </div>
-        </div>
-
-        <hr>
-
-        <div class="row mt-2" id="label-panel">
-            <!-- *[Label Panel] -->
-
-            <div class="row mb-2">
-                <div class="col-6">
-                    CHOOSE A SYMMETRY TYPE:
-                </div>
-                <div class="col-6">
-                    <div class="btn-group" role="group">
-                        <label class="btn btn-outline-secondary" type="radio" name="sym_options" id="rot_button"
-                               autocomplete="off" checked>
-                            Rotation Symmetry
-                            <span class="tooltip-text-2">
-                                Click one point as the rotation center
-                                <br>
-                                (Hotkey: <strong>R</strong>)
-                            </span>
-                        </label>
-                        <label class="btn btn-outline-secondary" type="radio" name="sym_options" id="ref_button"
-                               autocomplete="off">
-                            Reflection Symmetry
-                            <span class="tooltip-text-2">
-                                Click two points as the reflection axis
-                                <br>
-                                (Hotkey: <strong>R</strong>)
-                            </span>
-                        </label>
-                    </div>
-                </div>
             </div>
 
             <div class="row">
-                <p>
-                    CHOOSE AN ACTION:
-                </p>
+                <p class="fs-6 font-monospace text-center sym-tutorial"> [Totorial] </p>
             </div>
 
-            <div class="row justify-content-center">
-                <div class="row mb-2">
-                    <span id="delete_flip" class="btn-group btn-group-toggle" data-toggle="buttons">
-                        <label class="btn btn-primary" type="radio" name="options" id="annotate_button"
-                               autocomplete="off">
-                            Label
-                            <span class="tooltip-text-2">
-                                Label a New Symmetry
-                                <br>
-                                (Hotkey: <strong>D</strong>)
-                            </span>
-                        </label>
-                        <label class="btn btn-outline-secondary" type="radio" name="options" id="delete_button"
-                               autocomplete="off" checked>
-                            Delete
-                            <span class="tooltip-text-2">
-                                Delete an Existing Symmetry
-                                <br>
-                                (Hotkey: <strong>D</strong>)
-                            </span>
-                        </label>
-                    </span>
+
+            <div class="row border " id="body-part">
+                <div id="alert-box">
+                    <crowd-alert type="info" class="warning-msg-batch" dismissible>
+                        [Warning Msg for Batch Hits]
+                    </crowd-alert>
                 </div>
 
-
-                <div class="row mb-2">
-                    <div class="col-4 d-grid">
-                        <button type="button" class="btn btn-secondary btn-sm" name="undo_button" id="undo_button">
-                            Undo Last
-                            <span class="tooltip-text">
-                                Undo last Annotation/Deletion
-                                <br>
-                                (Hotkey: <strong>CTRL+Z</strong>)</span>
-                        </button>
-                    </div>
-                    <div class="col-4 d-grid">
-                        <button type="button" class="btn btn-warning btn-sm" name="reposition_button"
-                                id="reposition_button">
-                            Reset View
-                            <span class="tooltip-text">
-                                Reset View Scale After Zooming-In
-                                <br>
-                                (Hotkey: <strong>CTRL+X</strong>)</span>
-                        </button>
-                    </div>
-                    <div class="col-4 d-grid">
-                        <button type="button" class="btn btn-danger btn-sm" name="reset_button" id="reset_button">
-                            Clear All
-                            <span class="tooltip-text">
-                                Clear All Annotations
-                                <!-- <br>
-                                    <span style="color: red;">Symmetry Labels disappeared cannot be
-                                        recovered!</span> -->
-                            </span>
-                        </button>
-                    </div>
+                <div id="response">
+                    <!-- *Response -->
+                    <input id="coordinates" name="coordinates" type="hidden" />
+                    <input id="imageSize" name="imageSize" type="hidden" />
                 </div>
 
-                <div class="row mt-3">
-                    <div class="col-12 d-grid">
-                        <button type="button" class="btn btn-success" name="submit" id="submit"> Submit
-                            <span class="tooltip-text">
-                                Click here to submit your labeling
-                                <br>
-                                (Hotkey:<strong>ENTER</strong>)
-                            </span>
+                <div class="col-4 border" id="left-panel">
+                    <div class="row">
+                        <!-- *[Instruction] -->
+                        <button type="button" class="btn expandable" name="instruction_button" id="instruction_button">
+                            Click
+                            Here for Instructions
                         </button>
+                        <div id="instruction">
+
+                            <p class="fs-6 sym-instruction">
+                                [Insutrctions]
+                            </p>
+
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row">
+                        <!-- *[Information] -->
+                        <div class="batch-sym-info">
+                            <p class="fs-6 fw-bold text-center img-info">
+                                Image {cur}/{total}, Skipped: {skip_num}
+                            </p>
+                            <hr>
+                            <p class="fs-6 text-center sym-info">
+                                Labeled Rotation Symmetries: 0
+                                <br>
+                                Labeled Reflection Symmetries: 0
+                            </p>
+                        </div>
+                    </div>
+
+                    <hr>
+
+                    <div class="row mt-2" id="label-panel">
+                        <!-- *[Label Panel] -->
+
+                        <div class="row mb-2">
+                            <div class="col-6">
+                                CHOOSE A SYMMETRY TYPE:
+                            </div>
+                            <div class="col-6">
+                                <div class="btn-group" role="group">
+                                    <label class="btn btn-outline-secondary rot_button" type="radio" id="rot_button"
+                                           autocomplete="off" checked>
+                                        [Rotate]
+                                    </label>
+                                    <label class="btn btn-outline-secondary ref_button" type="radio" id="ref_button"
+                                           autocomplete="off">
+                                        [Reflect]
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <p>
+                                CHOOSE AN ACTION:
+                            </p>
+                        </div>
+
+                        <div class="row justify-content-center">
+                            <div class="row mb-2">
+                                <span id="delete_flip" class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-primary annotate_button" type="radio" id="annotate_button"
+                                           autocomplete="off">
+                                        [Label]
+                                    </label>
+                                    <label class="btn btn-outline-secondary delete_button" type="radio"
+                                           id="delete_button" autocomplete="off" checked>
+                                        [Delete]
+                                    </label>
+                                </span>
+                            </div>
+
+
+                            <div class="row mb-2">
+                                <div class="col-4 d-grid">
+                                    <button type="button" class="btn btn-secondary btn-sm undo_button" id="undo_button">
+                                        [Undo]
+                                    </button>
+                                </div>
+                                <div class="col-4 d-grid">
+                                    <button type="button" class="btn btn-light btn-sm border reposition_button"
+                                            id="reposition_button">
+                                        [Reset]
+                                    </button>
+                                </div>
+                                <div class="col-4 d-grid">
+                                    <button type="button" class="btn btn-danger btn-sm reset_button" id="reset_button">
+                                        [Clear All]
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="row mt-3">
+                                <div class="col-6 d-grid">
+                                    <button type="button" class="btn btn-warning border skip" id="skip">
+                                        [Skip]
+                                    </button>
+                                </div>
+                                <div class="col-6 d-grid">
+                                    <button type="button" class="btn btn-success border submit" id="next">
+                                        [Submit]
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <div class="col">
+                    <!-- *[Canvas Part] -->
+
+                    <div class="border col  d-flex justify-content-center">
+                        <div id="parent">
+                            <div id="child">
+                                <canvas id="myCanvas"></canvas>
+                                <!-- <img class="fixed_height" id="pic" src="${img_url}" /> -->
+                                <img id="pic"
+                                     src="https://sym-rp-data-collection.s3.amazonaws.com/Dataset/Iter-1/000-201.jpg" />
+
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
+
+
+            <div class="row border">
+                <!-- * [IRB Study Information Here] -->
+                <div>
+                    <p class="fs-6 font-monospace sym-irb">
+
+                    </p>
+                </div>
+                <div>
+                    <p class="fs-6 font-monospace worker-info">
+
+                    </p>
+                </div>
+            </div>
+
 
         </div>
 
-
-    </div>
-
-    <div class="col">
-        <!-- *[Canvas Part] -->
-
-        <div class="fixed_height border col  d-flex justify-content-center">
-            <div id="parent">
-                <div id="child">
-                    <canvas id="myCanvas"></canvas>
-                    <!-- <img class="fixed_height" id="pic" src="${img_url}" /> -->
-                    <img class="fixed_height" id="pic"
-                         src="https://sym-rp-data-collection.s3.amazonaws.com/Dataset/Iter-1/000-201.jpg" />
-
-                    <!-- <img class="fixed_height" id="pic" src=".\figures\test images\Butterfly.jpg" /> -->
-                    <!-- 
-                                <img class="fixed_height" id="pic" src=".\figures\test images\flower.jpg" /> -->
-
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+        <!-- Prevent crowd-form from creating its own button -->
+        <crowd-button form-action="submit" style="display: none;"></crowd-button>
+    </crowd-form>
 
 
-<div class="row border">
-    <!-- * [IRB Study Information Here] -->
-    <div id="sym-irb-info">
 
-    </div>
-    <div id="irb-info">
-
-    </div>
-</div>
+    <script src="https://fastly.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
 
 
-</div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+    <script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
+
+    <script src="reload.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Load XML
+            let xml_url = "../sym.xml";
+            $.get(xml_url, function (xml) {
+                console.log("Load XML was performed.");
+
+                reloadMain(xml);
+            });
+
+        });
+
+
+    </script>
+
+    <script src="../turker.js"></script>
+</body>
+
+</html>

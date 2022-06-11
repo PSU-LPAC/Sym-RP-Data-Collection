@@ -68,6 +68,16 @@ def convertResult(img, anno_str):
 
     return anno
 
+def convertBatchResult(anno_str):
+    raw_anno = json.loads(anno_str)
+
+    raw_anno = raw_anno[0]
+    if 'annos' not in raw_anno:
+        return 
+    raw_anno['annos'] = json.loads(raw_anno['annos'])
+
+    print(raw_anno)
+
 def urlToLocalPath(img_dir, img_url):
     ''' Convert the image url to local directory '''
     img_name = os.path.split(img_url)[-1]
@@ -266,19 +276,18 @@ def ProcessNew(image_local_dir, save_dir, batch_file_path, batch_name = 'Iter-2'
 
 def Test():
     img = cv2.imread('E:/Lab Work/Human Research/Dataset Collection/Iter-1/000-201.jpg')
-    data = pd.read_csv('D:/Downloads/testResult.csv')
-    # convertResult(img, anno_str= '[{"coordinates": "[{\"class\":\"Rotation\",\"mode\":\"dot\",\"data\":[477,272]},{\"class\":\"Rotation\",\"mode\":\"dot\",\"data\":[515,279]}]", "imageSize": "[731, 485]"}]')
+    data = pd.read_csv('E:/Lab Work/Datasets/Sym-RP-Collection/AWS csv/test_batch_response.csv')
+
+    # convertResult(img, anno_str='[{"coordinates":"[{\"class\":\"Rotation\",\"mode\":\"dot\",\"data\":[117,95]}]","imageSize":"[219, 219]"}]')
 
     for idx, row in data.iterrows():
 
-        anno = convertResult(img, anno_str= row['Answer.taskAnswers'])
+        anno = convertBatchResult(anno_str= row['Answer.taskAnswers'])
 
-        visu = visuSym(img, anno)
-        cv2.imwrite('test.jpg', visu)
 
 if __name__ == "__main__":
 
-    # Test()
+    Test()
 
     # anno_dict = ProcessOld(
     #     image_local_dir = 'E:/Lab Work/Datasets/Sym-RP-Collection/Images', 
@@ -296,16 +305,16 @@ if __name__ == "__main__":
     #     anno_dict = anno_dict
     # )
 
-    with open('E:/Lab Work/Datasets/Sym-RP-Collection/Results/Iter-2-1/all_anno_dict.json', 'r') as f:
-        anno_dict = json.load(f)
+    # with open('E:/Lab Work/Datasets/Sym-RP-Collection/Results/Iter-2-1/all_anno_dict.json', 'r') as f:
+    #     anno_dict = json.load(f)
 
-    anno_dict = ProcessNew(
-        image_local_dir = 'E:/Lab Work/Datasets/Sym-RP-Collection/Images', 
-        save_dir = 'E:/Lab Work/Datasets/Sym-RP-Collection/Results', 
-        batch_file_path = 'D:/Downloads/Batch_4754201_batch_results (2).csv',
-        batch_name = 'Iter-2-2-half',
-        anno_dict = anno_dict
-    )
+    # anno_dict = ProcessNew(
+    #     image_local_dir = 'E:/Lab Work/Datasets/Sym-RP-Collection/Images', 
+    #     save_dir = 'E:/Lab Work/Datasets/Sym-RP-Collection/Results', 
+    #     batch_file_path = 'D:/Downloads/Batch_4754201_batch_results (2).csv',
+    #     batch_name = 'Iter-2-2-half',
+    #     anno_dict = anno_dict
+    # )
 
     
 
