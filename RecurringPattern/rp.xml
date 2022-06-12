@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<info>
+    <text>
+        <title>
+            Goal of the study: to find out how humans perceive Recurring Pattern (RP) in real world scenes
+        </title>
+    
+        <rp-tutorial>
+            <![CDATA[ 
+            Need a refresher on "<b>Recurring Pattern</b>"?
+            Click here:
+            <a href="https://psu-lpac.github.io/Sym-RP-Data-Collection/RecurringPattern/Tutorial/definition.html" target="_blank">
+                Understanding Recurring Pattern
+            </a>
+            ]]>
+        </rp-tutorial>
+
+        <rp-instruction>
+            <![CDATA[ 
+            <ol>
+                <li> Label every <b>Recurring Pattern (RP)</b> you <b>perceive</b> on each image.</li>
+    
+                <li>
+                    For each <b>RP</b> you perceived:
+                    <ul>
+                        <li>
+                            First click the <b>Add</b> button. A new <b>RP</b> button will be appeared and auto selected.
+                        </li>
+                        <li>
+                            Then you can start labeling the perceived <b>RP
+                                Instances</b> by either <b>Bounding Box</b> or
+                                <b>Polygon</b> contour.
+                        </li>
+                    </ul>
+    
+                </li>
+    
+                <li>
+                    Use mouse scroll to zoom in/out the image for more precise labeling.
+                </li>
+    
+                <li>Click the <strong>Submit</strong> button or press <strong>ENTER</strong> to finish
+                    current task.</li>
+    
+                <li> Buttons & Hotkeys:
+                    <ol>
+                        <li>
+                            Click <strong>Add</strong> button or press 
+                            <strong>A</strong> to add a new <b>RP</b>.
+                        </li>
+                        <li>
+                            Click <strong>Remove</strong> button or press 
+                            <strong>R</strong> to remove the selected <b>RP</b>.
+                        </li>
+                        <li>
+                            Click <strong>Bbox/Polygon</strong> button or press
+                            <strong>E</strong> to toggle between two labeling modes.
+                            <ul>
+                                <li>
+                                    In <strong>Bbox</strong> mode, draw the bounding box of the <strong>RP instance</strong> by <b>holding down</b> left click.
+                                </li>
+                                <li>
+                                    In <strong>Polygon</strong> mode, draw the contour of the <strong>RP instance</strong> by left clicks.
+                                    Press <strong>C</strong> to close the polygon.
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            Click <strong>Label/Deletion</strong> flip switch or press
+                            <strong>D</strong> to toggle between labeling and deleting.
+                        </li>
+                        <li>
+                            Click the <strong>Undo Last</strong> button or press <strong>CTRL+Z</strong>
+                            to
+                            undo last Annotation/Deletion.
+                        </li>
+    
+                        <li>
+                            Click the <strong>Reset View</strong> button or press
+                            <strong>CTRL+X</strong> center the image and reset
+                            zoom.
+                        </li>
+    
+                        <li>
+                            Click the <strong>Clear All</strong> button to clear all annotations.
+                            <span style="color: red;"><strong>Warning:</strong> this action cannot be
+                                recovered!</span>
+                        </li>
+    
+                    </ol>
+                </li>
+            </ol>
+            ]]>
+        </rp-instruction>
+    
+        <rp-irb>
+            This study is carried under The Pennsylvania State University (PSU) IRB STUDY00016169, and funded by National Science Foundation (NSF) grant 1909315.
+        </rp-irb>
+    
+        <worker-info>
+            <![CDATA[ 
+            By completing this HIT, you understand that you are agreeing to participate in an experiment designed by researchers at The Pennsylvania State University and that you will remain anonymous. 
+            Your participation is voluntary and you may stop the experiment at any time or choose to not answer any specific question. If you have any questions, concerns, or problems regarding the research, please contact Shimian Zhang at
+            <a href="mailto:svz5303@psu.edu" target="_blank">svz5303@psu.edu</a>
+            or Dr. Yanxi Liu at
+            <a href="mailto:yul11@psu.edu" target="_blank">yul11@psu.edu</a>
+            . 
+            If you have any other questions, concerns, or problems specifically regarding your rights as a research participant, please contact The Pennsylvania State University's Office for Research Protections
+            (ORP) at (814) 865-1775.
+            ]]>
+        </worker-info>
+    </text>
+    
+    <alerts>
+        <warning-msg>
+            <![CDATA[ 
+            During <strong>Preview</strong>, if no perceived Recurring Patterns are found, you can
+            <strong>SKIP</strong> this image.
+            <br>
+            To get <strong>HIT approved</strong> properly, make sure you have seen this
+            tutorial <a href="https://psu-lpac.github.io/Sym-RP-Data-Collection/RecurringPattern/Tutorial/definition.html" target="_blank">
+                Understanding Recurring Pattern</a> AND submit your <strong>WorkerID</strong> through the background
+            survey.
+            ]]>
+        </warning-msg>
+    
+        <warning-no-rp>
+            <![CDATA[ 
+            No <b>RP</b> selected. Please click the <b>Add</b> button first!
+            ]]>
+        </warning-no-rp>
+    </alerts>
+
+    
+
+    <buttons>
+        <add_rp_button>
+            <![CDATA[ 
+            Add <b>RP</b>
+            <span class="tooltip-text">
+                Add a new Recurring Pattern
+                <br>
+                (Hotkey: <strong>A</strong>)
+            </span>
+            ]]>
+        </add_rp_button>
+
+        <remove_rp_button>
+            <![CDATA[ 
+            Remove <b>RP</b>
+            <span class="tooltip-text">
+                Remove the selected Recurring Pattern
+                <br>
+                (Hotkey: <strong>R</strong>)
+            </span>
+            ]]>
+        </remove_rp_button>
+
+        
+
+        <box_button>
+            <![CDATA[
+            <i class="bi bi-square"></i> Box 
+            <span class="tooltip-text">
+                <strong>Box</strong> mode draws the bounding box
+                <br>
+                of the <strong>RP instance</strong> by <b>holding down</b> left click.
+                <br>
+                (Toggle Hotkey: <strong>E</strong>)
+            </span>
+            ]]>
+        </box_button>
+    
+        <polygon_button>
+            <![CDATA[ 
+            <i class="bi bi-heptagon"></i> Polygon
+            <span class="tooltip-text">
+                <strong>Polygon</strong> mode draws the contour
+                <br>
+                of the <strong>RP instance</strong> by left clicks.
+                <br>
+                Press <strong>C</strong> to close polygon in polygon mode.
+                <br>
+                (Toggle Hotkey: <strong>E</strong>)
+            </span>
+            ]]>
+    
+        </polygon_button>
+
+        <annotate_button>
+            <![CDATA[ 
+            Label Instance
+            <span class="tooltip-text">
+                Label a New RP Instance
+                <br>
+                (Hotkey: <strong>D</strong>)
+            </span>
+            ]]>
+        </annotate_button>
+
+        <delete_button>
+            <![CDATA[ 
+            Delete Instance
+            <span class="tooltip-text">
+                Delete an Existing RP Instance
+                <br>
+                (Hotkey: <strong>D</strong>)
+            </span>
+            ]]>
+        </delete_button>
+
+        <undo_button>
+            <![CDATA[ 
+            Undo Last
+            <span class="tooltip-text">
+                Undo last Annotation/Deletion
+                <br>
+                (Hotkey: <strong>CTRL+Z</strong>)
+            </span>
+            ]]>
+        </undo_button>
+
+        <reposition_button>
+            <![CDATA[ 
+            Reset View
+            <span class="tooltip-text">
+                Reset View Scale After Zooming-In
+                <br>
+                (Hotkey: <strong>CTRL+X</strong>)
+            </span>
+            ]]>
+        </reposition_button>
+
+        <reset_button>
+            <![CDATA[ 
+            Clear All
+            <span class="tooltip-text">
+                Clear All Annotations
+            </span>
+            ]]>
+        </reset_button>
+
+        <submit>
+            <![CDATA[ 
+            Submit
+            <span class="tooltip-text">
+                Click here to submit your labeling
+                <br>
+                (Hotkey:<strong>ENTER</strong>)
+            </span>
+            ]]>
+        </submit>
+
+        <skip>
+            <![CDATA[ 
+            Skip
+            <span class="tooltip-text">
+                Skip the current Image if no perceived RPs are found.
+            </span>
+            ]]>
+        </skip>
+    </buttons>
+
+    
+</info>

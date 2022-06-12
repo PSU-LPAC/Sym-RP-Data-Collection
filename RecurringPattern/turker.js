@@ -40,11 +40,15 @@ let distinctColors = ['(230, 25, 75)', '(60, 180, 75)', '(255, 225, 25)', '(0, 1
 
 let classMaxNum = distinctColors.length;
 
-let bbox_tip = "";
-let polygon_tip = "";
-let warning_no_rp = "";
+let xml;
 
-$(document).ready(function () {
+// $(document).ready(function () {
+//     setupAll();
+// });
+
+
+function setupAll(my_xml) {
+    xml = my_xml;
     parent = document.getElementById("parent");
     child = document.getElementById("child");
     canvas = document.getElementById("myCanvas");
@@ -58,21 +62,6 @@ $(document).ready(function () {
     canvas.style.cursor = "crosshair";
 
     classSelection = $("select#label_class")[0];
-
-    // * load xml
-    $.ajax({
-        type: "GET",
-        url: rp_info_url,
-        dataType: "xml",
-        success: function (xml) {
-            // Variables
-            bbox_tip = $(xml).find('bbox-tip').text();
-            polygon_tip = $(xml).find('polygon-tip').text();
-            modeButtonCaption();
-
-            warning_no_rp = $(xml).find('warning-no-rp').text();
-        }
-    });
 
     // * setup the hidden instruction
     $("#instruction").slideUp(0);
@@ -238,9 +227,7 @@ $(document).ready(function () {
             updateGraphics();
         }
     });
-});
-
-// end of ready function
+}
 
 function checkAnno() {
     // * check if the annotations are valid
@@ -253,26 +240,14 @@ function checkAnno() {
 function modeButtonCaption() {
     // * set the caption of mode button
     if (mode == 'bbox'){
-        console.log(rp_info_url);
-        modeButton.html(
-            `
-            <i class="bi bi-square"></i> Box
-            <span class="tooltip-text-2">
-            ${bbox_tip}
-            </span>
-            `
-            );
+        modeButton.addClass('box_button');
+        modeButton.removeClass('polygon_button');
+        reloadButton('box_button', xml);
     }
     else if (mode == 'polygon'){
-        console.log(rp_info_url);
-        modeButton.html(
-            `
-            <i class="bi bi-heptagon"></i> Polygon
-            <span class="tooltip-text-2">
-            ${polygon_tip}
-            </span>
-            `
-            );
+        modeButton.addClass('polygon_button');
+        modeButton.removeClass('box_button');
+        reloadButton('polygon_button', xml);
     }
     
 }
@@ -566,7 +541,6 @@ function getClass() {
 function checkClass() {
     if (selectedRPIndex == -1 ) {
         // * a warning of no RP class
-        console.log("test");
         noRPSelectAlert();
         return false;
     }
@@ -578,8 +552,7 @@ function noRPSelectAlert() {
 
     $("#alert-box").append(
         `
-        <crowd-alert type="error" class="sym-alert" id="sym-type-alert" dismissible>
-            ${warning_no_rp}
+        <crowd-alert type="error" class="rp-alert warning-no-rp" dismissible>
         </crowd-alert>
         `
     );
@@ -587,19 +560,21 @@ function noRPSelectAlert() {
     // * show the alert in a test environment
     $('#test-alert-box').append(
         `
-        <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        ${warning_no_rp}
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        <div class="alert alert-danger alert-dismissible fade show rp-alert" role="alert">
+            <p class="warning-no-rp"> </p>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
         `
     );
+
+    reloadAlert(xml);
 }
 
 function dismissAlerts() {
     // * dismiss all alerts
-    if ($('crowd-alert.sym-alert').length > 0) {
-        $('crowd-alert.sym-alert').slideUp();
-        $('crowd-alert.sym-alert').alert('close');
+    if ($('crowd-alert.rp-alert').length > 0) {
+        $('crowd-alert.rp-alert').slideUp();
+        $('crowd-alert.rp-alert').alert('close');
     }
     if ($('.alert').length > 0) {
         $('.alert').alert('close');

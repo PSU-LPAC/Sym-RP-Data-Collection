@@ -14,131 +14,8 @@
 
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css'>
 
-    <style>
-        body {
-            overflow: hidden;
-        }
-
-        #left-panel {
-            overflow: auto;
-        }
-
-        #parent {
-            /* width: 1000px; */
-            width: auto;
-            height: auto;
-            overflow: hidden;
-            position: relative;
-            /* background: #f5f5f5; */
-        }
-
-        #child {
-            margin: auto;
-        }
-
-        #myCanvas {
-            position: absolute;
-        }
-
-        #pic {
-            /* width: 100%; */
-            height: 50vh;
-        }
-
-
-        .btn:hover {
-            text-shadow: 0px 0px 1px black;
-        }
-
-        .btn:hover .tooltip-text {
-            visibility: visible;
-        }
-
-        .btn:hover .tooltip-text-2 {
-            visibility: visible;
-        }
-
-        .tooltip-text {
-            visibility: hidden;
-
-            background-color: black;
-            color: #fff;
-            font-size: smaller;
-            text-align: center;
-
-            width: 160px;
-            position: absolute;
-            
-            z-index: 2;
-        }
-
-        .tooltip-text-2 {
-            visibility: hidden;
-
-            background-color: black;
-            color: #fff;
-            font-size: smaller;
-            text-align: center;
-
-            /* width: 160px; */
-            position: absolute;
-            bottom: 100%;
-            left: 75%;
-            margin-left: -50%;
-        }
-
-        .fixed_width {
-            width: 130px !important;
-        }
-
-        .fixed_height {
-            height: 50vh;
-        }
-
-        .rp_containers {
-            height: 20vh;
-        }
-
-        #label_class {
-            width: 200px;
-            float: right;
-        }
-
-
-        .panel {
-            margin-top: 20px;
-        }
-
-        #rot_button.btn-outline-secondary {
-            color: red;
-        }
-
-        #rot_button.btn-primary {
-            background-color: #ac2925;
-            color: white;
-        }
-
-        #ref_button.btn-outline-secondary {
-            color: green;
-        }
-
-        #ref_button.btn-primary {
-            background-color: #398439;
-            color: white;
-        }
-
-        #instruction_button {
-            font-weight: bold;
-        }
-
-        .rp_button {
-            font-weight: bold;
-        }
-
-        .rp_button.active {
-            border-color: black;
-        }
-    </style>
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="rp.css">
 </head>
 
 <body>
@@ -147,18 +24,18 @@
             <div class="page-header justify-content-between" id="header">
                 <!-- [Header] -->
 
-                <p class="fs-4 text-center fw-bold" id="title">[Title]</p>
+                <p class="fs-4 text-center fw-bold title">[Title]</p>
 
             </div>
 
             <div class="row">
-                <p class="fs-6 font-monospace text-center" id="tutorial-display"> [Totorial] </p>
+                <p class="fs-6 font-monospace text-center rp-tutorial"> [Totorial] </p>
             </div>
 
 
             <div class="row border " id="body-part">
                 <div id="alert-box">
-                    <crowd-alert type="info" id="warning-msg" dismissible>
+                    <crowd-alert type="info" class="warning-msg" dismissible>
                         [Warning Msg]
                     </crowd-alert>
                 </div>
@@ -172,12 +49,12 @@
                 <div class="col-4 border" id="left-panel">
                     <div class="row">
                         <!-- *[Instruction] -->
-                        <button type="button" class="btn" name="instruction_button" id="instruction_button"> Click
+                        <button type="button" class="btn expandable" name="instruction_button" id="instruction_button"> Click
                             Here for Instructions
                         </button>
                         <div id="instruction">
-                            <p class="fs-6" id="instruction-content">
-                            
+                            <p class="fs-6 rp-instruction">
+                                [Instructions]
                             </p>
 
                         </div>
@@ -213,24 +90,13 @@
                             </div>
                             <div class="col-5 d-grid">
                                 <div class="btn-group" role="group">
-                                    <button type="button" class="btn btn-success" name="add_rp_button"
-                                            id="add_rp_button">
-                                        Add <b>RP</b>
-                                        <span class="tooltip-text">
-                                            Add a new Recurring Pattern
-                                            <br>
-                                            (Hotkey: <strong>A</strong>)
-                                        </span>
+                                    <button type="button" class="btn btn-success add_rp_button" id="add_rp_button">
+                                        [Add]
                                     </button>
 
-                                    <button type="button" class="btn btn-warning" name="remove_rp_button"
+                                    <button type="button" class="btn btn-warning remove_rp_button"
                                             id="remove_rp_button">
-                                        Remove <b>RP</b>
-                                        <span class="tooltip-text">
-                                            Remove the selected Recurring Pattern
-                                            <br>
-                                            (Hotkey: <strong>R</strong>)
-                                        </span>
+                                        [Remove]
                                     </button>
 
 
@@ -256,23 +122,13 @@
                         <div class="row justify-content-center">
                             <div class="row mb-2">
                                 <span id="delete_flip" class="btn-group btn-group-toggle" data-toggle="buttons">
-                                    <label class="btn btn-primary" type="radio" name="options" id="annotate_button"
+                                    <label class="btn btn-primary annotate_button" type="radio" id="annotate_button"
                                            autocomplete="off">
-                                        Label Instance
-                                        <span class="tooltip-text-2">
-                                            Label a New RP Instance
-                                            <br>
-                                            (Hotkey: <strong>D</strong>)
-                                        </span>
+                                        [Label]
                                     </label>
-                                    <label class="btn btn-outline-secondary" type="radio" name="options"
+                                    <label class="btn btn-outline-secondary delete_button" type="radio"
                                            id="delete_button" autocomplete="off" checked>
-                                        Delete Instance
-                                        <span class="tooltip-text-2">
-                                            Delete an Existing RP Instance
-                                            <br>
-                                            (Hotkey: <strong>D</strong>)
-                                        </span>
+                                        [Delete]
                                     </label>
                                 </span>
                             </div>
@@ -280,34 +136,19 @@
 
                             <div class="row mb-2">
                                 <div class="col-4 d-grid">
-                                    <button type="button" class="btn btn-secondary btn-sm" name="undo_button"
-                                            id="undo_button">
-                                        Undo Last
-                                        <span class="tooltip-text">
-                                            Undo last Annotation/Deletion
-                                            <br>
-                                            (Hotkey: <strong>CTRL+Z</strong>)</span>
+                                    <button type="button" class="btn btn-secondary btn-sm undo_button" id="undo_button">
+                                        [Undo]
                                     </button>
                                 </div>
                                 <div class="col-4 d-grid">
-                                    <button type="button" class="btn btn-warning btn-sm" name="reposition_button"
+                                    <button type="button" class="btn btn-warning btn-sm reposition_button"
                                             id="reposition_button">
-                                        Reset View
-                                        <span class="tooltip-text">
-                                            Reset View Scale After Zooming-In
-                                            <br>
-                                            (Hotkey: <strong>CTRL+X</strong>)</span>
+                                        [Reset]
                                     </button>
                                 </div>
                                 <div class="col-4 d-grid">
-                                    <button type="button" class="btn btn-danger btn-sm" name="reset_button"
-                                            id="reset_button">
-                                        Clear All
-                                        <span class="tooltip-text">
-                                            Clear All Annotations
-                                            <!-- <br>
-                                    <span style="color: red;">Symmetry Labels disappeared cannot be
-                                        recovered!</span> -->
+                                    <button type="button" class="btn btn-danger btn-sm reset_button" id="reset_button">
+                                        [Clear All]
                                         </span>
                                     </button>
                                 </div>
@@ -315,12 +156,8 @@
 
                             <div class="row mt-3">
                                 <div class="col-12 d-grid">
-                                    <button type="button" class="btn btn-success" name="submit" id="submit"> Submit
-                                        <span class="tooltip-text">
-                                            Click here to submit your labeling
-                                            <br>
-                                            (Hotkey:<strong>ENTER</strong>)
-                                        </span>
+                                    <button type="button" class="btn btn-success submit" id="submit">
+                                        [Submit]
                                     </button>
                                 </div>
                             </div>
@@ -356,12 +193,12 @@
             <div class="row border">
                 <!-- * [IRB Study Information Here] -->
                 <div>
-                    <p class="fs-6 font-monospace" id="rp-irb">
+                    <p class="fs-6 font-monospace rp-irb">
 
                     </p>
                 </div>
                 <div>
-                    <p class="fs-6 font-monospace" id="worker-info">
+                    <p class="fs-6 font-monospace worker-info">
 
                     </p>
                 </div>
@@ -385,26 +222,22 @@
 
     <script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
 
+    <!-- <script src="https://sym-rp-data-collection.s3.amazonaws.com/Sym-Interface/turker.js"></script> -->
+    <script src="turker.js"></script>
+    <script src="reload.js"></script>
+
     <script>
-        // Load XML
-        let rp_info_url = "rp-info.xml";
-
         $(document).ready(function () {
-            $.ajax({
-                type: "GET",
-                url: rp_info_url,
-                dataType: "xml",
-                success: function (xml) {
-                    // Text
-                    $("p#title").html($(xml).find('title').text());
-                    $("p#tutorial-display").html($(xml).find('rp-tutorial').text());
-                    $("p#instruction-content").html($(xml).find('rp-instruction').text());
-                    $("p#rp-irb").html($(xml).find('rp-irb').text());
-                    $("p#worker-info").html($(xml).find('worker-info').text());
+            // Load XML
+            let xml_url = "rp.xml";
+            $.get(xml_url, function (xml) {
+                console.log("Load XML was performed.");
 
-                    // Warning Message
-                    $("#warning-msg").html($(xml).find('warning-msg').text());
-                }
+                reloadText(xml);
+                reloadAlert(xml);
+                reloadButtons(xml);
+
+                setupAll(xml);
             });
 
         });
@@ -412,8 +245,7 @@
 
     </script>
 
-    <!-- <script src="https://sym-rp-data-collection.s3.amazonaws.com/Sym-Interface/turker.js"></script> -->
-    <script src="turker.js"></script>
+
 </body>
 
 </html>

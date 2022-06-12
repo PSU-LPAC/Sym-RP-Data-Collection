@@ -1,0 +1,81 @@
+.image{
+  position:relative;
+  overflow:hidden;
+  padding-bottom:100%;
+}
+
+.image img{
+  position:absolute;
+  width: 100%;
+  height: 100%;
+}
+
+#left-panel {
+  overflow: auto;
+}
+
+#parent {
+  /* width: 1000px; */
+  width: auto;
+  height: auto;
+  overflow: hidden;
+  position: relative;
+  /* background: #f5f5f5; */
+}
+
+#child {
+  margin: auto;
+}
+
+#myCanvas {
+  position: absolute;
+}
+
+#pic {
+  /* width: 100%; */
+  height: 50vh;
+}
+
+.btn:hover {
+  text-shadow: 0px 0px 1px black;
+}
+
+.btn:hover .tooltip-text {
+  visibility: visible;
+}
+
+.btn:hover .tooltip-text-2 {
+  visibility: visible;
+}
+
+.btn.expandable {
+  font-size: x-large;
+  font-weight: bold;
+}
+
+.btn.navigation {
+  font-size: x-large;
+  font-weight: bold;
+}
+
+
+
+.tooltip-text {
+  visibility: hidden;
+
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  position: fixed;
+
+  /* z-index: 7; */
+}
+
+
+.rp_button {
+  font-weight: bold;
+}
+
+.rp_button.active {
+  border-color: black;
+}

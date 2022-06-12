@@ -81,12 +81,6 @@ function reloadSymDef(xml) {
     let sym_def_url = `${sym_root_url}/Tutorial/definition.html`;
 
     $("div#sym-definition").load(`${sym_def_url} div#sym-definition`);
-
-    // $.get(`${sym_def_url}`, function(data){
-    //     console.log($(data).find('div#sym-definition').html());
-    //     console.log($("div#sym-definition"));
-    //     $("div#sym-definition").html($(data).find('div#sym-definition').html());
-    // });
 }
 
 
