@@ -142,9 +142,9 @@
 
         <tutorial-url>https://psu-lpac.github.io/Sym-RP-Data-Collection/Symmetry/Tutorial/tutorial.html</tutorial-url>
 
-        <!-- <sym-root-url>https://psu-lpac.github.io/Sym-RP-Data-Collection/Symmetry</sym-root-url> -->
+        <sym-root-url>https://psu-lpac.github.io/Sym-RP-Data-Collection/Symmetry</sym-root-url>
 
-        <sym-root-url>..</sym-root-url>
+        <!-- <sym-root-url>..</sym-root-url> -->
 
         <!-- <turker-script-url>https://sym-rp-data-collection.s3.amazonaws.com/Sym-Interface/turker.js</turker-script-url> -->
 
