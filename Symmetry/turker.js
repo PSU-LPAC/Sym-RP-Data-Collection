@@ -82,6 +82,12 @@ function resizeCanvas() {
     canvas.style.cursor = "crosshair";
 }
 
+function disableCanvas() {
+    canvas = document.getElementById("myCanvas");
+    canvas.width = 0;
+    canvas.height = 0;
+}
+
 function setupAll() {
     parent = document.getElementById("parent");
     child = document.getElementById("child");
@@ -258,6 +264,7 @@ function getAnno() {
 
     return single_anno;
 }
+
 
 
 function dismissAlerts() {

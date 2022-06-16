@@ -2,7 +2,7 @@
 <info>
     <text>
         <title>
-            Goal of the study: to find out how humans perceive symmetries in real world scenes
+            Goal of the study: to find out how humans perceive Symmetries in real world scenes
         </title>
 
         <sym-tutorial>
@@ -92,24 +92,30 @@
             <![CDATA[ 
             For this task, you will need to:
             <ul>
-                <li>
-                    Read through a Symmetry Labeling Tutorial,
+                <li> 
+                    Familiarize yourself with Symmetry Labeling: 
+                    <ul>
+                        <li>
+                            Read through the Understanding Symmetry Tutorial.
+                        </li>
+                        <li>
+                            Pass a quick test (label 4 sample images) on Symmetry Labeling.
+                        </li>
+                        <li>
+                            Complete a short background survey with your <b>WorkerID</b>.
+                        </li>
+                    </ul>
                 </li>
+
                 <li>
-                    Then pass a quick test (label 4 sample images) on Symmetry Labeling,
-                </li>
-                <li>
-                    Complete a short background survey, and
-                </li>
-                <li>
-                    Labeling <span class="num-imgs" style="font-weight: bold;"></span> images.
+                    Label <span class="num-imgs" style="font-weight: bold;"></span> images.
                 </li>
             </ul>
-            You may choose to skip at most <span class="num-imgs" style="font-weight: bold;"></span> images, but skipped images are not counted towards the labeled images. 
+            You may choose to skip <b>at most</b> <span class="num-imgs" style="font-weight: bold;"></span> images, but skipped images are not counted towards the labeled images. 
             <br>
             You will receive a <span style="color:blue; font-weight: bold;">basic reward</span> of $<span class="basic-reward" style="font-weight: bold;"></span> for the completion of the task, and at most a <span style="color:red;font-weight: bold;">bonus reward</span> of $<span class="bonus-reward" style="font-weight: bold;"></span> based on the number of labeled images. 
             <br>
-            You may only do this symmetry labeling HIT once.
+            You may do this symmetry labeling HIT <b>only</b> once.
             ]]>
         </task-description>
     

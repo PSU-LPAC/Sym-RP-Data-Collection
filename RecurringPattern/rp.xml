@@ -57,7 +57,7 @@
                             <strong>E</strong> to toggle between two labeling modes.
                             <ul>
                                 <li>
-                                    In <strong>Bbox</strong> mode, draw the bounding box of the <strong>RP instance</strong> by <b>holding down</b> left click.
+                                    In <strong>Box</strong> mode, draw the bounding box of the <strong>RP instance</strong> by <b>holding down</b> left click.
                                 </li>
                                 <li>
                                     In <strong>Polygon</strong> mode, draw the contour of the <strong>RP instance</strong> by left clicks.
@@ -109,6 +109,32 @@
             (ORP) at (814) 865-1775.
             ]]>
         </worker-info>
+
+        <rp-definition>
+            <![CDATA[ 
+            A <b>Recurring Pattern (RP)</b> is an ensemble of similar yet not necessarily identical "instances" in an image.
+            <br>
+            The term of "<b>instances</b>" refers to a visual area which distinctive features that could be undoubtedly grouped or segmented together. 
+            Each <b>RP</b> consists of two or more similar instances.    
+            ]]>
+        </rp-definition>
+
+        <rp-example-illustration>
+            <![CDATA[ 
+            <ul>
+                <li>
+                    The four similar <span style="color: red;"><b>sun-shape instances</b></span> could be grouped as a <span style="color: red;"><b>Recurring Pattern</b></span>, even with scaling, rotation, shearing and color variations.
+                </li>
+                <li>
+                    Correspondingly, the two similar <span style="color: green;"><b>thunder-shape instances</b></span> could be grouped as another <span style="color: green;"><b>Recurring Pattern</b></span>.
+                </li>
+                <li>
+                    Finally, the ONE <span style="color: orange;"><b>moon-shape instances</b></span> CANNOT be grouped as a <b>Recurring Pattern</b>, because each <b>RP</b> shall consist of two or more similar instances.
+                </li>
+            </ul>
+            ]]>
+
+        </rp-example-illustration>
     </text>
     
     <alerts>
@@ -261,5 +287,41 @@
         </skip>
     </buttons>
 
-    
+    <url>
+        <rp-root-url>..</rp-root-url>
+    </url>
+
+    <figures>
+        <rp-examples>
+            <item>
+                <url>/figures/examples/new027.jpg</url>
+                <caption>An RP consist of 4 eagle instances.</caption>
+            </item>
+
+            <item>
+                <url>/figures/examples/new705.jpg</url>
+                <caption>An RP consist of 9 Pipa (a musical instrument) instances.</caption>
+            </item>
+
+            <item>
+                <url>/figures/examples/new653.jpg</url>
+                <caption>An RP consist of multiple parachute instances.</caption>
+            </item>
+
+            <item>
+                <url>/figures/examples/new632.jpg</url>
+                <caption>An RP consist of multiple Micky instances.</caption>
+            </item>
+
+            <item>
+                <url>/figures/examples/new789.jpg</url>
+                <caption>An RP consist of 6 painting instances <b>from a projective view</b></caption>
+            </item>
+
+            <item>
+                <url>/figures/examples/new036.jpg</url>
+                <caption><b>Two</b> RPs consist of two different types of products.</caption>
+            </item>
+        </rp-examples>
+    </figures>
 </info>

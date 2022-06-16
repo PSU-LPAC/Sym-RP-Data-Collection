@@ -147,13 +147,16 @@ function loadNext(xml, img_urls, callback = null) {
     // * load the next image
     img_idx += 1;
     if (img_idx >= img_urls.length) { return -1; }
-
+    switchAlert();
     reset();
+    disableCanvas();
+
     // * set the img
     $("#pic").attr("src", img_urls[img_idx]);
     $('#pic').load(function () {
         console.log("Load Next!");
         resizeCanvas();
+        dismissAlerts();
     });
 
     return 0;
@@ -164,19 +167,6 @@ function loadNext(xml, img_urls, callback = null) {
 
 function checkSkip() {
     // * check the annotation, and return true to skip the current image
-
-    // single_task_anno = getAnno();
-
-    // if (single_task_anno.length != 0) {
-    //     if (confirm(skip_confirm_str)) {
-    //         skip_num += 1;
-    //         return true;
-    //     }
-    // }
-    // else { 
-    //     skip_num += 1;
-    //     return true; 
-    // }
 
     if (confirm(skip_confirm_str)) {
         skip_num += 1;
@@ -206,3 +196,10 @@ function checkSubmit() {
     return false;
 }
 
+function switchAlert() {
+    $('#alert-box').append(`
+    <crowd-alert type="info" class="alert switch-alert" dismissible>
+        Loading the next image ... 
+    </crowd-alert>
+    `);
+}

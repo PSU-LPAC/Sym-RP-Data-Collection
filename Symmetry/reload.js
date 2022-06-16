@@ -1,10 +1,10 @@
-// Reload the html content from XML
+// * Reload the html content from XML
 
 function reloadMain(xml) {
     reloadText(xml);
     reloadAlert(xml);
     reloadSymDef(xml);
-    reloadFigs(xml);
+    reloadSymFigs(xml);
     reloadButtons(xml);
 }
 
@@ -46,7 +46,7 @@ function reloadButtons(xml) {
     })
 }
 
-function reloadFigs(xml) {
+function reloadSymFigs(xml) {
     let sym_root_url = $(xml).find('sym-root-url').text();
     $(xml).find('real-img-urls item').each(function () {
         let img_url = `${sym_root_url}/figures/tutorial/${$(this).text()}`
@@ -97,4 +97,34 @@ function reloadPanel(xml){
     // });
 }
 
+function reloadRPFigs(xml) {
+    // * reload RP figures for tutorial
+    let rp_root_url = $(xml).find('rp-root-url').text(); 
+    let figs = $(xml).find('figures').children();
 
+    figs.each((_, fig_xmls)=>{
+        let fig_container = $(fig_xmls).prop('nodeName');
+        console.log(fig_container);
+        console.log(fig_xmls);
+
+        $(fig_xmls).find('item').each((_, fig_xml)=> {
+            var url = $(fig_xml).find('url').text();
+            url = rp_root_url + url
+            var caption = $(fig_xml).find('caption').text();
+            // console.log(url, caption);
+            $(`.${fig_container}`).append(` 
+                <div class="col-6 d-flex justify-content-center">
+                    <figure class="figure">
+                        <img src="${url}" class="figure-img img-fluid rounded">
+                        <figcaption class="figure-caption text-center">
+                            ${caption}
+                        </figcaption>
+                    </figure>
+                </div>
+            `);
+        })
+
+        
+    })
+
+}
