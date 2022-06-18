@@ -40,10 +40,17 @@ function reloadReward(xml, num_imgs, basic_reward, per_reward, valid_num=0) {
 function reloadButtons(xml) {
     let btn_xmls = $(xml).find('buttons').children();  
     // btn_xml = $.parseXML(btn_xml);
+    
     btn_xmls.each((idx, btn_xml)=>{
         let btn_name = $(btn_xml).prop('nodeName');
-        $(`.${btn_name}`).html($(btn_xml).text());
+        let caption = $(btn_xml).find('caption').text();
+        let tooltip = $(btn_xml).find('tooltip').text();
+
+        $(`.${btn_name}`).html(caption);
+        $(`.${btn_name}`).prop('title', tooltip);
     })
+
+    initialTooltips();
 }
 
 function reloadSymFigs(xml) {
@@ -127,4 +134,12 @@ function reloadRPFigs(xml) {
         
     })
 
+}
+
+
+function initialTooltips() {
+    var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+    var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+        return new bootstrap.Tooltip(tooltipTriggerEl)
+    });
 }

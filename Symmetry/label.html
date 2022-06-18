@@ -11,7 +11,7 @@
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css'>
     <!-- Styles -->
     <link rel="stylesheet" type="text/css" href="sym.css">
 
@@ -92,12 +92,13 @@
                             </div>
                             <div class="col-6">
                                 <div class="btn-group" role="group">
-                                    <label class="btn btn-outline-secondary rot_button" type="radio" id="rot_button"
-                                           autocomplete="off" checked>
+                                    <label class="btn btn-outline-secondary rot_button" data-bs-toggle="tooltip"
+                                           data-bs-placement="top" type="radio" id="rot_button" autocomplete="off"
+                                           checked>
                                         [Rotate]
                                     </label>
-                                    <label class="btn btn-outline-secondary ref_button" type="radio" id="ref_button"
-                                           autocomplete="off">
+                                    <label class="btn btn-outline-secondary ref_button" data-bs-toggle="tooltip"
+                                           data-bs-placement="top" type="radio" id="ref_button" autocomplete="off">
                                         [Reflect]
                                     </label>
                                 </div>
@@ -113,12 +114,13 @@
                         <div class="row justify-content-center">
                             <div class="row mb-2">
                                 <span id="delete_flip" class="btn-group btn-group-toggle" data-toggle="buttons">
-                                    <label class="btn btn-primary annotate_button" type="radio" id="annotate_button"
-                                           autocomplete="off">
+                                    <label class="btn btn-primary annotate_button" data-bs-toggle="tooltip"
+                                           data-bs-placement="top" type="radio" id="annotate_button" autocomplete="off">
                                         [Label]
                                     </label>
-                                    <label class="btn btn-outline-secondary delete_button" type="radio"
-                                           id="delete_button" autocomplete="off" checked>
+                                    <label class="btn btn-outline-secondary delete_button" data-bs-toggle="tooltip"
+                                           data-bs-placement="top" type="radio" id="delete_button" autocomplete="off"
+                                           checked>
                                         [Delete]
                                     </label>
                                 </span>
@@ -127,18 +129,20 @@
 
                             <div class="row mb-2">
                                 <div class="col-4 d-grid">
-                                    <button type="button" class="btn btn-secondary btn-sm undo_button" id="undo_button">
+                                    <button type="button" class="btn btn-secondary btn-sm undo_button"
+                                            data-bs-toggle="tooltip" data-bs-placement="top" id="undo_button">
                                         [Undo]
                                     </button>
                                 </div>
                                 <div class="col-4 d-grid">
                                     <button type="button" class="btn btn-warning btn-sm reposition_button"
-                                            id="reposition_button">
+                                            data-bs-toggle="tooltip" data-bs-placement="top" id="reposition_button">
                                         [Reset]
                                     </button>
                                 </div>
                                 <div class="col-4 d-grid">
-                                    <button type="button" class="btn btn-danger btn-sm reset_button" id="reset_button">
+                                    <button type="button" class="btn btn-danger btn-sm reset_button"
+                                            data-bs-toggle="tooltip" data-bs-placement="top" id="reset_button">
                                         [Clear All]
                                         </span>
                                     </button>
@@ -147,7 +151,8 @@
 
                             <div class="row mt-3">
                                 <div class="col-12 d-grid">
-                                    <button type="button" class="btn btn-success submit" id="submit">
+                                    <button type="button" class="btn btn-success submit" data-bs-toggle="tooltip"
+                                            data-bs-placement="top" id="submit">
                                         [Submit]
                                     </button>
                                 </div>
@@ -220,6 +225,7 @@
                 console.log("Load XML was performed.");
 
                 reloadMain(xml);
+                setupAll();
             });
 
         });
@@ -228,7 +234,7 @@
     </script>
 
     <!-- <script src="https://sym-rp-data-collection.s3.amazonaws.com/Sym-Interface/turker.js"></script> -->
-    
+
 </body>
 
 </html>

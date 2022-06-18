@@ -88,6 +88,8 @@ function disableCanvas() {
     canvas.height = 0;
 }
 
+
+
 function setupAll() {
     parent = document.getElementById("parent");
     child = document.getElementById("child");
