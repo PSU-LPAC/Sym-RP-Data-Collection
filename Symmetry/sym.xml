@@ -214,6 +214,7 @@
             Note: Real world symmetries may <strong style="color: red;">NOT</strong> appear perfectly.
             ]]>
         </notify-real-sym>
+
     </alerts>
 
 
@@ -312,16 +313,61 @@
         <test-1>
             <test-title>
                 <![CDATA[ 
-                Test-1: Label a <span style="color:red">Rotation Symmetry</span> you perceive on this image.
+                Test-1: Label one <span style="color:red">Rotation Symmetry</span> you perceive on this image.
                 ]]>
-    
+
             </test-title>
-    
-            <test-img-url>figures/tutorial/rot_train.jpg</test-img-url>
-    
+
+            <test-img-url>figures/test images/real_rot.jpg</test-img-url>
+
             <gt>[0.5754455383848455, 0.4178809032983508]</gt>
         </test-1>
-    
+
+        <test-2>
+            <test-title>
+                <![CDATA[ 
+                Test-2: Label one <span style="color:green">Reflection Symmetry</span> you perceive on this image.
+                ]]>
+            </test-title>
+
+            <test-img-url>figures/test images/real_ref.jpg</test-img-url>
+
+            <gt>[
+                0.43019450589970504,
+                0.11169109513274336,
+                0.3918464233038348,
+                0.5364698561946902
+            ]</gt>
+        </test-2>
+
+        <test-3>
+            <test-title>
+                <![CDATA[ 
+                Test-3: Find at least one <span style="color:red">Rotation Symmetry</span> and one <span style="color:green">Reflection Symmetry</span> you perceive on this image.
+                ]]>
+            </test-title>
+
+            <test-img-url>figures/test images/real_both.jpg</test-img-url>
+
+            <gt>[]</gt>
+        </test-3>
+
+        <test-4>
+            <test-title>
+                <![CDATA[ 
+                Test-4: Most people find no prominent symmetries on this image.
+                <br>
+                However, if you perceive prominent symmetries, label them
+                <br>
+                Else, just press "Submit" Button.  
+                ]]>
+            </test-title>
+
+            <test-img-url>figures/test images/real_no_sym.jpg</test-img-url>
+
+            <gt>[]</gt>
+        </test-4>
+
     </test-info>
 
 </info>

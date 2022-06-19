@@ -1,8 +1,10 @@
 let setup_flag = false;
 let gt = [];
+let test_id;
 
-function loadTestPage(xml, test_id = 1) {
+function loadTestPage(xml, idx = 1) {
     // * load the content of test page
+    test_id = idx;
     let test_xml = $(xml).find(`test-${test_id}`);
     $('.test-title').html(test_xml.find('test-title').text());
 
@@ -16,20 +18,36 @@ function loadTestPage(xml, test_id = 1) {
             setupAll();
             // bindBatchBtn(xml, img_urls, callback);
             setup_flag = true;
+
+            $("#test-submit").click(() => checkTest(xml));
         }
     })
 
-    // console.log(test_xml.find('test-title').text());
+    gt = JSON.parse(test_xml.find('gt').text());
+    // console.log(gt);
 }
 
-function checkTest1() {
+function checkTest(xml) {
+    if (test_id == 1)
+        return checkTest1(xml);
+    else if (test_id == 2)
+        return checkTest2(xml);
+    else if (test_id == 3)
+        return checkTest3(xml);
+    else if (test_id == 4)
+        return checkTest4(xml);
+}
+
+function checkTest1(xml) {
     // * check the result of Test 1
+
+
     var success_flag = true;
 
 
     if (annotations.length != 1 || annotations[0]["class"] != "Rotation") {
         success_flag = false;
-        val_failure("You should label ONE rotation symmetry.");
+        val_alert("<b>Incorrect!</b> You should label <b>ONE</b> rotation symmetry.", 'alert-danger', reset());
         return;
     }
 
@@ -37,18 +55,87 @@ function checkTest1() {
 
     user_label = [user_label[0] / $(img).width(), user_label[1] / $(img).height()]
 
-    if (!validate_rot(user_label, rot_gt, th_dist = 0.05)) {
+    if (!validate_rot(user_label, gt, th_dist = 0.05)) {
         success_flag = false;
-        val_failure("You should label the <b>CENTER</b> of a rotation symmetry.");
+        val_alert("<b>Incorrect!</b> You should label the <b>CENTER</b> of a rotation symmetry.", 'alert-danger', reset());
         return;
     }
 
     if (success_flag) {
-        val_success("After closing this message you will be redirected to the next training page.", "test-2.html");
+        val_alert("<b>Correct!</b> Close this message to continue.", 'alert-success', function () {
+            loadTestPage(xml, 2);
+            reset();
+            dismissAlerts();
+        });
         return;
     }
 }
 
+function checkTest2(xml) {
+    // * check the result of Test 2
+    var success_flag = true;
+
+
+    if (annotations.length != 1 || annotations[0]["class"] != "Reflection") {
+        success_flag = false;
+        val_alert("<b>Incorrect!</b> You should label <b>ONE</b> reflection symmetry.", 'alert-danger', reset());
+        return;
+    }
+
+    var user_label = annotations[0]["data"];
+
+    user_label = [user_label[0] / $(img).width(), user_label[1] / $(img).height(), user_label[2] / $(img).width(), user_label[3] / $(img).height()]
+
+    if (!validate_rot(user_label, gt, th_dist = 0.5)) {
+        success_flag = false;
+        val_alert("<b>Incorrect!</b> You should label the <b>TWO END-POINTS</b> of a reflection symmetry axis.", 'alert-danger', reset());
+        return;
+    }
+
+    if (success_flag) {
+        val_alert("<b>Correct!</b> Close this message to continue.", 'alert-success', function () {
+            loadTestPage(xml, 3);
+            reset();
+            dismissAlerts();
+        });
+        return;
+    }
+}
+
+function checkTest3(xml) {
+    // * check the result of Test 3
+
+    var rot_flag = false;
+    var ref_flag = false;
+
+    console.log(annotations);
+
+    annotations.forEach(element => {
+        if (element["class"] == "Rotation") { rot_flag = true; }
+        else if (element["class"] == "Reflection") { ref_flag = true; }
+    });
+
+
+    if (rot_flag && ref_flag) {
+
+        val_alert("<b>Correct!</b> Close this message to continue.", 'alert-success', function () {
+            loadTestPage(xml, 4);
+            reset();
+            dismissAlerts();
+        });
+
+        return;
+    }
+    else {
+        val_alert("<b>Incorrect!</b> You should label at least <b>ONE</b> rotation and <b>ONE</b> reflection symmetry", 'alert-danger', reset());
+        return;
+    }
+}
+
+function checkTest4(xml) {
+    // * check the result of Test 4
+    location.href = 'congrats.html';
+}
 
 function pt_dist(A, B) {
     // * compute the Euclidean distance of two points
@@ -143,7 +230,7 @@ function ref_sym_dist_d(A, B) {
 }
 
 function validate_rot(user_label, gt, th_dist = 0.05) {
-    console.log("label:", user_label, "gt:", gt);
+    // console.log("label:", user_label, "gt:", gt);
     // * validate a labeled rotation with ground truth
     if (rot_sym_dist(user_label, gt) > th_dist) { return false; }
     else { return true; }
@@ -191,4 +278,24 @@ function val_failure(message) {
     // $(".alert#incorrect").fadeTo(5000, 1.0).slideUp("fast", function(){
     //     reset();
     // });
+}
+
+function val_alert(message, alert_class = null, close_callback = null) {
+    dismissAlerts();
+    let alert = $(`
+    <div class="alert alert-dismissible fade show val_alert"  role="alert">
+    </div>
+    `);
+    if (alert_class != null)
+        alert.addClass(alert_class);
+
+    alert.html(`
+    ${message}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    `)
+
+    if (close_callback != null)
+        alert.on('closed.bs.alert', close_callback);
+
+    $("#test-alert-box").append(alert);
 }
