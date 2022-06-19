@@ -55,7 +55,7 @@ function setupAll(my_xml) {
     ctx = canvas.getContext("2d");
     img = document.getElementById("pic");
 
-    modeButton = $("#mode_button")
+    modeButton = $(".mode_button")
 
     canvas.width = img.width;
     canvas.height = img.height;
@@ -90,7 +90,7 @@ function setupAll(my_xml) {
 
     mode = modes[0];
 
-    modeButtonCaption();
+    setModeButton();
     // modeButton.text(capitalize(mode));
 
     // * generate RP list options
@@ -100,7 +100,7 @@ function setupAll(my_xml) {
     $("#reset_button").click(reset);
     $("#reposition_button").click(reposition);
     $("#undo_button").click(undo);
-    $("#mode_button").click(toggleMode);
+    $(".mode_button").click(toggleMode);
     $("#delete_button").click(() => setDeleteMode(true));
     $("#annotate_button").click(() => setDeleteMode(false));
 
@@ -118,6 +118,8 @@ function setupAll(my_xml) {
             }
         }
     });
+
+    updateGraphics();
 
 
     // document.getElementById("submitButton").disabled = false;
@@ -237,17 +239,21 @@ function checkAnno() {
     return true;
 }
 
-function modeButtonCaption() {
+function setModeButton() {
     // * set the caption of mode button
     if (mode == 'bbox'){
-        modeButton.addClass('box_button');
-        modeButton.removeClass('polygon_button');
-        reloadButton('box_button', xml);
+        $('.polygon_button').css('display', 'none');
+        $('.box_button').css('display', 'block');
+        // modeButton.addClass('box_button');
+        // modeButton.removeClass('polygon_button');
+        // reloadButton('box_button', xml);
     }
     else if (mode == 'polygon'){
-        modeButton.addClass('polygon_button');
-        modeButton.removeClass('box_button');
-        reloadButton('polygon_button', xml);
+        $('.box_button').css('display', 'none');
+        $('.polygon_button').css('display', 'block');
+        // modeButton.addClass('polygon_button');
+        // modeButton.removeClass('box_button');
+        // reloadButton('polygon_button', xml);
     }
     
 }
@@ -347,9 +353,9 @@ function setRPInstNum() {
 
 function setRPInfo() {
     // * set the rp information, how many RPs have been labeled
-    $("#labeled-rp-info").text(
+    $("#labeled-rp-info").html(
         `
-        Labeled RPs: ${Object.keys(instsNum).length}
+        Labeled Recurring Patterns (<b>RPs</b>): ${Object.keys(instsNum).length}
         `
     );
 }
@@ -410,8 +416,7 @@ function toggleMode() {
     }
     setDeleteMode(false);
     mode = modes[modeNum];
-    // modeButton.text(capitalize(mode));
-    modeButtonCaption();
+    setModeButton();
     clearCurrentAnn();
 }
 
@@ -797,8 +802,6 @@ window.addEventListener(
 );
 
 let handleScroll = function (evt) {
-    
-
     getCorrectCoords(evt);
     delta = evt.wheelDelta ? evt.wheelDelta / 40 : evt.detail ? -evt.detail : 0;
 
@@ -820,13 +823,6 @@ let handleScroll = function (evt) {
     translateTransform[0] = translateTransform_raw[0] / newScale;
     translateTransform[1] = translateTransform_raw[1] / newScale;
     updateTransform();
-
-    // * disable page scroll
-    TopScroll = window.pageYOffset || document.documentElement.scrollTop;
-    LeftScroll = window.pageXOffset || document.documentElement.scrollLeft;
-    window.onscroll = function () {
-        window.scrollTo(LeftScroll, TopScroll);
-    };
 };
 
 function updateTransform() {

@@ -1,3 +1,7 @@
+.non-scrollable{
+  overflow: hidden;
+}
+
 .image{
   position:relative;
   overflow:hidden;
@@ -25,6 +29,11 @@
 
 #child {
   margin: auto;
+  overflow-y:scroll;
+}
+#child::-webkit-scrollbar {
+  width: 0;  /* Remove scrollbar space */
+  background: transparent;  /* Optional: just make scrollbar invisible */
 }
 
 #myCanvas {
@@ -40,13 +49,6 @@
   text-shadow: 0px 0px 1px black;
 }
 
-.btn:hover .tooltip-text {
-  visibility: visible;
-}
-
-.btn:hover .tooltip-text-2 {
-  visibility: visible;
-}
 
 .btn.expandable {
   font-size: x-large;
@@ -60,16 +62,12 @@
 
 
 
-.tooltip-text {
-  visibility: hidden;
-
-  background-color: black;
-  color: #fff;
-  text-align: center;
-  position: fixed;
-
-  /* z-index: 7; */
+.tooltip-inner {
+  background-color: #2f4fff;
+  box-shadow: 0px 0px 4px black;
+  opacity: 1;
 }
+
 
 
 .rp_button {

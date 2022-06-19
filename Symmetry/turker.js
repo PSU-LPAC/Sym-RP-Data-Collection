@@ -56,13 +56,6 @@ let handleScroll = function (evt) {
     translateTransform[0] = translateTransform_raw[0] / newScale;
     translateTransform[1] = translateTransform_raw[1] / newScale;
     updateTransform();
-
-    // * disable page scroll
-    TopScroll = window.pageYOffset || document.documentElement.scrollTop;
-    LeftScroll = window.pageXOffset || document.documentElement.scrollLeft;
-    window.onscroll = function () {
-        window.scrollTo(LeftScroll, TopScroll);
-    };
 };
 
 

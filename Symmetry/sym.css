@@ -21,11 +21,16 @@
     overflow: hidden;
     position: relative;
     /* background: #f5f5f5; */
-}
-
-#child {
+  }
+  
+  #child {
     margin: auto;
-}
+    overflow-y:scroll;
+  }
+  #child::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+  }
 
 #myCanvas {
     position: absolute;

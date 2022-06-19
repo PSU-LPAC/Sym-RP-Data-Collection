@@ -40,49 +40,35 @@ function reloadReward(xml, num_imgs, basic_reward, per_reward, valid_num=0) {
 function reloadButtons(xml) {
     let btn_xmls = $(xml).find('buttons').children();  
     // btn_xml = $.parseXML(btn_xml);
+    
     btn_xmls.each((idx, btn_xml)=>{
         let btn_name = $(btn_xml).prop('nodeName');
-        $(`.${btn_name}`).html($(btn_xml).text());
+        let caption = $(btn_xml).find('caption').text();
+        let tooltip = $(btn_xml).find('tooltip').text();
+
+        // set button common properties
+        $(`.${btn_name}`).attr('data-bs-toggle', 'tooltip');
+        $(`.${btn_name}`).attr('data-bs-placement', 'top');
+        $(`.${btn_name}`).attr('data-bs-trigger', 'hover');
+        $(`.${btn_name}`).attr('data-bs-html', true);
+
+        $(`.${btn_name}`).html(caption);
+        $(`.${btn_name}`).attr('title', tooltip);
     })
+
+    initialTooltips();
 }
 
-function reloadSymFigs(xml) {
-    let sym_root_url = $(xml).find('sym-root-url').text();
-    $(xml).find('real-img-urls item').each(function () {
-        let img_url = `${sym_root_url}/figures/tutorial/${$(this).text()}`
-        $(`div#real-images`).append(
-            `
-            <div class="col-5 border">
-                <div class="image">
-                    <img src="${img_url}" class="img img-responsive full-width" />
-                </div>
-            </div>
-            `
-        );
-    });
+function reloadButton(btn_name, xml){
+    let btn_xml = $(xml).find(`buttons ${btn_name}`);
+    let caption = $(btn_xml).find('caption').text();
+    let tooltip = $(btn_xml).find('tooltip').text();
+    $(`.${btn_name}`).html(caption);
+    $(`.${btn_name}`).prop('title', tooltip);
 
-    $(xml).find('sample-results-urls item').each(function () {
-        let img_url = `${sym_root_url}/figures/tutorial/${$(this).text()}`
-        $(`div#sample-results`).append(
-            `
-            <div class="col-5 border">
-                <div class="image">
-                    <img src="${img_url}" class="img img-responsive full-width" />
-                </div>
-            </div>
-            `
-        );
-    });
+    console.log($(`.${btn_name}`));
+    $(`.${btn_name}`).tooltip();
 }
-
-function reloadSymDef(xml) {
-    // * reload sym-definition
-    let sym_root_url = $(xml).find('sym-root-url').text();
-    let sym_def_url = `${sym_root_url}/Tutorial/definition.html`;
-
-    $("div#sym-definition").load(`${sym_def_url} div#sym-definition`);
-}
-
 
 function reloadPanel(xml){
     let sym_root_url = $(xml).find('sym-root-url').text();
@@ -90,11 +76,6 @@ function reloadPanel(xml){
 
     $("div#left-panel").load(`${label_url} div#left-panel div`);
 
-    // $.get(`${label_url}`, function(data){
-    //     // console.log($(data).find('div#left-panel').html());
-    //     // console.log($("div#label-panel"));
-    //     $("div#left-panel").html($(data).find('div#left-panel').html());
-    // });
 }
 
 function reloadRPFigs(xml) {
@@ -128,3 +109,15 @@ function reloadRPFigs(xml) {
     })
 
 }
+
+function initialTooltips() {
+    console.log($('[data-bs-toggle="tooltip"]'));
+    $('[data-bs-toggle="tooltip"]').tooltip();
+}
+
+// function initialTooltips() {
+//     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+//     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+//         return new bootstrap.Tooltip(tooltipTriggerEl)
+//     });
+// }

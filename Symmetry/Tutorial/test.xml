@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<test-info>
+    <test-1>
+        <test-title>
+            <![CDATA[ 
+            Test-1: Label ONE <span style="color:red">Rotation Symmetry</span> you perceive on this image.
+            ]]>
+
+        </test-title>
+
+        <test-img-url>figures/tutorial/rot_train.jpg</test-img-url>
+
+        <gt>[0.5754455383848455, 0.4178809032983508]</gt>
+    </test-1>
+
+</test-info>

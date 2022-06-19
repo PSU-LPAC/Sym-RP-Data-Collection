@@ -225,7 +225,7 @@
                 ]]>
             </caption>
             <tooltip>
-                Click one point as the rotation center (Hotkey: R)
+                Click one point as the rotation center (Toggle Hotkey: R)
             </tooltip>
         </rot_button>
 
@@ -236,7 +236,7 @@
                 ]]>
             </caption>
             <tooltip>
-                Click two points as the reflection axis (Hotkey: R)
+                Click two points as the reflection axis (Toggle Hotkey: R)
             </tooltip>
         </ref_button>
 
@@ -245,7 +245,7 @@
                 Label a New Symmetry
             </caption>
             <tooltip>
-                Label a New Symmetry (Hotkey: D)
+                Label a New Symmetry (Toggle Hotkey: D)
             </tooltip>
         </annotate_button>
 
@@ -254,7 +254,7 @@
                 Delete
             </caption>
             <tooltip>
-                Delete an Existing Symmetry (Hotkey: D)
+                Delete an Existing Symmetry (Toggle Hotkey: D)
             </tooltip>
         </delete_button>
 
@@ -307,5 +307,21 @@
 
     </buttons>
 
+
+    <test-info>
+        <test-1>
+            <test-title>
+                <![CDATA[ 
+                Test-1: Label a <span style="color:red">Rotation Symmetry</span> you perceive on this image.
+                ]]>
+    
+            </test-title>
+    
+            <test-img-url>figures/tutorial/rot_train.jpg</test-img-url>
+    
+            <gt>[0.5754455383848455, 0.4178809032983508]</gt>
+        </test-1>
+    
+    </test-info>
 
 </info>

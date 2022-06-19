@@ -1,3 +1,54 @@
+let setup_flag = false;
+let gt = [];
+
+function loadTestPage(xml, test_id = 1) {
+    // * load the content of test page
+    let test_xml = $(xml).find(`test-${test_id}`);
+    $('.test-title').html(test_xml.find('test-title').text());
+
+    // $(selector).attr(attributeName, value);
+    let img_url = test_xml.find('test-img-url').text();
+    $('#pic').attr('src', `../${img_url}`);
+
+    $('#pic').load(function () {
+        console.log(`Image ${$("#pic").attr("src")} is loaded!`);
+        if (!setup_flag) {
+            setupAll();
+            // bindBatchBtn(xml, img_urls, callback);
+            setup_flag = true;
+        }
+    })
+
+    // console.log(test_xml.find('test-title').text());
+}
+
+function checkTest1() {
+    // * check the result of Test 1
+    var success_flag = true;
+
+
+    if (annotations.length != 1 || annotations[0]["class"] != "Rotation") {
+        success_flag = false;
+        val_failure("You should label ONE rotation symmetry.");
+        return;
+    }
+
+    var user_label = annotations[0]["data"];
+
+    user_label = [user_label[0] / $(img).width(), user_label[1] / $(img).height()]
+
+    if (!validate_rot(user_label, rot_gt, th_dist = 0.05)) {
+        success_flag = false;
+        val_failure("You should label the <b>CENTER</b> of a rotation symmetry.");
+        return;
+    }
+
+    if (success_flag) {
+        val_success("After closing this message you will be redirected to the next training page.", "test-2.html");
+        return;
+    }
+}
+
 
 function pt_dist(A, B) {
     // * compute the Euclidean distance of two points
@@ -120,7 +171,7 @@ function val_success(message, redirect_url) {
     $('.alert#correct').on('closed.bs.alert', function () {
         location.href = redirect_url;
     })
-    $(".alert#correct").slideUp(3000, function(){
+    $(".alert#correct").slideUp(3000, function () {
         $(this).alert('close');
     });
 }

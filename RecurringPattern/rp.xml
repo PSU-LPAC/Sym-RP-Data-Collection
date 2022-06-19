@@ -161,129 +161,151 @@
 
     <buttons>
         <add_rp_button>
-            <![CDATA[ 
-            Add <b>RP</b>
-            <span class="tooltip-text">
-                Add a new Recurring Pattern
+            <caption>
+                <![CDATA[ 
+                Add <b>RP</b>
+                ]]>
+            </caption>
+            <tooltip>
+                <![CDATA[ 
+                Add a new Recurring Pattern 
                 <br>
-                (Hotkey: <strong>A</strong>)
-            </span>
-            ]]>
+                (Hotkey: <b>A</b>)
+                ]]>
+            </tooltip>
         </add_rp_button>
 
         <remove_rp_button>
-            <![CDATA[ 
-            Remove <b>RP</b>
-            <span class="tooltip-text">
-                Remove the selected Recurring Pattern
+            <caption>
+                <![CDATA[ 
+                Remove <b>RP</b>
+                ]]>
+            </caption>
+            <tooltip>
+                <![CDATA[ 
+                Remove the selected Recurring Pattern 
                 <br>
-                (Hotkey: <strong>R</strong>)
-            </span>
-            ]]>
+                (Hotkey: <b>R</b>)   
+                ]]>          
+            </tooltip>
+
         </remove_rp_button>
 
         
 
         <box_button>
-            <![CDATA[
-            <i class="bi bi-square"></i> Box 
-            <span class="tooltip-text">
-                <strong>Box</strong> mode draws the bounding box
+            <caption>
+                <![CDATA[ 
+                <i class="bi bi-square"></i> Box
+                ]]>
+            </caption>
+            <tooltip>
+                <![CDATA[ 
+                Box mode draws the bounding box of the RP instance by holding down left click. 
                 <br>
-                of the <strong>RP instance</strong> by <b>holding down</b> left click.
-                <br>
-                (Toggle Hotkey: <strong>E</strong>)
-            </span>
-            ]]>
+                (Toggle Hotkey: <b>E</b>) 
+                ]]>     
+            </tooltip>
         </box_button>
     
         <polygon_button>
-            <![CDATA[ 
-            <i class="bi bi-heptagon"></i> Polygon
-            <span class="tooltip-text">
-                <strong>Polygon</strong> mode draws the contour
+            <caption>
+                <![CDATA[ 
+                <i class="bi bi-heptagon"></i> Polygon
+                ]]>
+            </caption>
+            <tooltip>
+                <![CDATA[ 
+                Polygon mode draws the contour of the RP instance by left clicks. 
                 <br>
-                of the <strong>RP instance</strong> by left clicks.
-                <br>
-                Press <strong>C</strong> to close polygon in polygon mode.
-                <br>
-                (Toggle Hotkey: <strong>E</strong>)
-            </span>
-            ]]>
-    
+                Press <b>C</b> to close polygon in polygon mode.    
+                (Toggle Hotkey: <b>E</b>) 
+                ]]>   
+            </tooltip>
         </polygon_button>
 
         <annotate_button>
-            <![CDATA[ 
-            Label Instance
-            <span class="tooltip-text">
-                Label a New RP Instance
+            <caption>
+                Label RP Instance
+            </caption>
+            <tooltip>
+                <![CDATA[ 
+                Label a New RP Instance 
                 <br>
-                (Hotkey: <strong>D</strong>)
-            </span>
-            ]]>
+                (Toggle Hotkey: <b>D</b>)  
+                ]]>   
+            </tooltip>
         </annotate_button>
 
         <delete_button>
-            <![CDATA[ 
-            Delete Instance
-            <span class="tooltip-text">
+            <caption>
+                Delete RP Instance
+            </caption>
+            <tooltip>
+                <![CDATA[ 
                 Delete an Existing RP Instance
                 <br>
-                (Hotkey: <strong>D</strong>)
-            </span>
-            ]]>
+                (Toggle Hotkey: <b>D</b>)  
+                ]]>   
+            </tooltip>
         </delete_button>
 
         <undo_button>
-            <![CDATA[ 
-            Undo Last
-            <span class="tooltip-text">
+            <caption>
+                Undo last Annotation/Deletion
+            </caption>
+            <tooltip>
+                <![CDATA[ 
                 Undo last Annotation/Deletion
                 <br>
-                (Hotkey: <strong>CTRL+Z</strong>)
-            </span>
-            ]]>
+                (Hotkey: <b>CTRL+Z</b>)  
+                ]]>   
+            </tooltip>
         </undo_button>
 
         <reposition_button>
-            <![CDATA[ 
-            Reset View
-            <span class="tooltip-text">
+            <caption>
+                Reset View
+            </caption>
+            <tooltip>
+                <![CDATA[ 
                 Reset View Scale After Zooming-In
                 <br>
-                (Hotkey: <strong>CTRL+X</strong>)
-            </span>
-            ]]>
+                (Hotkey: <b>CTRL+X</b>)  
+                ]]>   
+            </tooltip>
         </reposition_button>
 
         <reset_button>
-            <![CDATA[ 
-            Clear All
-            <span class="tooltip-text">
+            <caption>
+                Clear All
+            </caption>
+            <tooltip>
                 Clear All Annotations
-            </span>
-            ]]>
+            </tooltip>
         </reset_button>
 
         <submit>
-            <![CDATA[ 
-            Submit
-            <span class="tooltip-text">
+            <caption>
+                Submit
+            </caption>
+            <tooltip>
+                <![CDATA[ 
                 Click here to submit your labeling
                 <br>
-                (Hotkey:<strong>ENTER</strong>)
-            </span>
-            ]]>
+                (Hotkey: <b>ENTER</b>)  
+                ]]>   
+            </tooltip>
         </submit>
 
         <skip>
-            <![CDATA[ 
-            Skip
-            <span class="tooltip-text">
+            <caption>
+                Skip
+            </caption>
+            <tooltip>
                 Skip the current Image if no perceived RPs are found.
-            </span>
-            ]]>
+            </tooltip>
+
         </skip>
     </buttons>
 
@@ -291,37 +313,5 @@
         <rp-root-url>..</rp-root-url>
     </url>
 
-    <figures>
-        <rp-examples>
-            <item>
-                <url>/figures/examples/new027.jpg</url>
-                <caption>An RP consist of 4 eagle instances.</caption>
-            </item>
-
-            <item>
-                <url>/figures/examples/new705.jpg</url>
-                <caption>An RP consist of 9 Pipa (a musical instrument) instances.</caption>
-            </item>
-
-            <item>
-                <url>/figures/examples/new653.jpg</url>
-                <caption>An RP consist of multiple parachute instances.</caption>
-            </item>
-
-            <item>
-                <url>/figures/examples/new632.jpg</url>
-                <caption>An RP consist of multiple Micky instances.</caption>
-            </item>
-
-            <item>
-                <url>/figures/examples/new789.jpg</url>
-                <caption>An RP consist of 6 painting instances <b>from a projective view</b></caption>
-            </item>
-
-            <item>
-                <url>/figures/examples/new036.jpg</url>
-                <caption><b>Two</b> RPs consist of two different types of products.</caption>
-            </item>
-        </rp-examples>
-    </figures>
+    
 </info>

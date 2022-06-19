@@ -49,7 +49,8 @@
                 <div class="col-4 border" id="left-panel">
                     <div class="row">
                         <!-- *[Instruction] -->
-                        <button type="button" class="btn expandable" name="instruction_button" id="instruction_button"> Click
+                        <button type="button" class="btn expandable" name="instruction_button" id="instruction_button">
+                            Click
                             Here for Instructions
                         </button>
                         <div id="instruction">
@@ -104,8 +105,15 @@
                             </div>
                             <div class="col-3 d-grid">
                                 <div class="btn-group" role="group">
-                                    <button type="button" class="btn btn-info" name="mode_button" id="mode_button">
-                                        Dot Mode
+                                    <button type="button" class="btn btn-info mode_button box_button" id="box_button"
+                                            style="display: none;">
+                                        [Box Mode]
+
+                                    </button>
+
+                                    <button type="button" class="btn btn-info mode_button polygon_button"
+                                            id="polygon_button" style="display: none;">
+                                        [Polygon Mode]
 
                                     </button>
                                 </div>
@@ -223,8 +231,9 @@
     <script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
 
     <!-- <script src="https://sym-rp-data-collection.s3.amazonaws.com/Sym-Interface/turker.js"></script> -->
-    <script src="turker.js"></script>
     <script src="reload.js"></script>
+    <script src="turker.js"></script>
+
 
     <script>
         $(document).ready(function () {
