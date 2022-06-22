@@ -64,7 +64,7 @@ function checkTest1(xml) {
     if (success_flag) {
         val_alert("<b>Correct!</b> Close this message to continue. The message will be automatically closed in 3 second.", 'alert-success', function () {
             loadTestPage(xml, 2);
-            reset();
+            reset(false);
             dismissAlerts();
         });
         return;
@@ -95,7 +95,7 @@ function checkTest2(xml) {
     if (success_flag) {
         val_alert("<b>Correct!</b> Close this message to continue. The message will be automatically closed in 3 second", 'alert-success', function () {
             loadTestPage(xml, 3);
-            reset;
+            reset(false);
             dismissAlerts();
         });
         return;
