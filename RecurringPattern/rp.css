@@ -1,7 +1,3 @@
-.non-scrollable{
-  overflow: hidden;
-}
-
 .image{
   position:relative;
   overflow:hidden;

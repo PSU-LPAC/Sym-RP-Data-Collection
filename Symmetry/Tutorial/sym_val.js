@@ -47,7 +47,7 @@ function checkTest1(xml) {
 
     if (annotations.length != 1 || annotations[0]["class"] != "Rotation") {
         success_flag = false;
-        val_alert("<b>Incorrect!</b> You should label <b>ONE</b> rotation symmetry.", 'alert-danger', reset());
+        val_alert("<b>Incorrect!</b> You should label <b>ONE</b> rotation symmetry.", 'alert-danger',  function(){return reset(false);});
         return;
     }
 
@@ -57,12 +57,12 @@ function checkTest1(xml) {
 
     if (!validate_rot(user_label, gt, th_dist = 0.05)) {
         success_flag = false;
-        val_alert("<b>Incorrect!</b> You should label the <b>CENTER</b> of a rotation symmetry.", 'alert-danger', reset());
+        val_alert("<b>Incorrect!</b> You should label the <b>CENTER</b> of a rotation symmetry.", 'alert-danger', function(){return reset(false);});
         return;
     }
 
     if (success_flag) {
-        val_alert("<b>Correct!</b> Close this message to continue.", 'alert-success', function () {
+        val_alert("<b>Correct!</b> Close this message to continue. The message will be automatically closed in 3 second.", 'alert-success', function () {
             loadTestPage(xml, 2);
             reset();
             dismissAlerts();
@@ -78,7 +78,7 @@ function checkTest2(xml) {
 
     if (annotations.length != 1 || annotations[0]["class"] != "Reflection") {
         success_flag = false;
-        val_alert("<b>Incorrect!</b> You should label <b>ONE</b> reflection symmetry.", 'alert-danger', reset());
+        val_alert("<b>Incorrect!</b> You should label <b>ONE</b> reflection symmetry.", 'alert-danger',  function(){return reset(false);});
         return;
     }
 
@@ -88,14 +88,14 @@ function checkTest2(xml) {
 
     if (!validate_rot(user_label, gt, th_dist = 0.5)) {
         success_flag = false;
-        val_alert("<b>Incorrect!</b> You should label the <b>TWO END-POINTS</b> of a reflection symmetry axis.", 'alert-danger', reset());
+        val_alert("<b>Incorrect!</b> You should label the <b>TWO END-POINTS</b> of a reflection symmetry axis.", 'alert-danger',  function(){return reset(false);});
         return;
     }
 
     if (success_flag) {
-        val_alert("<b>Correct!</b> Close this message to continue.", 'alert-success', function () {
+        val_alert("<b>Correct!</b> Close this message to continue. The message will be automatically closed in 3 second", 'alert-success', function () {
             loadTestPage(xml, 3);
-            reset();
+            reset;
             dismissAlerts();
         });
         return;
@@ -118,7 +118,7 @@ function checkTest3(xml) {
 
     if (rot_flag && ref_flag) {
 
-        val_alert("<b>Correct!</b> Close this message to continue.", 'alert-success', function () {
+        val_alert("<b>Correct!</b> Close this message to continue. The message will be automatically closed in 3 second", 'alert-success', function () {
             loadTestPage(xml, 4);
             reset();
             dismissAlerts();
@@ -127,7 +127,7 @@ function checkTest3(xml) {
         return;
     }
     else {
-        val_alert("<b>Incorrect!</b> You should label at least <b>ONE</b> rotation and <b>ONE</b> reflection symmetry", 'alert-danger', reset());
+        val_alert("<b>Incorrect!</b> You should label at least <b>ONE</b> rotation and <b>ONE</b> reflection symmetry", 'alert-danger',  function(){return reset(false);});
         return;
     }
 }
@@ -295,7 +295,13 @@ function val_alert(message, alert_class = null, close_callback = null) {
     `)
 
     if (close_callback != null)
+    {
+        setTimeout(()=>{
+            alert.alert('close');
+        }, 3000);
         alert.on('closed.bs.alert', close_callback);
+    }
+        
 
     $("#test-alert-box").append(alert);
 }

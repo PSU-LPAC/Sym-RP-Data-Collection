@@ -93,7 +93,7 @@
             For this task, you will need to:
             <ul>
                 <li> 
-                    Familiarize yourself with Symmetry Labeling: 
+                    Familiarize yourself with Symmetry Labeling (if you are the first time): 
                     <ul>
                         <li>
                             Read through the Understanding Symmetry Tutorial.
@@ -111,11 +111,13 @@
                     Label <span class="num-imgs" style="font-weight: bold;"></span> images.
                 </li>
             </ul>
+            This task may take you <span class="min-time" style="font-weight: bold;"></span> - <span class="max-time" style="font-weight: bold;"></span> minutes to complete.
+            <br>
             You may choose to skip <b>at most</b> <span class="num-imgs" style="font-weight: bold;"></span> images, but skipped images are not counted towards the labeled images. 
             <br>
-            You will receive a <span style="color:blue; font-weight: bold;">basic reward</span> of $<span class="basic-reward" style="font-weight: bold;"></span> for the completion of the task, and at most a <span style="color:red;font-weight: bold;">bonus reward</span> of $<span class="bonus-reward" style="font-weight: bold;"></span> based on the number of labeled images. 
+            You will receive a <span style="color:blue; font-weight: bold;">basic reward</span> of $<span class="basic-reward" style="font-weight: bold;"></span> for the completion of the task, and at most a <span style="color:red;font-weight: bold;">bonus reward</span> of $<span class="bonus-reward" style="font-weight: bold;"></span> based on the number of labeled images ($<span class="per-reward" style="font-weight: bold;"></span> per labeled image). 
             <br>
-            You may do this symmetry labeling HIT <b>only</b> once.
+            You may do this symmetry labeling HIT <b>ONLY</b> once.
             ]]>
         </task-description>
 
@@ -140,9 +142,9 @@
 
         <tutorial-url>https://psu-lpac.github.io/Sym-RP-Data-Collection/Symmetry/Tutorial/tutorial.html</tutorial-url>
 
-        <!-- <sym-root-url>https://psu-lpac.github.io/Sym-RP-Data-Collection/Symmetry</sym-root-url> -->
+        <sym-root-url>https://psu-lpac.github.io/Sym-RP-Data-Collection/Symmetry</sym-root-url>
 
-        <sym-root-url>..</sym-root-url>
+        <!-- <sym-root-url>..</sym-root-url> -->
 
         <!-- <turker-script-url>https://sym-rp-data-collection.s3.amazonaws.com/Sym-Interface/turker.js</turker-script-url> -->
 
@@ -226,7 +228,11 @@
                 ]]>
             </caption>
             <tooltip>
-                Click one point as the rotation center (Toggle Hotkey: R)
+                <![CDATA[ 
+                Click one point as the Rotation Center
+                <br>
+                (Toggle Hotkey: <b>R</b>)
+                ]]>
             </tooltip>
         </rot_button>
 
@@ -237,7 +243,11 @@
                 ]]>
             </caption>
             <tooltip>
-                Click two points as the reflection axis (Toggle Hotkey: R)
+                <![CDATA[ 
+                Click two points as the Reflection Xxis
+                <br>
+                (Toggle Hotkey: <b>R</b>)
+                ]]>
             </tooltip>
         </ref_button>
 
@@ -246,7 +256,11 @@
                 Label a New Symmetry
             </caption>
             <tooltip>
-                Label a New Symmetry (Toggle Hotkey: D)
+                <![CDATA[ 
+                Label a New Symmetry
+                <br>
+                (Toggle Hotkey: <b>D</b>)
+                ]]>
             </tooltip>
         </annotate_button>
 
@@ -255,16 +269,24 @@
                 Delete
             </caption>
             <tooltip>
-                Delete an Existing Symmetry (Toggle Hotkey: D)
+                <![CDATA[ 
+                Delete an Existing Symmetry
+                <br>
+                (Toggle Hotkey: <b>D</b>)
+                ]]>
             </tooltip>
         </delete_button>
 
         <undo_button>
             <caption>
-                Undo last Annotation/Deletion
+                Undo Last
             </caption>
             <tooltip>
-                Undo last Annotation/Deletion (Hotkey: CTRL+Z)
+                <![CDATA[ 
+                Undo last Annotation/Deletion
+                <br>
+                (Toggle Hotkey: <b>CTRL+Z</b>)
+                ]]>
             </tooltip>
         </undo_button>
 
@@ -273,7 +295,11 @@
                 Reset View
             </caption>
             <tooltip>
-                Reset View Scale After Zooming-In (Hotkey: CTRL+X)
+                <![CDATA[ 
+                Reset View Scale After Zooming-In
+                <br>
+                (Toggle Hotkey: <b>CTRL+X</b>)
+                ]]>
             </tooltip>
         </reposition_button>
 
@@ -291,7 +317,11 @@
                 Submit
             </caption>
             <tooltip>
-                Click here to submit your labeling (Hotkey: ENTER)
+                <![CDATA[ 
+                Click here to submit your labeling
+                <br>
+                (Toggle Hotkey: <b>ENTER</b>)
+                ]]>
             </tooltip>
         </submit>
 

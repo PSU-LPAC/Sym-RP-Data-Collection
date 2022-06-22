@@ -25,7 +25,10 @@
 
         <div id="hit-related" style="display:none;">
             <!-- *Input Variables -->
-            <!-- <div id="img-urls">${img_urls}</div> -->
+            <!-- <div id="img-urls">${img_urls}</div>
+            <div id="basic-reward-rate">${basic_reward_rate}</div>
+            <div id="per-reward">${per_reward}</div>
+            <div id="time-range">${time_range}</div> -->
 
             <div id="img-urls">
                 <!-- ["https://s3.amazonaws.com/sym-rp-data-collection/Dataset/Iter-2/0000-201.jpg","https://s3.amazonaws.com/sym-rp-data-collection/Dataset/Iter-2/0001-2015-03-10 13.47.02.jpg","https://s3.amazonaws.com/sym-rp-data-collection/Dataset/Iter-2/0002-2015-09-14 19.33.44.jpg"] -->
@@ -43,9 +46,9 @@
 
             </div>
 
-
-            <div id="basic-reward">${basic_reward}</div>
-            <div id="per-reward">${per_reward}</div>
+            <div id="per-reward">0.12</div>
+            <div id="basic-reward-rate">0.5</div>
+            <div id="time-range">[30,60]</div>
             <!-- *Response -->
             <input id="annos" name="annos" type="hidden" />
             <input id="suggestion" name="suggestion" type="hidden" />
@@ -83,7 +86,8 @@
         let skip_num = 0;
 
         let root_url, img_urls;
-        let num_imgs = 100, basic_reward, per_reward = 0.08;
+        let num_imgs, basic_reward, per_reward;
+        let min_time, max_time;
 
         $(document).ready(function () {
             // Load variables
@@ -91,8 +95,17 @@
             img_urls = JSON.parse(img_urls_str);
             num_imgs = img_urls.length;
 
-            basic_reward = 0.5 * per_reward * num_imgs;
+            per_reward = JSON.parse($("#per-reward").text());
+            let basic_reward_rate = JSON.parse($("#basic-reward-rate").text());
+            basic_reward = basic_reward_rate * per_reward * num_imgs;
 
+            let time_range = JSON.parse($("#time-range").text());
+            [min_time, max_time] = time_range
+            // min_time *= num_imgs;
+            // max_time *= num_imgs;
+
+            min_time = Math.floor(min_time);
+            max_time = Math.floor(max_time);
             console.log(img_urls);
 
             $.get(xml_url, function (xml) {

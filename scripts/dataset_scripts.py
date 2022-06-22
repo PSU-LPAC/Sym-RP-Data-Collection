@@ -18,15 +18,15 @@ def get_csv_list(img_dir, csv_path, url_root_dir = ''):
         print(rows)
         writer.writerows(rows)
 
-def get_csv_batch_list(img_dir, csv_path, url_root_dir = '', img_num = 0, duplicate = 0):
+def get_csv_batch_list(img_dir, csv_path, url_root_dir = '', start_idx = 0,img_num = 0, duplicate = 0):
     ''' [Batch Hits] Generate Image List from a folder (as a csv format)'''
     img_urls = []
-    for idx, img_name in enumerate(os.listdir(img_dir)):
+    for idx, img_name in enumerate(os.listdir(img_dir)[start_idx:]):
         if (img_num != 0 and idx >= img_num):
             break
         img_urls.append(url_root_dir + img_name)    
     # add duplicate images for self-validation
-    for idx, img_name in enumerate(os.listdir(img_dir)):
+    for idx, img_name in enumerate(os.listdir(img_dir)[start_idx:]):
         if (idx >= duplicate):
             break
         img_urls.append(url_root_dir + img_name)    
@@ -78,8 +78,9 @@ if __name__ == "__main__":
         img_dir = 'E:/Lab Work/Datasets/Sym-RP-Collection/Images', 
         csv_path = "E:/Lab Work/Datasets/Sym-RP-Collection/Batch-Iter-1.csv",
         url_root_dir = 'https://s3.amazonaws.com/sym-rp-data-collection/Dataset/Iter-2/',
-        img_num = 10,
-        duplicate= 0
+        start_idx = 0,
+        img_num = 50,
+        duplicate= 5
     )
         
     

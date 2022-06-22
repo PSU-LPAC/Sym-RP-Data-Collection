@@ -38,14 +38,10 @@ function loadStart(xml, img_urls, callback = null) {
     $("div#root-container").load(`${root_url}/batch_hits/start.html div#container`, function () {
         console.log("Load start page was performed.");
 
-        // * add the reload script
-        // $.getScript(`${root_url}/reload.js`, () => {
-        //     console.log('Add reload script was performed.')
-        //     reloadMain(xml);
-        // });
-
         reloadMain(xml);
         reloadReward(xml, num_imgs, basic_reward, per_reward, valid_num);
+        reloadTime(min_time, max_time);
+
         
         // bind the buttons
         $("#tutorial-btn").click(() => {

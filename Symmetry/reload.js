@@ -17,6 +17,11 @@ function reloadText(xml) {
     })
 }
 
+function reloadTime(min_time, max_time) {
+    $(`span.min-time`).text(min_time);
+    $(`span.max-time`).text(max_time);
+}
+
 function reloadAlert(xml) {
     let alert_xmls = $(xml).find('alerts').children(); 
 
@@ -30,6 +35,7 @@ function reloadReward(xml, num_imgs, basic_reward, per_reward, valid_num=0) {
     $(`span.num-imgs`).text(num_imgs);
     $(`span.valid-num`).text(valid_num);
 
+    $(`span.per-reward`).text(per_reward.toFixed(2));
     $(`span.basic-reward`).text(basic_reward.toFixed(2));
     $(`span.total-reward`).text((num_imgs*per_reward).toFixed(2));
     $(`span.bonus-reward`).text(Math.max(0, num_imgs*per_reward - basic_reward).toFixed(2));
@@ -46,8 +52,14 @@ function reloadButtons(xml) {
         let caption = $(btn_xml).find('caption').text();
         let tooltip = $(btn_xml).find('tooltip').text();
 
+        // set button common properties
+        $(`.${btn_name}`).attr('data-bs-toggle', 'tooltip');
+        $(`.${btn_name}`).attr('data-bs-placement', 'top');
+        $(`.${btn_name}`).attr('data-bs-trigger', 'hover');
+        $(`.${btn_name}`).attr('data-bs-html', true);
+
         $(`.${btn_name}`).html(caption);
-        $(`.${btn_name}`).prop('title', tooltip);
+        $(`.${btn_name}`).attr('title', tooltip);
     })
 
     initialTooltips();

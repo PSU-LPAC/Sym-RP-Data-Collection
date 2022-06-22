@@ -11,6 +11,7 @@
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css'>
 
     <!-- Styles -->
     <link rel="stylesheet" type="text/css" href="../sym.css">
@@ -47,13 +48,14 @@
             <div class="col-4 border" id="left-panel">
                 <div class="row">
                     <!-- *[Instruction] -->
-                    <button type="button" class="btn expandable" name="instruction_button" id="instruction_button"> Click
+                    <button type="button" class="btn expandable" name="instruction_button" id="instruction_button">
+                        Click
                         Here for Instructions
                     </button>
                     <div id="instruction">
 
                         <p class="fs-6 sym-instruction">
-                        [Insutrctions]
+                            [Insutrctions]
                         </p>
 
                     </div>
@@ -108,8 +110,8 @@
                                        autocomplete="off">
                                     [Label]
                                 </label>
-                                <label class="btn btn-outline-secondary delete_button" type="radio"
-                                       id="delete_button" autocomplete="off" checked>
+                                <label class="btn btn-outline-secondary delete_button" type="radio" id="delete_button"
+                                       autocomplete="off" checked>
                                     [Delete]
                                 </label>
                             </span>
@@ -146,7 +148,7 @@
                     </div>
                 </div>
             </div>
-                
+
             <div class="col">
                 <!-- *[Canvas Part] -->
 
@@ -207,11 +209,11 @@
                 console.log("Load XML was performed.");
 
                 reloadMain(xml);
-                    
+
                 loadTestPage(xml, 1);
 
                 // setupAll();
-            });            
+            });
         });
     </script>
 </body>
