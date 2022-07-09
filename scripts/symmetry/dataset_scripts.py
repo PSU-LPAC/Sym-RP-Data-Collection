@@ -1,6 +1,6 @@
 ''' Some scripts for dataset '''
 import json
-import os, glob, csv, shutil
+import os, glob, csv, shutil, cv2
 
 def get_csv_list(img_dir, csv_path, url_root_dir = ''):
     ''' Generate Image List from a folder (as a csv format) '''
@@ -18,7 +18,7 @@ def get_csv_list(img_dir, csv_path, url_root_dir = ''):
         print(rows)
         writer.writerows(rows)
 
-def get_csv_batch_list(img_dir, csv_path, url_root_dir = '', start_idx = 0,img_num = 0, duplicate = 0):
+def get_csv_batch_list(img_dir, csv_path, url_root_dir = '', start_idx = 0,img_num = 0, duplicate = 0, basic_reward_rate = 0.5, per_reward = 0.12, time_range = [30,60]):
     ''' [Batch Hits] Generate Image List from a folder (as a csv format)'''
     img_urls = []
     for idx, img_name in enumerate(os.listdir(img_dir)[start_idx:]):
@@ -40,8 +40,8 @@ def get_csv_batch_list(img_dir, csv_path, url_root_dir = '', start_idx = 0,img_n
         # creating a csv writer object 
         writer = csv.writer(f) 
 
-        writer.writerow(['img_urls'])    
-        writer.writerow([json_img_urls])
+        writer.writerow(['img_urls', 'basic_reward_rate', 'per_reward', 'time_range'])    
+        writer.writerow([json_img_urls, basic_reward_rate, per_reward, time_range])
 
 
 def add_index(img_dir, new_img_dir, start_index = 0):
@@ -58,6 +58,22 @@ def update_index(img_dir, new_img_dir):
         new_name = f'0{img_name}'
         shutil.copy(os.path.join(img_dir, img_name), os.path.join(new_img_dir, new_name))
 
+
+def get_img_size_json(img_dir, save_path):
+    ''' Store the image size in json format '''
+    result = {}
+    
+    for img_path in glob.glob(os.path.join(img_dir, '*.*')):
+        img = cv2.imread(img_path)
+        if img is not None:
+            img_name = os.path.split(img_path)[-1]
+            img_w, img_h = img.shape[1], img.shape[0]
+            result[img_name] = [img_w, img_h ]
+    
+    with open(save_path, 'w') as f:
+        json.dump(result, f, indent=4)
+
+
 if __name__ == "__main__":
     # add_index(
     #     img_dir = 'E:/Lab Work/Datasets/Sym-RP-Collection/NRT Images/symmetry', 
@@ -65,22 +81,21 @@ if __name__ == "__main__":
     #     start_index= 625
     #     )
 
+    get_img_size_json(img_dir = 'E:/Lab Work/Datasets/Sym-RP-Collection/Images', save_path= 'E:/Lab Work/Datasets/Sym-RP-Collection/img_size.json')
 
-    
-
-    # get_csv_list(
-    #     img_dir = 'E:/Lab Work/Datasets/Sym-RP-Collection/Rename', 
-    #     csv_path = "E:/Lab Work/Datasets/Sym-RP-Collection/Iter-2.csv",
-    #     url_root_dir='https://s3.amazonaws.com/sym-rp-data-collection/Dataset/Iter-2/'
+    # for i in range(10):
+    #     num_imgs = 50
+    #     start_idx = i*num_imgs
+    #     save_dir = "E:/Lab Work/Datasets/Sym-RP-Collection/AWS csv/sym-batch"
+    #     get_csv_batch_list(
+    #         img_dir = 'E:/Lab Work/Datasets/Sym-RP-Collection/Images', 
+    #         csv_path = os.path.join(save_dir, f' Batch Symmetry Labeling Iter {i+1} ({start_idx}-{start_idx+num_imgs-1}).csv'),
+    #         url_root_dir = 'https://s3.amazonaws.com/sym-rp-data-collection/Dataset/Iter-2/',
+    #         start_idx = start_idx,
+    #         img_num = 50,
+    #         duplicate = 5,
+    #         basic_reward_rate = 0.5,
+    #         per_reward = 0.12,
+    #         time_range = [30,60] 
     #     )
-    
-    get_csv_batch_list(
-        img_dir = 'E:/Lab Work/Datasets/Sym-RP-Collection/Images', 
-        csv_path = "E:/Lab Work/Datasets/Sym-RP-Collection/Batch-Iter-1.csv",
-        url_root_dir = 'https://s3.amazonaws.com/sym-rp-data-collection/Dataset/Iter-2/',
-        start_idx = 0,
-        img_num = 50,
-        duplicate= 5
-    )
-        
     

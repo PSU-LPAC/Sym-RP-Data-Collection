@@ -2,7 +2,65 @@
 ###
 import matplotlib.pyplot as plt
 import cv2
+import boto3
 ###
+
+def setup_mturk(client_in_production=False):
+    # * Setup the MTurk Client
+    environments = {
+    "production": {
+        "endpoint": "https://mturk-requester.us-east-1.amazonaws.com",
+        "preview": "https://www.mturk.com/mturk/preview"
+    },
+    "sandbox": {
+        "endpoint": 
+            "https://mturk-requester-sandbox.us-east-1.amazonaws.com",
+        "preview": "https://workersandbox.mturk.com/mturk/preview"
+    },
+    }
+    mturk_environment = environments["production"] if client_in_production else environments["sandbox"]
+
+    session = boto3.Session(profile_name='mturk')
+    client = session.client(
+        service_name='mturk',
+        region_name='us-east-1',
+        endpoint_url=mturk_environment['endpoint'],
+    )
+    print ('client_in_production:', client_in_production)
+    return client
+
+def approve_bonus(client, worker_id, assignment_id, hit_id, feedback='', bonus_reward=0, num_label=0, in_production=False):
+    ''' Approve & Bonus an assignment'''
+    token = f'{worker_id}-{assignment_id}-{bonus_reward}'
+    # * Approve
+    try:
+        if in_production:
+            response = client.approve_assignment(
+                AssignmentId=assignment_id,
+                RequesterFeedback=feedback,
+                OverrideRejection=True
+            )
+            print (f'\tApprove: {worker_id}')
+        else:
+            print (f'\t[Will] approve: {worker_id}')
+    except:
+        print (f'\tCannot Approve: {worker_id}')
+    # * Bonus
+    if bonus_reward:
+        try:
+            if in_production:
+                response = client.send_bonus(
+                    WorkerId= worker_id,
+                    BonusAmount=f'{bonus_reward:.2f}',
+                    AssignmentId=assignment_id,
+                    Reason=f'Labeled {num_label} images',
+                    UniqueRequestToken=token
+                )
+                print (f'\tBonus: {worker_id} with {bonus_reward:.2f}')
+            else:
+                print (f'\t[Will] bonus: {worker_id} with {bonus_reward:.2f}')
+        except:
+            print (f'\tCannot Bonus: {worker_id} with {bonus_reward:.2f}')
 
 def drawRot(img, rot_gt):
     ''' Draw rotation center '''
