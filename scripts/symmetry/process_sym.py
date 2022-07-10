@@ -1,8 +1,8 @@
-from glob import glob
-import boto3
-import pandas as pd
-import json
 import os
+import sys
+module_path = os.path.abspath(os.path.join(__file__, '..', '..'))
+if module_path not in sys.path:
+    sys.path.append(module_path)
 ###
 from util import *
 ###
@@ -58,7 +58,7 @@ def visu_results(annos, image_local_dir, visu_save_dir, iter_flag = False):
 
         img = cv2.imread(os.path.join(image_local_dir, img_name))
 
-        visu = visuSym(img, worker_anno)
+        visu = visu_sym(img, worker_anno)
 
         img_name_noext = os.path.splitext(img_name)[0]
 

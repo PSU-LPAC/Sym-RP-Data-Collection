@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Batch Symmetry Labeling</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="rp.css">
+</head>
+
+<body>
+
+    <body>
+        <div class="container" id="container">
+
+            <div class="row gap-3">
+                <div class="row">
+                    <p class="fs-4 text-center fw-bold title">[Title]</p>
+                </div>
+                <hr>
+
+                <!-- <div class="row">
+                    <p>
+                        If it is your <b>first time</b> with the symmetry labeling HITs, to get your HIT <b>approved</b> properly, make sure you have familiarized yourself with the <a
+                        href="https://psu-lpac.github.io/Sym-RP-Data-Collection/Symmetry/Tutorial/tutorial.html" target="_blank"><b>Understanding Symmetry</b></a> tutorial. 
+                        Kindly submit your <b>WorkerID</b> through the background survey at the end of the tutorial.
+                    </p>
+                </div> 
+                <hr> -->
+                <div>
+                    <p class="fs-6 task-description">
+                        [task-description]
+                    </p>
+                </div>
+                <hr>
+                <div class="row">
+                    <button type="button" class="btn btn-lg btn-outline-primary navigation" id="tutorial-btn"> 
+                    Press to Familiarize yourself with Recurring Pattern Labeling
+                    </button>
+                </div>
+                <hr>
+                <div class="row">
+                    <button type="button" class="btn btn-lg btn-outline-success navigation" id="task-btn"> 
+                    Press to Begin Labeling Task
+                    </button>
+                </div>
+            </div>
+            <hr>
+            <div class="row border">
+                <!-- * [IRB Study Information Here] -->
+                <div>
+                    <p class="fs-6 font-monospace sym-irb">
+
+                    </p>
+                </div>
+                <div>
+                    <p class="fs-6 font-monospace worker-info">
+
+                    </p>
+                </div>
+            </div>
+
+
+        </div>
+    </body>
+
+    <script src="https://fastly.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+    <script src="reload.js"></script>
+    <!-- <script src="turker.js"></script> -->
+
+    <script>
+        $(document).ready(function () {
+            // Load XML
+            let xml_url = "rp.xml";
+            $.get(xml_url, function (xml) {
+                console.log("Load XML was performed.");
+                reloadText(xml);
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>

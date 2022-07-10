@@ -9,7 +9,7 @@
             <![CDATA[ 
             Need a refresher on "<b>Recurring Pattern</b>"?
             Click here:
-            <a href="https://psu-lpac.github.io/Sym-RP-Data-Collection/RecurringPattern/Tutorial/definition.html" target="_blank">
+            <a href="https://psu-lpac.github.io/Sym-RP-Data-Collection/RecurringPattern/Tutorial/tutorial.html" target="_blank">
                 Understanding Recurring Pattern
             </a>
             ]]>
@@ -112,10 +112,10 @@
 
         <rp-definition>
             <![CDATA[ 
-            A <b>Recurring Pattern (RP)</b> is an ensemble of similar yet not necessarily identical "instances" in an image.
+            A <b>Recurring Pattern (RP)</b> is an ensemble of similar yet not necessarily identical <b>RP Instances</b> in an image.
             <br>
-            The term of "<b>instances</b>" refers to a visual area which distinctive features that could be undoubtedly grouped or segmented together. 
-            Each <b>RP</b> consists of two or more similar instances.    
+            The term of <b>RP Instance</b> refers to a visual area which distinctive features that could be undoubtedly grouped or segmented together. 
+            Each <b>RP</b> consists of two or more similar RP Instances.    
             ]]>
         </rp-definition>
 
@@ -123,18 +123,59 @@
             <![CDATA[ 
             <ul>
                 <li>
-                    The four similar <span style="color: red;"><b>sun-shape instances</b></span> could be grouped as a <span style="color: red;"><b>Recurring Pattern</b></span>, even with scaling, rotation, shearing and color variations.
+                    The three similar <span style="color: red;"><b>sun-shape RP Instances</b></span> could be grouped as a <span style="color: red;"><b>Recurring Pattern</b></span>, even with scaling, rotation, shearing and color variations.
                 </li>
                 <li>
-                    Correspondingly, the two similar <span style="color: green;"><b>thunder-shape instances</b></span> could be grouped as another <span style="color: green;"><b>Recurring Pattern</b></span>.
+                    Correspondingly, the two similar <span style="color: green;"><b>thunder-shape RP Instances</b></span> could be grouped as another <span style="color: green;"><b>Recurring Pattern</b></span>.
                 </li>
                 <li>
-                    Finally, the ONE <span style="color: orange;"><b>moon-shape instances</b></span> CANNOT be grouped as a <b>Recurring Pattern</b>, because each <b>RP</b> shall consist of two or more similar instances.
+                    Finally, the ONE <span style="color: orange;"><b>moon-shape</b></span> pattern CANNOT be viewed as a <b>Recurring Pattern</b>, because each <b>RP</b> shall consist of two or more similar RP Instances.
                 </li>
             </ul>
             ]]>
 
         </rp-example-illustration>
+
+        <task-description>
+            <![CDATA[ 
+            For this task, you will need to:
+            <ul>
+                <li> 
+                    Familiarize yourself with Recurring Pattern Labeling (if you are the first time): 
+                    <ul>
+                        <li>
+                            Read through the Understanding Recurring Pattern Tutorial.
+                        </li>
+                        <li>
+                            Pass a quick test (label 1 sample image) on Recurring Pattern Labeling.
+                        </li>
+                        <li>
+                            Complete a short background survey with your <b>WorkerID</b>.
+                        </li>
+                    </ul>
+                </li>
+
+                <li>
+                    Label <span class="num-imgs" style="font-weight: bold;"></span> images.
+                </li>
+            </ul>
+            This task may take you <span class="min-time" style="font-weight: bold;"></span> - <span class="max-time" style="font-weight: bold;"></span> minutes to complete.
+            <br>
+            You may choose to skip <b>at most</b> <span class="num-imgs" style="font-weight: bold;"></span> images, but skipped images are not counted towards the labeled images. 
+            <br>
+            You will receive a <span style="color:blue; font-weight: bold;">basic reward</span> of $<span class="basic-reward" style="font-weight: bold;"></span> for the completion of the task, and at most a <span style="color:red;font-weight: bold;">bonus reward</span> of $<span class="bonus-reward" style="font-weight: bold;"></span> based on the number of labeled images ($<span class="per-reward" style="font-weight: bold;"></span> per labeled image). 
+            <br>
+            You may do this Recurring Pattern labeling HIT <b>ONLY</b> once.
+            ]]>
+        </task-description>
+
+        <final-congrats>
+            <![CDATA[ 
+            Thank you for your interest in the study. 
+            <br>
+            You have labeled <span class="valid-num" style="font-weight: bold;"></span> images making a <span style="color:blue; font-weight: bold;">basic reward</span> of $<span class="basic-reward" style="font-weight: bold;"></span>, and a <span style="color:red;font-weight: bold;">bonus reward</span> of $<span class="real-bonus-reward" style="font-weight: bold;"></span>
+            ]]>
+        </final-congrats>
     </text>
     
     <alerts>
@@ -252,7 +293,7 @@
 
         <undo_button>
             <caption>
-                Undo last Annotation/Deletion
+                Undo Last 
             </caption>
             <tooltip>
                 <![CDATA[ 
@@ -310,8 +351,60 @@
     </buttons>
 
     <url>
-        <rp-root-url>..</rp-root-url>
+        <rp-root-url>.</rp-root-url>
+
+        <tutorial-url>https://psu-lpac.github.io/Sym-RP-Data-Collection/RecurringPattern/Tutorial/tutorial.html</tutorial-url>
+
+        <survey-url>https://forms.gle/PMp27C7eicHJh2hU6</survey-url>
     </url>
 
+    <figures>
+        <rp-examples>
+            <item>
+                <url>/figures/examples/new027_label.gif</url>
+                <caption>An RP consist of 4 eagle instances.</caption>
+            </item>
+
+            <item>
+                <url>/figures/examples/new705_label.gif</url>
+                <caption>An RP consist of 9 Pipa (a musical instrument) instances.</caption>
+            </item>
+
+            <item>
+                <url>/figures/examples/new653_label.gif</url>
+                <caption>An RP consist of multiple parachute instances.</caption>
+            </item>
+
+            <item>
+                <url>/figures/examples/new632_label.gif</url>
+                <caption>An RP consist of multiple Micky instances.</caption>
+            </item>
+
+            <item>
+                <url>/figures/examples/new789_label.gif</url>
+                <caption>An RP consist of 6 painting instances <b>from a projective view</b></caption>
+            </item>
+
+            <item>
+                <url>/figures/examples/new036_label.gif</url>
+                <caption><b>Two</b> RPs consist of two different types of products.</caption>
+            </item>
+        </rp-examples>
+    </figures>
+    
+    <test-info>
+        <test-1>
+            <test-title>
+                <![CDATA[ 
+                Test-1: Label <span style="color:red">ONE</span> Recurring Pattern with <span style="color:red">FOUR</span> RP Instances you perceive on this image.
+                ]]>
+
+            </test-title>
+
+            <test-img-url>figures/test_images/new027.jpg</test-img-url>
+
+            <gt>[0.5754455383848455, 0.4178809032983508]</gt>
+        </test-1>
+    </test-info>
     
 </info>

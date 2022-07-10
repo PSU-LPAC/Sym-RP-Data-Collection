@@ -3,8 +3,6 @@
 function reloadMain(xml) {
     reloadText(xml);
     reloadAlert(xml);
-    reloadSymDef(xml);
-    reloadSymFigs(xml);
     reloadButtons(xml);
 }
 
@@ -15,6 +13,11 @@ function reloadText(xml) {
         let text_name = $(text_xml).prop('nodeName');
         $(`.${text_name}`).html($(text_xml).text());
     })
+}
+
+function reloadTime(min_time, max_time) {
+    $(`span.min-time`).text(min_time);
+    $(`span.max-time`).text(max_time);
 }
 
 function reloadAlert(xml) {
@@ -81,6 +84,7 @@ function reloadPanel(xml){
 function reloadRPFigs(xml) {
     // * reload RP figures for tutorial
     let rp_root_url = $(xml).find('rp-root-url').text(); 
+    rp_root_url = '..';
     let figs = $(xml).find('figures').children();
 
     figs.each((_, fig_xmls)=>{
@@ -114,10 +118,3 @@ function initialTooltips() {
     console.log($('[data-bs-toggle="tooltip"]'));
     $('[data-bs-toggle="tooltip"]').tooltip();
 }
-
-// function initialTooltips() {
-//     var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-//     var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-//         return new bootstrap.Tooltip(tooltipTriggerEl)
-//     });
-// }

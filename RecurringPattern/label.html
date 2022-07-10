@@ -16,6 +16,12 @@
 
     <!-- Styles -->
     <link rel="stylesheet" type="text/css" href="rp.css">
+
+    <style>
+        body {
+            overflow: hidden;
+        }
+    </style>
 </head>
 
 <body>
@@ -65,17 +71,18 @@
 
                     <div class="row">
                         <!-- *[Information] -->
-                        <div>
+                        <div class="batch-rp-info">
+                            <p class="fs-6 fw-bold text-center img-info">
+                                Image {cur}/{total}, Skipped: {skip_num}
+                            </p>
+                            <hr>
                             <p class="fs-6 text-center" id="labeled-rp-info">
                                 Labeled RPs: 0
                             </p>
                         </div>
 
-                        <div class="rp_containers row justify-content-between overflow-auto">
-                            <div class="col-6 rp_container" id="0">
-                            </div>
-                            <div class="col-6 rp_container" id="1">
-                            </div>
+                        <div class="rp_container row justify-content-between overflow-auto">
+
                         </div>
                     </div>
 
@@ -163,8 +170,13 @@
                             </div>
 
                             <div class="row mt-3">
-                                <div class="col-12 d-grid">
-                                    <button type="button" class="btn btn-success submit" id="submit">
+                                <div class="col-6 d-grid">
+                                    <button type="button" class="btn btn-warning skip" id="skip">
+                                        [Skip]
+                                    </button>
+                                </div>
+                                <div class="col-6 d-grid">
+                                    <button type="button" class="btn btn-success submit" id="next">
                                         [Submit]
                                     </button>
                                 </div>
@@ -184,8 +196,11 @@
                             <div id="child">
                                 <canvas id="myCanvas"></canvas>
                                 <!-- <img class="fixed_height" id="pic" src="${img_url}" /> -->
+                                <!-- <img class="fixed_height" id="pic"
+                                     src="https://sym-rp-data-collection.s3.amazonaws.com/Dataset/Iter-1/000-201.jpg" /> -->
+
                                 <img class="fixed_height" id="pic"
-                                     src="https://sym-rp-data-collection.s3.amazonaws.com/Dataset/Iter-1/000-201.jpg" />
+                                     src="figures/examples/new789.jpg" />
 
                                 <!-- <img class="fixed_height" id="pic" src=".\figures\test images\Butterfly.jpg" /> -->
                                 <!-- 

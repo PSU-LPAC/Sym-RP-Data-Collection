@@ -14,7 +14,7 @@
 
     <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css'>
     <!-- Styles -->
-    <link rel="stylesheet" type="text/css" href="../sym.css">
+    <link rel="stylesheet" type="text/css" href="rp.css">
 </head>
 
 <body>
@@ -72,11 +72,11 @@
     <script src="https://assets.crowd.aws/crowd-html-elements.js"></script>
 
     <script id='batch' src="batch.js"></script>
-    <script id='reload' src="../reload.js"></script>
-    <script id='turker' src="../turker.js"></script>
+    <script id='reload' src="reload.js"></script>
+    <script id='turker' src="turker.js"></script>
 
     <script>
-        let xml_url = "../sym.xml";
+        let xml_url = "rp.xml";
 
         let all_annos = [];     // store all the annotations
 
@@ -111,16 +111,9 @@
             $.get(xml_url, function (xml) {
                 // Load XML
                 console.log("Load XML was performed.");
-
-
-
-                root_url = $(xml).find("sym-root-url").text();
-
-
+                root_url = $(xml).find("rp-root-url").text();
 
                 loadStart(xml, img_urls);
-
-
             });
 
 

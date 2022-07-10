@@ -1,5 +1,11 @@
 ''' Script for Processing Batch Result '''
 #%%
+import os
+import sys
+module_path = os.path.abspath(os.path.join(__file__, '..', '..'))
+if module_path not in sys.path:
+    sys.path.append(module_path)
+    
 ''' Setups '''
 import os,json
 import pandas as pd 
@@ -48,7 +54,7 @@ print('AvailableBalance:', client.get_account_balance()['AvailableBalance'])
 #%% 
 ''' Process Batches '''
 
-process_mode = 'Summarize Approved'  # * ['Approve & Bonus New', 'Summarize Approved']
+process_mode = 'Approve & Bonus New'  # * ['Approve & Bonus New', 'Summarize Approved']
 
 if process_mode == 'Approve & Bonus New':
     process_assignment_type = 'Submitted'
@@ -160,5 +166,7 @@ with open(os.path.join(save_dir, f'{prefix}_suggestions.json'), 'w') as f:
 if visu_flag:
     visu_results(annos, img_local_dir, os.path.join(save_dir, 'visu')) 
 
+#%%
 # * Show Balance
 print('New AvailableBalance:', client.get_account_balance()['AvailableBalance'])
+# %%

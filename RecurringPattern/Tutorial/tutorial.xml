@@ -42,32 +42,32 @@
     <figures>
         <rp-examples>
             <item>
-                <url>/figures/examples/new027.jpg</url>
+                <url>/figures/examples/new027_label.gif</url>
                 <caption>An RP consist of 4 eagle instances.</caption>
             </item>
 
             <item>
-                <url>/figures/examples/new705.jpg</url>
+                <url>/figures/examples/new705_label.gif</url>
                 <caption>An RP consist of 9 Pipa (a musical instrument) instances.</caption>
             </item>
 
             <item>
-                <url>/figures/examples/new653.jpg</url>
+                <url>/figures/examples/new653_label.gif</url>
                 <caption>An RP consist of multiple parachute instances.</caption>
             </item>
 
             <item>
-                <url>/figures/examples/new632.jpg</url>
+                <url>/figures/examples/new632_label.gif</url>
                 <caption>An RP consist of multiple Micky instances.</caption>
             </item>
 
             <item>
-                <url>/figures/examples/new789.jpg</url>
+                <url>/figures/examples/new789_label.gif</url>
                 <caption>An RP consist of 6 painting instances <b>from a projective view</b></caption>
             </item>
 
             <item>
-                <url>/figures/examples/new036.jpg</url>
+                <url>/figures/examples/new036_label.gif</url>
                 <caption><b>Two</b> RPs consist of two different types of products.</caption>
             </item>
         </rp-examples>

@@ -47,6 +47,25 @@ let xml;
 // });
 
 
+function resizeCanvas() {
+    canvas = document.getElementById("myCanvas");
+    ctx = canvas.getContext("2d");
+    img = document.getElementById("pic");
+
+    canvas.width = img.width;
+    canvas.height = img.height;
+    ctx.canvas.width = img.width;
+    ctx.canvas.height = img.height;
+    canvas.style.cursor = "crosshair";
+}
+
+function disableCanvas() {
+    canvas = document.getElementById("myCanvas");
+    canvas.width = 0;
+    canvas.height = 0;
+}
+
+
 function setupAll(my_xml) {
     xml = my_xml;
     parent = document.getElementById("parent");
@@ -97,7 +116,7 @@ function setupAll(my_xml) {
     // addRPClass(0);
 
     // * initialize buttons
-    $("#reset_button").click(reset);
+    $("#reset_button").click(() => reset(true));
     $("#reposition_button").click(reposition);
     $("#undo_button").click(undo);
     $(".mode_button").click(toggleMode);
@@ -153,7 +172,7 @@ function setupAll(my_xml) {
         anchorY = evt.clientY;
         dragged = false;
         dragStart = true;
-        if (selectedRPIndex == -1 ) {return;}
+        if (selectedRPIndex == -1) { return; }
         if (mode == "bbox" && !rightClick && !getDeleteMode()) {
             currentBbox.class = getClass();
             currentBbox.data = new Array();
@@ -167,7 +186,7 @@ function setupAll(my_xml) {
 
         timeDownUp = new Date().getTime();
         getCorrectCoords(evt);
-        if (selectedRPIndex == -1 ) {return;}
+        if (selectedRPIndex == -1) { return; }
         if (dragged) {
             if (mode == "bbox" && !rightClick) {
                 currentBbox.data.push([correctX, correctY]);
@@ -233,29 +252,29 @@ function setupAll(my_xml) {
 
 function checkAnno() {
     // * check if the annotations are valid
-    if (Object.keys(instsNum).length == 0) {return false;}
-    if (annotations == []) {return false;}
+    if (Object.keys(instsNum).length == 0) { return false; }
+    if (annotations == []) { return false; }
 
     return true;
 }
 
 function setModeButton() {
     // * set the caption of mode button
-    if (mode == 'bbox'){
+    if (mode == 'bbox') {
         $('.polygon_button').css('display', 'none');
         $('.box_button').css('display', 'block');
         // modeButton.addClass('box_button');
         // modeButton.removeClass('polygon_button');
         // reloadButton('box_button', xml);
     }
-    else if (mode == 'polygon'){
+    else if (mode == 'polygon') {
         $('.box_button').css('display', 'none');
         $('.polygon_button').css('display', 'block');
         // modeButton.addClass('polygon_button');
         // modeButton.removeClass('box_button');
         // reloadButton('polygon_button', xml);
     }
-    
+
 }
 
 
@@ -290,7 +309,7 @@ function addRPClass(idx = -1) {
 
 function removeRPClass() {
     // * remove the selected RP
-    if (classNum < 1) {return;}
+    if (classNum < 1) { return; }
     classNum -= 1;
     // classNum = Math.max(1, classNum);
 
@@ -326,9 +345,14 @@ function setRPClass(selectedIndex = 0) {
     $('.rp_container').html("");
     classes.forEach((theClass, idx) => {
         colors[theClass] = distinctColors[idx];
-        $(`#${idx%2}.rp_container`).append(`
-        <button type="button" class="btn rp_button" name="${theClass}" id="${theClass}"><span style="color:rgb${colors[theClass]};" class="bi bi-square-fill"> </span> ${theClass}</button>
-        `);
+        $(`.rp_container`).append(`
+        <div class='col-6 d-grid'>
+            <button type="button" class="btn rp_button" name="${theClass}" id="${theClass}"><span style="color:rgb${colors[theClass]};" class="bi bi-square-fill"> </span> ${theClass}</button>
+        </div>
+        `)
+        // $(`#${idx % 2}.rp_container`).append(`
+        // <button type="button" class="btn rp_button" name="${theClass}" id="${theClass}"><span style="color:rgb${colors[theClass]};" class="bi bi-square-fill"> </span> ${theClass}</button>
+        // `);
     });
 
     let rp_button = $('.rp_button');
@@ -342,29 +366,35 @@ function setRPClass(selectedIndex = 0) {
 function setRPInstNum() {
     // * add the rp_inst number to each RP button for convenience
     let rp_button = $('.rp_button');
-    rp_button.each(function(){
+    rp_button.each(function () {
         let theClass = $(this).attr('name');
         let instNum = 0;
-        if (theClass in instsNum) {instNum = instsNum[theClass];}
+        if (theClass in instsNum) { instNum = instsNum[theClass]; }
         $(this).html(`<span style="color:rgb${colors[theClass]};" class="bi bi-square-fill"> </span> ${theClass} (${instNum})`);
     });
 
 }
 
-function setRPInfo() {
-    // * set the rp information, how many RPs have been labeled
+function updateRPInfo() {
+    // * update the rp information, how many RPs have been labeled
     $("#labeled-rp-info").html(
         `
         Labeled Recurring Patterns (<b>RPs</b>): ${Object.keys(instsNum).length}
         `
     );
+
+    // batch info
+    if ($(".batch-rp-info").length > 0) {
+        $(".img-info").html(`Image ${img_idx + 1}/${num_imgs}, Skipped: ${skip_num}`);
+    }
 }
 
 function activeRP() {
-    if (selectedRPIndex < 0) {return;}
-    let parent_idx = selectedRPIndex%2;
-    let child_idx = Math.floor(selectedRPIndex / 2);
-    $(`#${parent_idx}.rp_container .rp_button`)[child_idx].classList.add('active');
+    if (selectedRPIndex < 0) { return; }
+    // let parent_idx = selectedRPIndex % 2;
+    // let child_idx = Math.floor(selectedRPIndex / 2);
+    // $(`#${parent_idx}.rp_container .rp_button`)[child_idx].classList.add('active');
+    $(`.rp_container .rp_button`)[selectedRPIndex].classList.add('active');
 }
 
 
@@ -470,21 +500,25 @@ function setDeleteMode(deleteMode) {
     }
 }
 
-function reset(confirmFlag = true) {
-    if (confirmFlag && confirm("Clear all labelings?") == true) {
-        clearAnnotations();
-        reposition();
-        firstPoint = true;
-        dragStart = false;
-        dragged = false;
-        setDeleteMode(false);
+function reset(confirmFlag = false) {
+    if (confirmFlag && !confirm("Clear all annotations (this action cannot be recovered)?")) return;
 
-        classes = [];
-        classNum = 0;
-        selectedRPIndex = -1;
-        // addRPClass(0);
-    }
-    
+    clearAnnotations();
+    reposition();
+    firstPoint = true;
+    dragStart = false;
+    dragged = false;
+    setDeleteMode(false);
+
+    classes = [];
+    instsNum = {};
+    currentLink = { class: [], mode: "link", data: [] };
+    currentPolygon = { class: [], mode: "polygon", data: [] };
+    currentBbox = { class: [], mode: "bbox", data: [] };
+    classNum = 0;
+    selectedRPIndex = -1;
+    // addRPClass(0);
+    setRPClass(selectedRPIndex);
 }
 
 function reposition() {
@@ -503,7 +537,7 @@ function reposition() {
 }
 
 function updateAnnotation() {
-    if (selectedRPIndex == -1 ) {return;}
+    if (selectedRPIndex == -1) { return; }
     switch (mode) {
         case "dot": // dot mode
             annotations.push({
@@ -538,13 +572,13 @@ function clearAnnotations() {
 }
 
 function getClass() {
-    
+
     return classes[selectedRPIndex];
     // return $('#rp_container .rp_button')[selectedRPIndex].innerHTML;
 }
 
 function checkClass() {
-    if (selectedRPIndex == -1 ) {
+    if (selectedRPIndex == -1) {
         // * a warning of no RP class
         noRPSelectAlert();
         return false;
@@ -573,6 +607,14 @@ function noRPSelectAlert() {
     );
 
     reloadAlert(xml);
+}
+
+function getAnno() {
+    let single_anno = {};
+    single_anno['coordinates'] = annotations;
+    single_anno['imageSize'] = [$(img).width(), $(img).height()];
+
+    return single_anno;
 }
 
 function dismissAlerts() {
@@ -699,7 +741,7 @@ function updateGraphics() {
         drawBbox(currentBbox, { current: true });
     }
 
-    
+
     if (annotations.length == 0) {
         document.getElementById("coordinates").value = "";
     } else {
@@ -710,7 +752,7 @@ function updateGraphics() {
     document.getElementById("imageSize").value = `[${$(img).width()}, ${$(img).height()}]`;
 
     setRPInstNum();
-    setRPInfo();
+    updateRPInfo();
 }
 
 // depending on mode, either undo deletion or undo annotation
@@ -760,8 +802,8 @@ window.addEventListener(
             toggleMode();
         }
 
-         // Press D for Flipping Label/Delete
-         if (evt.key == "d") {
+        // Press D for Flipping Label/Delete
+        if (evt.key == "d") {
             toggleDelete();
         }
 

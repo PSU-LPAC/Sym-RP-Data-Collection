@@ -3,6 +3,8 @@
 import matplotlib.pyplot as plt
 import cv2
 import boto3
+import json
+import numpy as np
 ###
 
 def setup_mturk(client_in_production=False):
@@ -62,10 +64,8 @@ def approve_bonus(client, worker_id, assignment_id, hit_id, feedback='', bonus_r
         except:
             print (f'\tCannot Bonus: {worker_id} with {bonus_reward:.2f}')
 
-def drawRot(img, rot_gt):
+def draw_rot(img, rot_gt):
     ''' Draw rotation center '''
-
-    
     # fig, ax = plt.subplots(figsize=(12,8), dpi=300)
     # ax.set_axis_off()
     # ax.imshow(img)
@@ -79,7 +79,7 @@ def drawRot(img, rot_gt):
     return img
     return fig, ax
 
-def drawRef(img, ref_gt):
+def draw_ref(img, ref_gt):
     ''' Draw reflection line '''
     fig, ax = plt.subplots(figsize=(12,8), dpi=300)
     # ax.set_axis_off()
@@ -99,7 +99,7 @@ def drawRef(img, ref_gt):
 
     return fig, ax
 
-def ResizeWithAspectRatio(image, width=None, height=None, inter=cv2.INTER_AREA):
+def resize_with_aspect_ratio(image, width=None, height=None, inter=cv2.INTER_AREA):
     dim = None
     (h, w) = image.shape[:2]
 
@@ -114,11 +114,17 @@ def ResizeWithAspectRatio(image, width=None, height=None, inter=cv2.INTER_AREA):
 
     return cv2.resize(image, dim, interpolation=inter)
 
-def visuSym(img, anno):
+def rp_color_list():
+    ''' rp color list in RGB '''
+    colors = [(230, 25, 75), (60, 180, 75), (255, 225, 25), (0, 130, 200), (245, 130, 48), (145, 30, 180), (70, 240, 240), (240, 50, 230), (210, 245, 60), (250, 190, 212), (0, 128, 128), (220, 190, 255), (170, 110, 40), (255, 250, 200), (128, 0, 0), (170, 255, 195), (128, 128, 0), (255, 215, 180), (0, 0, 128), (128, 128, 128)]
+    
+    return colors
+
+def visu_sym(img, anno):
     ''' Visualization of the Symmetry Labeling with Roughly the Same Size'''
     img_w, img_h = img.shape[1], img.shape[0] 
     result = img.copy()
-    result = ResizeWithAspectRatio(result, width=800)
+    result = resize_with_aspect_ratio(result, width=800, height=800)
     new_w, new_h = result.shape[1], result.shape[0] 
 
     # fig, ax = plt.subplots(figsize=(12,8), dpi=300)
@@ -137,4 +143,23 @@ def visuSym(img, anno):
             result = cv2.line(result, start, end, color=(255, 255, 255), thickness= 3)
             result = cv2.line(result, start, end, color=(0, 255, 0), thickness= 2)
 
+    return result
+
+def visu_rp(img, anno):
+    ''' Visualization of the RP Labeling '''
+    img_w, img_h = img.shape[1], img.shape[0] 
+    result = img.copy()
+    result = resize_with_aspect_ratio(result, width=800, height=800)
+    new_w, new_h = result.shape[1], result.shape[0] 
+
+    rx, ry = new_w/img_w, new_h/img_h
+
+    for rp_idx, rp_name in enumerate(anno):
+        color = rp_color_list()[rp_idx]
+        color = (color[1], color[2], color[0])
+        for inst in anno[rp_name]:
+            pts = np.array([[int(pt['x']*rx), int(pt['y']*ry)] for pt in inst], np.int32)
+            cv2.polylines(result, [pts], isClosed=True, color=(255, 255, 255), thickness=8)
+            cv2.polylines(result, [pts], isClosed=True, color=color, thickness=6)
+    
     return result

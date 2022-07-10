@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Recurring Pattern Labeling</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css'>
+
+    <!-- Styles -->
+    <link rel="stylesheet" type="text/css" href="../rp.css">
+</head>
+
+<body>
+    <div class="container-fluid" id="root-container">
+
+        <div class="page-header justify-content-between" id="header">
+            <!-- [Header] -->
+
+            <p class="fs-4 fw-bold text-center test-title"> [Test-X Title]
+            </p>
+        </div>
+
+        <div class="row">
+            <p class="fs-6 font-monospace text-center rp-tutorial"> [Totorial] </p>
+        </div>
+
+        <div class="row border " id="body-part">
+            <div id="test-alert-box">
+
+            </div>
+
+            <div id="response">
+                <!-- *Response -->
+                <input id="coordinates" name="coordinates" type="hidden" />
+                <input id="imageSize" name="imageSize" type="hidden" />
+            </div>
+
+            <div id="left-panel-container">
+                [Left Panel]
+            
+
+            <div class="col">
+                <!-- *[Canvas Part] -->
+
+                <div class="fixed_height border col  d-flex justify-content-center">
+                    <div id="parent">
+                        <div id="child">
+                            <canvas id="myCanvas"></canvas>
+                            <img class="fixed_height" id="pic"
+                                 src="figures/examples/new789.jpg" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+    
+    </div>
+
+    <script src="https://fastly.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+            crossorigin="anonymous"></script>
+
+
+    <script src="../reload.js"></script>
+    <script src="../turker.js"></script>
+    <script src="rp_test.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            // Load the labeling container
+            
+            // Load XML
+            let xml_url = "../rp.xml";
+            $.get(xml_url, function (xml) {
+                console.log("Load XML was performed.");
+
+                // Reuse Elements from Label Page
+                $("div#root-container").load(`../label.html div#container`, function () {
+                    console.log("Reuse elements was performed.");
+                    // Customize some elements for test usage
+                    let title_element = $("p.title");
+                    title_element.addClass('test-title');
+                    title_element.removeClass('title');
+                    
+                    let alert_box = $("div#alert-box");
+                    alert_box.attr('id', 'test-alert-box');
+                    alert_box.html = "";
+                    alert_box.remove();
+
+                    $("button.skip").remove();
+                    $("button.submit").parent().addClass('col-12').removeClass('col-6');
+                    $("button.submit").attr('id', 'test-submit');
+
+                    $("#body-part").prepend(`
+                        <div id="test-alert-box">
+                        </div>
+                    `)
+
+                    $(".batch-rp-info").remove();
+                    
+                    
+                    reloadText(xml);
+                    reloadAlert(xml);
+                    reloadButtons(xml);
+
+                    loadTestPage(xml, 1);
+                });
+            });
+
+        });
+
+
+    </script>
+
+
+</body>
+
+</html>

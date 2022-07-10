@@ -43,9 +43,9 @@
                 <!-- <h2>An illustration image about Recurring Pattern</h2> -->
 
                 <div class="row border">
-                    <div class="col-6 d-flex justify-content-center">
+                    <div class="col-4 d-flex justify-content-center">
                         <figure class="figure">
-                            <img src="../figures/toy_example_labeled.png" class="figure-img img-fluid rounded">
+                            <img src="../figures/toy_example_updated_labeled.png" class="figure-img img-fluid rounded">
                             <figcaption class="figure-caption text-center">An illustration image about <b>Recurring Pattern</b>
                             </figcaption>
                         </figure>
@@ -98,7 +98,7 @@
                 </div>
 
                 <div class="row mb-3">
-                    <button type="button" class="btn btn-lg btn-outline-primary navigation" id="start-test" onclick="location.href = 'test-1.html';"> Start a Quick Test on RP Labeling
+                    <button type="button" class="btn btn-lg btn-outline-primary navigation" id="start-test" onclick="location.href = 'rp_test.html';"> Start a Quick Test on RP Labeling
                     </button>
 
                     <p class="fs-5 text-center mt-3" style="color: blue;">
@@ -123,7 +123,7 @@
 
     <script>
         $(document).ready(function () {
-            let xml_url = "tutorial.xml";
+            let xml_url = "../rp.xml";
 
             $.get(xml_url, function (xml) {
                 // Load XML
