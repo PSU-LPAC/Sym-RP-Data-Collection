@@ -112,12 +112,21 @@
 
         <rp-definition>
             <![CDATA[ 
+            A <b>Recurring Pattern (RP)</b> is a set of visual entities that recur within an image.
+            The non-identical yet similar visual elements comprising an <b>RP</b> are named <b>RP instances</b>.
+            Each <b>RP</b> consists of two or more similar RP Instances.
+                
+            ]]>
+        </rp-definition>
+
+        <!-- <rp-definition>
+            <![CDATA[ 
             A <b>Recurring Pattern (RP)</b> is an ensemble of similar yet not necessarily identical <b>RP Instances</b> in an image.
             <br>
             The term of <b>RP Instance</b> refers to a visual area which distinctive features that could be undoubtedly grouped or segmented together. 
-            Each <b>RP</b> consists of two or more similar RP Instances.    
+            Each <b>RP</b> consists of two or more similar RP Instances.
             ]]>
-        </rp-definition>
+        </rp-definition> -->
 
         <rp-example-illustration>
             <![CDATA[ 
@@ -129,7 +138,7 @@
                     Correspondingly, the two similar <span style="color: green;"><b>thunder-shape RP Instances</b></span> could be grouped as another <span style="color: green;"><b>Recurring Pattern</b></span>.
                 </li>
                 <li>
-                    Finally, the ONE <span style="color: orange;"><b>moon-shape</b></span> pattern CANNOT be viewed as a <b>Recurring Pattern</b>, because each <b>RP</b> shall consist of two or more similar RP Instances.
+                    Finally, the ONE <span style="color: orange;"><b>moon-shape</b></span> pattern CANNOT be viewed as a <b>Recurring Pattern</b>, because it doesn't contain two or more similar RP Instances.
                 </li>
             </ul>
             ]]>

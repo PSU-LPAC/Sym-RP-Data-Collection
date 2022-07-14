@@ -96,7 +96,7 @@
                                 <!-- <b>RP</b> OPTION: -->
                                 CHOOSE AN ACTION:
                             </div>
-                            <div class="col-5 d-grid">
+                            <div class="col-8 d-grid">
                                 <div class="btn-group" role="group">
                                     <button type="button" class="btn btn-success add_rp_button" id="add_rp_button">
                                         [Add]
@@ -110,22 +110,7 @@
 
                                 </div>
                             </div>
-                            <div class="col-3 d-grid">
-                                <div class="btn-group" role="group">
-                                    <button type="button" class="btn btn-info mode_button box_button" id="box_button"
-                                            style="display: none;">
-                                        [Box Mode]
-
-                                    </button>
-
-                                    <button type="button" class="btn btn-info mode_button polygon_button"
-                                            id="polygon_button" style="display: none;">
-                                        [Polygon Mode]
-
-                                    </button>
-                                </div>
-
-                            </div>
+                            
                         </div>
 
                         <div class="row">
@@ -136,16 +121,34 @@
 
                         <div class="row justify-content-center">
                             <div class="row mb-2">
-                                <span id="delete_flip" class="btn-group btn-group-toggle" data-toggle="buttons">
-                                    <label class="btn btn-primary annotate_button" type="radio" id="annotate_button"
-                                           autocomplete="off">
-                                        [Label]
-                                    </label>
-                                    <label class="btn btn-outline-secondary delete_button" type="radio"
-                                           id="delete_button" autocomplete="off" checked>
-                                        [Delete]
-                                    </label>
-                                </span>
+                                <div class="col-9 d-grid">
+                                    <span id="delete_flip" class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <label class="btn btn-primary annotate_button" type="radio" id="annotate_button"
+                                               autocomplete="off">
+                                            [Label]
+                                        </label>
+                                        <label class="btn btn-outline-secondary delete_button" type="radio"
+                                               id="delete_button" autocomplete="off" checked>
+                                            [Delete]
+                                        </label>
+                                    </span>
+                                </div>
+
+                                <div class="col-3 d-grid">
+                                    <div class="btn-group" role="group">
+                                        <button type="button" class="btn btn-info mode_button box_button" id="box_button"
+                                                style="display: none;">
+                                            [Box Mode]
+    
+                                        </button>
+    
+                                        <button type="button" class="btn btn-info mode_button polygon_button"
+                                                id="polygon_button" style="display: none;">
+                                            [Polygon Mode]
+    
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
 
 

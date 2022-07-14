@@ -15,4 +15,4 @@ https://psu-lpac.github.io/Sym-RP-Data-Collection/Symmetry/batch_hits/index.html
 https://psu-lpac.github.io/Sym-RP-Data-Collection/RecurringPattern/Tutorial/tutorial.html
 
 ### Interface Demo
-https://psu-lpac.github.io/Sym-RP-Data-Collection/RecurringPattern/label.html
+https://psu-lpac.github.io/Sym-RP-Data-Collection/RecurringPattern/index.html
