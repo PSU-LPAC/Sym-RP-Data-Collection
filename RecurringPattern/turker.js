@@ -286,7 +286,8 @@ function getRPIndex(className) {
 
 function selectRP() {
     // * get the RP index
-    selectedRPIndex = getRPIndex($(this).attr('name'));
+    selectedRPIndex = classes.indexOf($(this).attr('name'));
+    // selectedRPIndex = getRPIndex($(this).attr('name'));
     // * active the current RP button
     $(this).parent().children().removeClass('active');
     $(this).parent().siblings().children().removeClass('active');
