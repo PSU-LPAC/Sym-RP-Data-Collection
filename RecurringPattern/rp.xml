@@ -24,11 +24,11 @@
                     For each <b>RP</b> you perceived:
                     <ul>
                         <li>
-                            First click the <b>Add</b> button. A new <b>RP</b> button will be appeared and auto selected.
+                            First click the <b>Add</b> button. A new active <b>RP</b> button will appear.
                         </li>
                         <li>
-                            Then you can start labeling the perceived <b>RP
-                                Instances</b> by either <b>Bounding Box</b> or
+                            Start labeling the perceived <b>RP
+                                Instances</b> with either <b>Bounding Box</b> or
                                 <b>Polygon</b> contour.
                         </li>
                     </ul>
@@ -36,7 +36,7 @@
                 </li>
     
                 <li>
-                    Use mouse scroll to zoom in/out the image for more precise labeling.
+                    Use the mouse scroll to zoom in/out on the image for more precise labeling.
                 </li>
     
                 <li>Click the <strong>Submit</strong> button or press <strong>ENTER</strong> to finish
@@ -113,8 +113,8 @@
         <rp-definition>
             <![CDATA[ 
             A <b>Recurring Pattern (RP)</b> is a set of visual entities that recur within an image.
-            The non-identical yet similar visual elements comprising an <b>RP</b> are named <b>RP instances</b>.
-            Each <b>RP</b> consists of two or more similar RP Instances.
+            The non-identical yet similar visual elements comprising an <b>RP</b> are named <b>RP Instances</b>.
+            Each <b>RP</b> consists of two or more similar <b>RP Instances</b>.
                 
             ]]>
         </rp-definition>
@@ -132,6 +132,25 @@
             <![CDATA[ 
             <ul>
                 <li>
+                    The two <span style="color: red;"><b>RP Instances</b></span> of <span style="color: red;"><b>Recurring Pattern A</b></span>  have scaling variations.
+                </li>     
+                <br>
+                <li>
+                    The three <span style="color: green;"><b>RP Instances</b></span> of <span style="color: green;"><b>Recurring Pattern B</b></span> have scaling, shearing and color variations.
+                </li>  
+                <br>
+                <li>
+                    Finally, the ONE <span style="color: orange;"><b>moom-shape pattern</b></span> of <span style="color: orange;"><b>C</b></span> CANNOT be viewed be viewed as a <b>Recurring Pattern</b>, because it doesn't contain two or more similar RP Instances.
+                </li>  
+            </ul>
+            ]]>
+
+        </rp-example-illustration>
+
+        <!-- <rp-example-illustration>
+            <![CDATA[ 
+            <ul>
+                <li>
                     The three similar <span style="color: red;"><b>sun-shape RP Instances</b></span> could be grouped as a <span style="color: red;"><b>Recurring Pattern</b></span>, even with scaling, rotation, shearing and color variations.
                 </li>
                 <li>
@@ -143,14 +162,14 @@
             </ul>
             ]]>
 
-        </rp-example-illustration>
+        </rp-example-illustration> -->
 
         <task-description>
             <![CDATA[ 
             For this task, you will need to:
             <ul>
                 <li> 
-                    Familiarize yourself with Recurring Pattern Labeling (if you are the first time): 
+                    Familiarize yourself with Recurring Pattern Labeling (if this is your first time): 
                     <ul>
                         <li>
                             Read through the Understanding Recurring Pattern Tutorial.

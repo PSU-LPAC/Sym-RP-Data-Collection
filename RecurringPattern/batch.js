@@ -74,6 +74,7 @@ function loadTask(xml, img_urls, callback = null) {
     // Load the content
     $("div#root-container").load(`${root_url}/label.html div#container`, function () {
         console.log("Load page was performed.");
+        $('#submit').attr('id', 'next');
         // * reload necessary stuff
         reloadText(xml);
         reloadAlert(xml);

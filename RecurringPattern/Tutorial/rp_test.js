@@ -116,3 +116,8 @@ function val_alert(message, alert_class = null, close_callback = null) {
 
     $("#test-alert-box").append(alert);
 }
+
+function rp_IOD_metric(rp, gt){
+    // Meature the IOD metric of a given RP and GT
+    
+}

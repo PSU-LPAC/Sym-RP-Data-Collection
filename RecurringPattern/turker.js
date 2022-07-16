@@ -298,9 +298,19 @@ function selectRP() {
 function addRPClass(idx = -1) {
     if (classNum < classMaxNum) {
         classNum += 1;
-        classes.push(`RP ${classNum}`);
+        // get the RP Index to be added
+        add_rp_idx = classNum
+        for (i=1;i<classNum;i++){
+            if (!classes.includes(`RP ${i}`)){
+                add_rp_idx = i;
+                break;
+            }
+        }
+        console.log(add_rp_idx);
+        classes.push(`RP ${add_rp_idx}`);
+        classes.sort();
         if (idx == -1)
-            setRPClass(selectedRPIndex + 1);
+            setRPClass(add_rp_idx-1);
         else
             setRPClass(idx);
     }
@@ -312,13 +322,13 @@ function removeRPClass() {
     if (classNum < 1) { return; }
     classNum -= 1;
     // classNum = Math.max(1, classNum);
+    classes.splice(selectedRPIndex, 1);
+    // classes = [];
 
-    classes = [];
 
-
-    for (let i = 0; i < classNum; i++) {
-        classes.push(`RP ${i + 1}`);
-    }
+    // for (let i = 0; i < classNum; i++) {
+    //     classes.push(`RP ${i + 1}`);
+    // }
 
 
 
@@ -327,9 +337,11 @@ function removeRPClass() {
     annotations.forEach(item => {
         if (item['class'] != `RP ${selectedRPIndex + 1}`) {
             let idx = getRPIndex(item['class']);
-            if (idx > selectedRPIndex)
-                item['class'] = `RP ${idx}`;
+            // if (idx > selectedRPIndex)
+            //     item['class'] = `RP ${idx}`;
             new_anno.push(deep_copy(item));
+            // if (!classes.includes(item['class']))
+            //     classes.push(item['class']);
         }
     });
     // console.log(new_anno);
@@ -344,7 +356,7 @@ function setRPClass(selectedIndex = 0) {
 
     $('.rp_container').html("");
     classes.forEach((theClass, idx) => {
-        colors[theClass] = distinctColors[idx];
+        colors[theClass] = distinctColors[getRPIndex(theClass)];
         $(`.rp_container`).append(`
         <div class='col-6 d-grid'>
             <button type="button" class="btn rp_button" name="${theClass}" id="${theClass}"><span style="color:rgb${colors[theClass]};" class="bi bi-square-fill"> </span> ${theClass}</button>
@@ -384,7 +396,7 @@ function updateRPInfo() {
     );
 
     // batch info
-    if ($(".batch-rp-info").length > 0) {
+    if ($(".batch-rp-info").length > 0 && typeof(img_idx)!= 'undefined') {
         $(".img-info").html(`Image ${img_idx + 1}/${num_imgs}, Skipped: ${skip_num}`);
     }
 }
@@ -559,7 +571,22 @@ function updateAnnotation() {
             break;
         case "polygon": // polygon mode
             currentPolygon.class = getClass();
-            currentPolygon.data.push([correctX, correctY]);
+            
+            // check close
+            if (currentPolygon.data.length>0)
+            {
+                let x = correctX - currentPolygon.data[0][0];
+                let y = correctY - currentPolygon.data[0][1];
+                if (Math.sqrt(x**2 + y**2) < 10){
+                    closePolygon();
+                }
+                else{
+                    currentPolygon.data.push([correctX, correctY]);
+                }
+            }
+            else {
+                currentPolygon.data.push([correctX, correctY]);
+            }
     }
 }
 
@@ -825,23 +852,27 @@ window.addEventListener(
 
         // Press C for "Close Polygon"
         if (evt.key == "c") {
-            if (currentPolygon.data.length > 2) {
-                currentPolygon.class = getClass();
-                annotations.push(Object.assign({}, currentPolygon));
-                currentPolygon.data = new Array();
-            }
-            // Update coordinates
-            if (annotations.length == 0) {
-                document.getElementById("coordinates").value = "";
-            } else {
-                document.getElementById("coordinates").value =
-                    JSON.stringify(annotations);
-            }
+            closePolygon();
         }
         updateGraphics();
     },
     true
 );
+
+function closePolygon() {
+    if (currentPolygon.data.length > 2) {
+        currentPolygon.class = getClass();
+        annotations.push(Object.assign({}, currentPolygon));
+        currentPolygon.data = new Array();
+    }
+    // Update coordinates
+    if (annotations.length == 0) {
+        document.getElementById("coordinates").value = "";
+    } else {
+        document.getElementById("coordinates").value =
+            JSON.stringify(annotations);
+    }
+}
 
 let handleScroll = function (evt) {
     getCorrectCoords(evt);

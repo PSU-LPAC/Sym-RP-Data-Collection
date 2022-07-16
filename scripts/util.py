@@ -163,3 +163,18 @@ def visu_rp(img, anno):
             cv2.polylines(result, [pts], isClosed=True, color=color, thickness=6)
     
     return result
+
+def fig_plot(img, title=None, figsize=(12,8), dpi=100):
+    '''
+    Plot an image on matplotlib figure\n
+    Return: fig, ax
+    '''
+    result = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    fig, ax = plt.subplots(figsize=figsize, dpi=dpi)
+    ax.set_axis_off()
+    ax.imshow(result)
+
+    if title is not None:
+        ax.set_title(title)
+
+    return fig, ax
