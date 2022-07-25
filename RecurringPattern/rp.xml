@@ -72,7 +72,7 @@
                         <li>
                             Click the <strong>Undo Last</strong> button or press <strong>CTRL+Z</strong>
                             to
-                            undo last Annotation/Deletion.
+                            undo last Labeling/Deleting RP Instance
                         </li>
     
                         <li>
@@ -132,15 +132,15 @@
             <![CDATA[ 
             <ul>
                 <li>
-                    The two <span style="color: red;"><b>RP Instances</b></span> of <span style="color: red;"><b>Recurring Pattern A</b></span>  have scaling variations.
+                    The five <span style="color: red;"><b>RP Instances</b></span> of <span style="color: red;"><b>Recurring Pattern A</b></span>  have scaling variations.
                 </li>     
                 <br>
                 <li>
-                    The three <span style="color: green;"><b>RP Instances</b></span> of <span style="color: green;"><b>Recurring Pattern B</b></span> have scaling, shearing and color variations.
+                    The four <span style="color: green;"><b>RP Instances</b></span> of <span style="color: green;"><b>Recurring Pattern B</b></span> have scaling, shearing, and color variations. They also have local shape deformations.
                 </li>  
                 <br>
                 <li>
-                    Finally, the ONE <span style="color: orange;"><b>moom-shape pattern</b></span> of <span style="color: orange;"><b>C</b></span> CANNOT be viewed be viewed as a <b>Recurring Pattern</b>, because it doesn't contain two or more similar RP Instances.
+                    Finally, the two <span style="color: orange;"><b>instances</b></span> of <span style="color: orange;"><b>pattern C</b></span> CANNOT be viewed be viewed as a <b>Recurring Pattern</b>, because it doesn't contain two or more similar <b>RP Instances</b>.
                 </li>  
             </ul>
             ]]>
@@ -325,7 +325,7 @@
             </caption>
             <tooltip>
                 <![CDATA[ 
-                Undo last Annotation/Deletion
+                Undo last Labeling/Deleting RP Instance
                 <br>
                 (Hotkey: <b>CTRL+Z</b>)  
                 ]]>   
@@ -338,7 +338,7 @@
             </caption>
             <tooltip>
                 <![CDATA[ 
-                Reset View Scale After Zooming-In
+                Zoom Back to Original View
                 <br>
                 (Hotkey: <b>CTRL+X</b>)  
                 ]]>   

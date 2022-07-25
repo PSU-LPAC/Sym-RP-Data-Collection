@@ -364,7 +364,7 @@ if __name__ == "__main__":
         'Batch Symmetry Labeling Iter 6 (250-299)'
     ]
     
-    batch_name = batch_list[0]
+    batch_name = 'All'
     start_idx = 0
 
     save_dir = "E:\Lab Work\Datasets\Sym-RP-Collection\Results\Chris's format"
@@ -391,13 +391,13 @@ if __name__ == "__main__":
 
     #%%
     img_dir = 'E:/Lab Work/Datasets/Sym-RP-Collection/Images'
-    sym_images = convertImg(img_dir, start_idx=start_idx, img_num=50)
+    sym_images = convertImg(img_dir, start_idx=start_idx)
 
     with open(os.path.join(save_dir, batch_name, 'SymImages.json'), 'w') as f:
         json.dump(list(sym_images.values()), f, indent=4)
 
     #%%
-    annos_file_path = f'E:\Lab Work\Datasets\Sym-RP-Collection\Results\Batch\{batch_name}\{batch_name}.json'
+    annos_file_path = f'E:/Lab Work/Datasets/Sym-RP-Collection/Results/Batch/Batch Results/all_annos.json'
     with open(annos_file_path, 'r') as f:
         annos_json = json.load(f)
 

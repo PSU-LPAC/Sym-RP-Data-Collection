@@ -3,7 +3,7 @@
 import os, json
 import pandas as pd
 
-survey_file_path = 'D:\Downloads\Symmetry Qualification Background Survey (Responses) - Form Responses 1 (1).csv'
+survey_file_path = 'D:\Downloads\Symmetry Qualification Background Survey (Responses) - Form Responses 1 (3).csv'
 save_dir = 'E:\Lab Work\Datasets\Sym-RP-Collection\Results'
 
 data = pd.read_csv(survey_file_path)
@@ -34,7 +34,7 @@ with open(os.path.join(save_dir, 'background_survey.json'), 'w') as f:
 ''' Plot the Statistics '''
 import os, json
 import pandas as pd
-survey_file_path = 'D:\Downloads\Symmetry Qualification Background Survey (Responses) - Form Responses 1 (2).csv'
+survey_file_path = 'D:\Downloads\Symmetry Qualification Background Survey (Responses) - Form Responses 1 (3).csv'
 data = pd.read_csv(survey_file_path)
 
 workers = []
