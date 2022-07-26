@@ -379,7 +379,7 @@
     </buttons>
 
     <url>
-        <rp-root-url>https://psu-lpac.github.io/Sym-RP-Data-Collection/RP</rp-root-url>
+        <rp-root-url>https://psu-lpac.github.io/Sym-RP-Data-Collection/RecurringPattern</rp-root-url>
 
         <tutorial-url>https://psu-lpac.github.io/Sym-RP-Data-Collection/RecurringPattern/Tutorial/tutorial.html</tutorial-url>
 
