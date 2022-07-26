@@ -128,6 +128,7 @@ function loadNext(xml, img_urls, callback = null) {
     switchAlert();
     reset();
     disableCanvas();
+    startTime = new Date();
 
     // * set the img
     $("#pic").attr("src", img_urls[img_idx]);

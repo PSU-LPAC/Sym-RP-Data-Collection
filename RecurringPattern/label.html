@@ -50,6 +50,7 @@
                     <!-- *Response -->
                     <input id="coordinates" name="coordinates" type="hidden" />
                     <input id="imageSize" name="imageSize" type="hidden" />
+                    <input id="workerTime" name="workerTime" type="hidden" />
                 </div>
 
                 <div class="col-4 border" id="left-panel">
@@ -73,8 +74,10 @@
                         <!-- *[Information] -->
                         <div class="batch-rp-info">
                             <p class="fs-6 fw-bold text-center img-info">
-                                Image {cur}/{total}, Skipped: {skip_num}
+                                <!-- Image {cur}/{total}, Skipped: {skip_num} -->
+                                Image 1/1, Skipped: 0
                             </p>
+
                             <hr>
                             <p class="fs-6 text-center" id="labeled-rp-info">
                                 Labeled RPs: 0
@@ -213,7 +216,7 @@
                                      src="https://sym-rp-data-collection.s3.amazonaws.com/Dataset/Iter-1/000-201.jpg" /> -->
 
                                 <img class="fixed_height" id="pic"
-                                     src="figures/toy_example_2.png" />
+                                     src="figures/test_images/skanda_test2.png" />
 
                                 <!-- <img class="fixed_height" id="pic" src=".\figures\test images\Butterfly.jpg" /> -->
                                 <!-- 

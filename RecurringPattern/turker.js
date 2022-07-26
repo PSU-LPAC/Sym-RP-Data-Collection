@@ -42,10 +42,7 @@ let classMaxNum = distinctColors.length;
 
 let xml;
 
-// $(document).ready(function () {
-//     setupAll();
-// });
-
+let startTime, endTime;
 
 function resizeCanvas() {
     canvas = document.getElementById("myCanvas");
@@ -67,6 +64,8 @@ function disableCanvas() {
 
 
 function setupAll(my_xml) {
+    startTime = new Date();
+
     xml = my_xml;
     parent = document.getElementById("parent");
     child = document.getElementById("child");
@@ -129,10 +128,16 @@ function setupAll(my_xml) {
     $("#submit").click(function () {
         // check valid labeling
         if (checkAnno()) {
+            endTime = new Date();
+            var timeDiff = endTime - startTime;
+            $("#workerTime").val(`${(endTime - startTime)/1000}`);
             $("crowd-form")[0].submit();
         }
         else {
             if (confirm("No valid labelings!\nAre you sure to submit this HIT (invalid labelings may be rejected)? ")) {
+                endTime = new Date();
+                var timeDiff = endTime - startTime;
+                $("#workerTime").val(`${(endTime - startTime)/1000}`);
                 $("crowd-form")[0].submit();
             }
         }
@@ -638,9 +643,11 @@ function noRPSelectAlert() {
 }
 
 function getAnno() {
+    endTime = new Date();
     let single_anno = {};
     single_anno['coordinates'] = annotations;
     single_anno['imageSize'] = [$(img).width(), $(img).height()];
+    single_anno['workerTime'] = (endTime - startTime)/1000;
 
     return single_anno;
 }
