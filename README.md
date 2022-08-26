@@ -16,3 +16,8 @@ https://psu-lpac.github.io/Sym-RP-Data-Collection/RecurringPattern/Tutorial/tuto
 
 ### Interface Demo
 https://psu-lpac.github.io/Sym-RP-Data-Collection/RecurringPattern/index.html
+
+## Taiji
+
+### 10 Subjects
+https://psu-lpac.github.io/Sym-RP-Data-Collection/Taiji/10_subjects.html
