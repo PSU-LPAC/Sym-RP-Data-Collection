@@ -312,7 +312,7 @@ function addRPClass(idx = -1) {
                 break;
             }
         }
-        console.log(add_rp_idx);
+        // console.log(add_rp_idx);
         classes.push(`RP ${add_rp_idx}`);
         classes.sort();
         if (idx == -1)

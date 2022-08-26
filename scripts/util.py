@@ -64,6 +64,24 @@ def approve_bonus(client, worker_id, assignment_id, hit_id, feedback='', bonus_r
         except:
             print (f'\tCannot Bonus: {worker_id} with {bonus_reward:.2f}')
 
+def only_bonus(client, worker_id, assignment_id, hit_id, feedback='', bonus_reward=0, num_label=0, in_production=False):
+    token = f'{worker_id}-{assignment_id}-{bonus_reward}'
+    if bonus_reward:
+        try:
+            if in_production:
+                response = client.send_bonus(
+                    WorkerId= worker_id,
+                    BonusAmount=f'{bonus_reward:.2f}',
+                    AssignmentId=assignment_id,
+                    Reason=f'Labeled {num_label} images',
+                    UniqueRequestToken=token
+                )
+                print (f'\tBonus: {worker_id} with {bonus_reward:.2f}')
+            else:
+                print (f'\t[Will] bonus: {worker_id} with {bonus_reward:.2f}')
+        except:
+            print (f'\tCannot Bonus: {worker_id} with {bonus_reward:.2f}')
+
 def draw_rot(img, rot_gt):
     ''' Draw rotation center '''
     # fig, ax = plt.subplots(figsize=(12,8), dpi=300)
@@ -178,3 +196,17 @@ def fig_plot(img, title=None, figsize=(12,8), dpi=100):
         ax.set_title(title)
 
     return fig, ax
+
+def cleanRPAnno(annos):
+    # * clean annotations (remove invalid rp with only one instance)
+    valid_annos = []
+    for worker_anno in annos:
+        valid_anno = {}
+        for rp_name in worker_anno:
+            if len(worker_anno[rp_name]) > 1:
+                valid_anno[rp_name] = worker_anno[rp_name]
+        if len(valid_anno) > 0:
+            valid_annos.append(valid_anno)
+
+    return valid_annos
+

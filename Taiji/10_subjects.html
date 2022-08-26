@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Recurring Pattern Labeling</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <link rel='stylesheet' href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css'>
+
+
+    <style>
+        body {
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid" id="container">
+        <div class="row">
+            <p class="fs-4 text-center fw-bold">10 Taiji Subjects</p>
+        </div>
+        <div class="row" id="videos">
+           
+        </div>        
+
+    </div>
+
+</body>
+<script src="https://fastly.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+<script>
+    $(document).ready(function () {
+        for (let i = 1; i <= 10; i++) {
+            $('#videos').append(`
+            <div class="col-3 border">
+                <p class="fs-6 text-center fw-bold">Subject ${i}</p>
+
+                <div class="ratio ratio-16x9">
+                    <video src="subject_${i}.mp4" autoplay muted loop></video>
+                </div>
+            </div>
+            `)
+        }
+    });
+</script>
+
+</html>

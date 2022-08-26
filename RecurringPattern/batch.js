@@ -20,7 +20,7 @@ function loadStart(xml, img_urls, callback = null) {
         reloadReward(xml, num_imgs, basic_reward, per_reward, valid_num);
         reloadTime(min_time, max_time);
 
-        
+
         // bind the buttons
         $("#tutorial-btn").click(() => {
             window.open(tutorial_url);
@@ -158,8 +158,24 @@ function checkSkip() {
 function checkSubmit() {
     // * check the annotation, and return true to submit the current image
 
-    single_anno = getAnno();
+    var single_anno = getAnno();
     // console.log(single_anno);
+    var rps = {};
+    single_anno['coordinates'].forEach(element => {
+        rp_class = element['class'];
+        if (!(rp_class in rps)) {
+            rps[rp_class] = []
+        }
+        rps[rp_class].push(element);
+    });
+
+    for (const [key, value] of Object.entries(rps)) {
+        if (value.length < 2) {
+            dismissAlerts();
+            labelAlert();
+            return false
+        }
+    }
 
     if (single_anno['coordinates'].length == 0) {
         if (confirm(submit_confirm_str)) {
@@ -167,9 +183,9 @@ function checkSubmit() {
             return true;
         }
     }
-    else { 
+    else {
         valid_num += 1;
-        return true; 
+        return true;
     }
 
     return false;
@@ -179,6 +195,14 @@ function switchAlert() {
     $('#alert-box').append(`
     <crowd-alert type="info" class="alert switch-alert" dismissible>
         Loading the next image ... 
+    </crowd-alert>
+    `);
+}
+
+function labelAlert() {
+    $('#alert-box').append(`
+    <crowd-alert type="error" class="alert rp-alert invalid-labeling" dismissible>
+        Each <b>RP</b> should contain at least two <b>RP</b> Instances!
     </crowd-alert>
     `);
 }

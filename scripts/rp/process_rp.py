@@ -5,6 +5,7 @@ if module_path not in sys.path:
     sys.path.append(module_path)
     
 import json
+import cv2
 from util import visu_rp
 
 def convert_result(single_result, img_size):
@@ -54,3 +55,40 @@ def convert_result(single_result, img_size):
         anno[rp_class].append(inst)
     
     return anno
+
+
+def visu_results(annos, image_local_dir, visu_save_dir, iter_flag = False):
+    ''' 
+        Visualize the individual results and sort by {img_name, worker_id} categories 
+    '''
+    for single_anno in annos:
+        img_name = single_anno['ImageName']  
+        worker_id = single_anno['WorkerId']
+        if iter_flag:
+            iter =  single_anno['Iter']   # iterations of the annotation from the same worker
+        else:
+            iter = 0
+        worker_anno = single_anno['WorkerLabel']
+
+        img = cv2.imread(os.path.join(image_local_dir, img_name))
+
+        visu = visu_rp(img, worker_anno)
+
+        img_name_noext = os.path.splitext(img_name)[0]
+
+        visu_img_name = f'{img_name_noext}_{worker_id}_{iter}.jpg'
+
+        # * save together
+        save_path = os.path.join(visu_save_dir, 'together', visu_img_name)
+        os.makedirs(os.path.dirname(save_path), exist_ok=True)
+        cv2.imwrite(save_path ,visu)
+
+        # * save by image name 
+        save_path = os.path.join(visu_save_dir, 'image', img_name_noext, visu_img_name)
+        os.makedirs(os.path.dirname(save_path), exist_ok=True)
+        cv2.imwrite(save_path ,visu)
+
+        # * save by worker id
+        save_path = os.path.join(visu_save_dir, 'worker', worker_id, visu_img_name)
+        os.makedirs(os.path.dirname(save_path), exist_ok=True)
+        cv2.imwrite(save_path ,visu)

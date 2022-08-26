@@ -3,8 +3,8 @@
 import os, json
 import pandas as pd
 
-survey_file_path = 'D:\Downloads\Symmetry Qualification Background Survey (Responses) - Form Responses 1 (3).csv'
-save_dir = 'E:\Lab Work\Datasets\Sym-RP-Collection\Results'
+survey_file_path = 'D:\Downloads\RP Qualification Background Survey (Responses) - Form Responses 1.csv'
+save_dir = 'E:\Lab Work\Datasets\Sym-RP-Collection\RP_Results'
 
 data = pd.read_csv(survey_file_path)
 surveys = {}    #* {worker_id: survey_dict, ...}
@@ -12,7 +12,10 @@ surveys = {}    #* {worker_id: survey_dict, ...}
 
 for idx, row in data.iterrows():
     worker_id = row[1]
-    languages = [l.lstrip() for l in row[7].split(',')]
+    try:
+        languages = [l.lstrip() for l in row[7].split(',')]
+    except:
+        languages = []
     if worker_id not in surveys:
         survey_dict = {
             'WorkerId':worker_id,
@@ -34,7 +37,7 @@ with open(os.path.join(save_dir, 'background_survey.json'), 'w') as f:
 ''' Plot the Statistics '''
 import os, json
 import pandas as pd
-survey_file_path = 'D:\Downloads\Symmetry Qualification Background Survey (Responses) - Form Responses 1 (3).csv'
+survey_file_path = 'D:\Downloads\RP Qualification Background Survey (Responses) - Form Responses 1.csv'
 data = pd.read_csv(survey_file_path)
 
 workers = []
@@ -53,6 +56,7 @@ keys = df.keys()
 for i in [2,3]:
     df_group = df[[keys[0], keys[i]]].groupby([keys[i]])
     print (df_group.count())
+    df_group.count().plot.pie(subplots=True)
     
 for key in keys[4:]:
     df_group = df[[keys[0], key]].groupby([key])
