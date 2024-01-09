@@ -372,7 +372,7 @@
                 Skip
             </caption>
             <tooltip>
-                Skip the current Image if no perceived RPs are found.
+                Skip the current Image if no perceived RPs are found or you are not sure about the labeling.
             </tooltip>
 
         </skip>

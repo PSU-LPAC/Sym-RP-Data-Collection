@@ -6,6 +6,7 @@ let submit_confirm_str = "There are NO labelings on the current image. Do you wa
 let turker_script_flag = false;
 let setup_flag = false;
 
+let skip_reason = null;
 
 function loadStart(xml, img_urls, callback = null) {
     // * load the start page
@@ -142,18 +143,46 @@ function loadNext(xml, img_urls, callback = null) {
 }
 
 
-
-
 function checkSkip() {
-    // * check the annotation, and return true to skip the current image
+    // Create a dialog box or form to select the reason for skipping
+    skip_reason = getSkipReason(); // Implement this function to show dialog/form and return selected reason
 
-    if (confirm(skip_confirm_str)) {
+    if (skip_reason) {
         skip_num += 1;
         return true;
-    }
-    else
+    } else {
         return false;
+    }
 }
+
+function getSkipReason() {
+    let reasons = "1: No RP perceived\n2: Image too dense to annotate\n3: Other reasons";
+    let selectedReason = prompt("Why are you skipping this image?\n" + reasons, "Enter number");
+
+    switch (selectedReason) {
+        case "1":
+            return "No RP perceived";
+        case "2":
+            return "Image too dense to annotate";
+        case "3":
+            let otherReason = prompt("Please specify the reason:");
+            return otherReason ? `Other: ${otherReason}` : null;
+        default:
+            return null; // No valid reason selected
+    }
+}
+
+
+// function checkSkip() {
+//     // * check the annotation, and return true to skip the current image
+
+//     if (confirm(skip_confirm_str)) {
+//         skip_num += 1;
+//         return true;
+//     }
+//     else
+//         return false;
+// }
 
 function checkSubmit() {
     // * check the annotation, and return true to submit the current image
