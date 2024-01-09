@@ -537,6 +537,7 @@ function reset(confirmFlag = false) {
     selectedRPIndex = -1;
     // addRPClass(0);
     setRPClass(selectedRPIndex);
+    skip_reason = null;
 }
 
 function reposition() {
@@ -648,7 +649,7 @@ function getAnno() {
     single_anno['coordinates'] = annotations;
     single_anno['imageSize'] = [$(img).width(), $(img).height()];
     single_anno['workerTime'] = (endTime - startTime)/1000;
-
+    single_anno['skipReason'] = skip_reason
     return single_anno;
 }
 
